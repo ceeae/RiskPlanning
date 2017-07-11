@@ -22,7 +22,7 @@ namespace UnitTests
         [InlineData(-1)]
         public void ForgetScenarioAlwaysReturnTrue(int param)
         {
-            bool result = true;
+            bool result = true; // just a comment
 
             result.Should().BeTrue();
 
