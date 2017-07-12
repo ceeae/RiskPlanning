@@ -19,6 +19,8 @@ namespace CalcoloRischioResiduo
 
         public Types Perimeter { get; set; }
 
+        #region constructors
+
         public Element()
         {
             Initialize(false, null, null);
@@ -56,6 +58,23 @@ namespace CalcoloRischioResiduo
             _pds = pds;
         }
 
+        #endregion
+
+        public double EstimateResidualRisk()
+        {
+            if (!IsAssociated()) { return SlimVCI.VCIMAX; }
+
+            if (HasPDS()) { return _pds.GetResidualRiskValue(); }
+
+            if (HasVCI()) { return _vci.GetVCIValue(); }
+
+            Perimeter perimeter = _perimeters.FindByType(Perimeter);
+
+            if (perimeter == null) { return SlimVCI.VCIMAX; }
+
+            return perimeter.EstimatedResidualRisk(_classified);
+        }
+
         public void Classify()
         {
             _classified = true;
@@ -66,25 +85,9 @@ namespace CalcoloRischioResiduo
             _perimeters = perimeters;
         }
 
-        public double EstimateResidualRisk()
+        public bool IsAssociated()
         {
-            Perimeter perimeter = _perimeters.FindByType(Perimeter);
-            if (HasPDS())
-            {
-                return _pds.GetResidualRiskValue();
-            }
-            else if (HasVCI())
-            {
-                return _vci.GetVCIValue();
-            }
-            else if (perimeter != null)
-            {
-                return perimeter.EstimatedResidualRisk(_classified);
-            }
-            else
-            {
-                return SlimVCI.VCIMAX;
-            }
+            return _perimeters != null;
         }
 
         public bool IsClassified()
