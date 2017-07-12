@@ -78,6 +78,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ElementoUnitTests.cs" />
     <Compile Include="FakeUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -85,9 +86,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CalcoloRischio\CalcoloRischio.csproj">
-      <Project>{63e176f6-8227-4372-b290-103ba732b3db}</Project>
-      <Name>CalcoloRischio</Name>
+    <ProjectReference Include="..\CalcoloRischioResiduo\CalcoloRischioResiduo.csproj">
+      <Project>{abfe4a16-6837-4c7f-b4c5-1d76aa14206f}</Project>
+      <Name>CalcoloRischioResiduo</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

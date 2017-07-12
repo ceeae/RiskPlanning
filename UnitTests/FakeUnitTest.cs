@@ -6,6 +6,10 @@ namespace UnitTests
     public class FakeTest
     {
 
+        // UnitOfWork_Scenario_ExpectedResult
+        // e.g. class LogAnalyzerTests 
+        //      [Fact] IsValidFilename_BadExtension_ReturnFalse
+
         [Fact]
         public void AlwaysReturnTrue()
         {

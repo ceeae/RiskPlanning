@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{63E176F6-8227-4372-B290-103BA732B3DB}</ProjectGuid>
+    <ProjectGuid>{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CalcoloRischio</RootNamespace>
-    <AssemblyName>CalcoloRischio</AssemblyName>
+    <RootNamespace>CalcoloRischioResiduo</RootNamespace>
+    <AssemblyName>CalcoloRischioResiduo</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Element.cs" />
+    <Compile Include="FunctionalPerimeters.cs" />
+    <Compile Include="FunctionalPerimetersAnalysis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

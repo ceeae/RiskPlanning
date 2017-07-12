@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcoloRischio", "CalcoloRischio\CalcoloRischio.csproj", "{63E176F6-8227-4372-B290-103BA732B3DB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{45B8896D-85C2-4600-8E49-39E48DCAB76E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcoloRischioResiduo", "CalcoloRischioResiduo\CalcoloRischioResiduo.csproj", "{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{63E176F6-8227-4372-B290-103BA732B3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63E176F6-8227-4372-B290-103BA732B3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63E176F6-8227-4372-B290-103BA732B3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63E176F6-8227-4372-B290-103BA732B3DB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{45B8896D-85C2-4600-8E49-39E48DCAB76E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{45B8896D-85C2-4600-8E49-39E48DCAB76E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45B8896D-85C2-4600-8E49-39E48DCAB76E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45B8896D-85C2-4600-8E49-39E48DCAB76E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
