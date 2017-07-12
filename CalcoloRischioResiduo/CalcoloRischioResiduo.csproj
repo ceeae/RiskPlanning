@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Element.cs" />
+    <Compile Include="FunctionalPerimeterAnalysisCoverage.cs" />
+    <Compile Include="FunctionalPerimeterCoverageStatus.cs" />
     <Compile Include="FunctionalPerimeters.cs" />
-    <Compile Include="FunctionalPerimetersAnalysis.cs" />
+    <Compile Include="FunctionalPerimeterAnalysis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

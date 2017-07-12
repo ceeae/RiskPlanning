@@ -78,8 +78,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ElementoUnitTests.cs" />
+    <Compile Include="ElementUnitTests.cs" />
     <Compile Include="FakeUnitTest.cs" />
+    <Compile Include="FunctionalPerimeterAnalysisCoverageUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

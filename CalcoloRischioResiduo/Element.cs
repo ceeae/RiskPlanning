@@ -8,27 +8,15 @@ namespace CalcoloRischioResiduo
 {
     public class Element
     {
-        private bool cited = false;
-
+        private bool classified = true;
 
 
         public FunctionalPerimeters functionalperimeter { get; set; }
 
 
-        public Element()
-        {
-            cited = true;
-        }
-
-
         public bool isClassified()
         {
-            return cited;
-        }
-
-        public double CalculateResidualRisk()
-        {
-            return 1250;
+            return classified;
         }
 
     }

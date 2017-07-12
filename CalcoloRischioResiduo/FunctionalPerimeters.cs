@@ -9,6 +9,11 @@ namespace CalcoloRischioResiduo
     public enum FunctionalPerimeters: int
     {
         InformationTechnology = 1,
-        Wholesale = 2
+        Technology = 2,
+        BusinessAndTopClients = 3,
+        AdministrationFinanceAndControl = 4,
+        RegulatoryAffairsAndEquivalence = 5,
+        HumanResourcesAndOrganizationalDevelopment = 6,
+        BrandStrategyAndMedia = 7
     }
 }
