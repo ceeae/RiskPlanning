@@ -1,6 +1,8 @@
 ﻿using Xunit;
 using FluentAssertions;
 using CalcoloRischioResiduo;
+using CalcoloRischioResiduo.FunctionalPerimeters;
+using CalcoloRischioResiduo.RiskAssessment;
 
 
 namespace UnitTests
@@ -10,56 +12,48 @@ namespace UnitTests
 
         private Element element;
 
-        private FunctionalPerimeterAnalysisCoverage coverage;
-
         public ElementUnitTests()
         {
             element = new Element();
-
-            // Build a coverage
-            coverage = new FunctionalPerimeterAnalysisCoverage();
-            coverage.Add( FunctionalPerimeters.InformationTechnology, 811, 350, 0.9);
-            coverage.Add( FunctionalPerimeters.AdministrationFinanceAndControl, 923, 615, 0.87);
-            coverage.Add( FunctionalPerimeters.BrandStrategyAndMedia, 821, 587, 0.35);
-
         }
 
         [Fact]
-        public void NewElement_ByDefaultIsAbsent()
+        public void NewElement_ByDefaultIsNotClassified()
         {
-            bool isAbsent = element.isClassified();
+            bool isClassified = element.IsClassified();
 
-            isAbsent.Should().BeTrue();
+            isClassified.Should().BeFalse();
+        }
+
+        [Fact]
+        public void NewElement_CreatedAsClassified_ExpectedClassified()
+        {
+            element = new Element(true);
+            bool isClassified = element.IsClassified();
+
+            isClassified.Should().BeTrue();
+        }
+
+        [Fact]
+        public void SetElementPerimeter_AsInformationTechnology_ExpectedInformationTechnology()
+        {
+            element.Perimeter = Types.InformationTechnology;
+
+            Types result = element.Perimeter;
+
+            result.Should().Be(Types.InformationTechnology);
         }
 
 
         [Fact]
-        public void ElementFunctionalPerimeter_SetupInformationTechnology_ExpectedInformationTechnology()
+        public void NewElement_WithVCIOnly_ExpectedNotHasPdSAndIncomplete()
         {
-            element.functionalperimeter = FunctionalPerimeters.InformationTechnology;
+            SlimVCI vci = new SlimVCI(800, 400);
+            element = new Element(true, vci);
 
-            FunctionalPerimeters result = element.functionalperimeter;
-
-            result.Should().Be(FunctionalPerimeters.InformationTechnology);
+            element.HasPDS().Should().BeFalse();
+            element.IsIncomplete().Should().BeTrue();
         }
-
-        //[Theory]
-        //[InlineData(FunctionalPerimeters.HumanResourcesAndOrganizationalDevelopment, 1250)] // perimeter not covered
-        //[InlineData(FunctionalPerimeters.InformationTechnology, 1250)]  // is covered
-        //public void ResidualRisk_NotClassifiedElementAsPartOfFunctionalPerimeterScenarios_ReturnExpectedVCIValue(FunctionalPerimeters perimeter, double vcivalue)
-        //{
-
-        //    // Element is absent by default
-        //    element.functionalperimeter = perimeter;
-
-
-
-        //    double estimatedRR = element.CalculateResidualRisk();
-
-        //    estimatedRR.Should().Be(vcivalue);
-        //}
-
-
 
 
     }

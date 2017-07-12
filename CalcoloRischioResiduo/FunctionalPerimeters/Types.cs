@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalcoloRischioResiduo
+namespace CalcoloRischioResiduo.FunctionalPerimeters
 {
-    public enum FunctionalPerimeters: int
+    public enum Types: int
     {
         InformationTechnology = 1,
         Technology = 2,
