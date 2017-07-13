@@ -1,6 +1,7 @@
 ﻿
 using CalcoloRischioResiduo;
 using CalcoloRischioResiduo.RiskAssessment;
+using CalcoloRischioResiduo.RiskAssessment.Elements;
 using Xunit;
 using FluentAssertions;
 
@@ -20,7 +21,7 @@ namespace UnitTests.ResidualRiskEstimates
         [InlineData(Scenarios.CompleteElementWithCompletePerimeterAnalysis, 536)]
         public void ResidualRiskEstimate_DifferentScenarios(Scenarios scenario, double expectedresidualriskvalue)
         {
-            Element element = ElementsBuilder.CreateFromScenario(scenario);
+            IElement element = (IElement) ElementsBuilder.CreateFromScenario(scenario);
 
             double result = element.EstimateResidualRisk();
 

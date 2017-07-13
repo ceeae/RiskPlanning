@@ -78,7 +78,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ElementUnitTests.cs" />
     <Compile Include="FakeUnitTest.cs" />
     <Compile Include="FunctionalPerimeters\PerimetersAnalysisUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,7 +94,9 @@
       <Name>CalcoloRischioResiduo</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="RiskAssessment\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -1,5 +1,7 @@
 ﻿
-namespace CalcoloRischioResiduo.RiskAssessment
+using System.Security.Claims;
+
+namespace CalcoloRischioResiduo.RiskAssessment.Analysis
 {
     public class SlimVCI
     {
@@ -9,14 +11,14 @@ namespace CalcoloRischioResiduo.RiskAssessment
         private double _biavalue;
         private double _compliancevalue;
 
-        public SlimVCI(double vcivalue, double biavalue)
+        public SlimVCI(double biavalue, double compliancevalue)
         {
-            _vcivalue = vcivalue;
             _biavalue = biavalue;
-            _compliancevalue = vcivalue - biavalue;
+            _compliancevalue = compliancevalue;
+            _vcivalue = biavalue + compliancevalue;
         }
 
-        public double GetVCIValue()
+        public double GetPotentialRiskValue()
         {
             return _vcivalue;
         }

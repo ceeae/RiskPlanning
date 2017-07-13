@@ -1,6 +1,8 @@
 ﻿using CalcoloRischioResiduo;
 using CalcoloRischioResiduo.FunctionalPerimeters;
 using CalcoloRischioResiduo.RiskAssessment;
+using CalcoloRischioResiduo.RiskAssessment.Analysis;
+using CalcoloRischioResiduo.RiskAssessment.Elements;
 using Xunit;
 using FluentAssertions;
 
@@ -9,61 +11,47 @@ namespace UnitTests.ResidualRiskEstimates
     public class ElementsBuilder
     {
 
-        // UnitOfWork_Scenario_ExpectedResult
-        // e.g. class LogAnalyzerTests 
-        //      [Fact] IsValidFilename_BadExtension_ReturnFalse
-
-        public static Element CreateFromScenario(Scenarios scenario)
+        public static IElement CreateFromScenario(Scenarios scenario)
         {
-            Element element = new Element();
+            IElement element = null;
             PerimetersAnalysis perimeters = CreatePerimetersAnalysis();
-            element.AssociateWith(perimeters);
-
-            SlimVCI vci = new SlimVCI(750, 300);
+            SlimVCI vci = new SlimVCI(450, 300); // vci=750
             SlimPDS pds = new SlimPDS(536);
 
             switch (scenario)
             {
+
                 case Scenarios.NotClassifiedAbsentElementWithMissingPerimeterAnalysis:
-                    element.Perimeter = Types.BrandStrategyAndMedia;
+                    element = new NotClassifiedElement(Types.InformationTechnology, perimeters);
                     break;
 
                 case Scenarios.NotClassifiedAbsentElementWithCompletePerimeterAnalysis:
-                    element.Perimeter = Types.AdministrationFinanceAndControl;
+                    element = new NotClassifiedElement(Types.AdministrationFinanceAndControl, perimeters);
                     break;
 
                 case Scenarios.ClassifiedAbsentElementWithMissingPerimeterAnalysis:
-                    element.Classify();
-                    element.Perimeter = Types.InformationTechnology;
+                    element = new AbsentElement(Types.InformationTechnology, perimeters);
                     break;
 
                 case Scenarios.ClassifiedAbsentElementWithCompletePerimeterAnalysis:
-                    element.Classify();
-                    element.Perimeter = Types.AdministrationFinanceAndControl;
+                    element = new AbsentElement(Types.AdministrationFinanceAndControl, perimeters);
+
                     break;
 
                 case Scenarios.IncompleteElementWithMissingPerimeterAnalysis:
-                    element = new Element(vci);
-                    element.AssociateWith(perimeters);
-                    element.Perimeter = Types.InformationTechnology;
+                    element = new IncompleteElement(Types.InformationTechnology, vci, perimeters);
                     break;
 
                 case Scenarios.IncompleteElementWithCompletePerimeterAnalysis:
-                    element = new Element(vci);
-                    element.AssociateWith(perimeters);
-                    element.Perimeter = Types.AdministrationFinanceAndControl;
+                    element = new IncompleteElement(Types.AdministrationFinanceAndControl, vci, perimeters);
                     break;
 
                 case Scenarios.CompleteElementWithMissingPerimeterAnalysis:
-                    element = new Element(vci, pds);
-                    element.AssociateWith(perimeters);
-                    element.Perimeter = Types.InformationTechnology;
+                    element = new CompleteElement(Types.InformationTechnology, vci, pds, perimeters);
                     break;
 
                 case Scenarios.CompleteElementWithCompletePerimeterAnalysis:
-                    element = new Element(vci, pds);
-                    element.AssociateWith(perimeters);
-                    element.Perimeter = Types.AdministrationFinanceAndControl;
+                    element = new CompleteElement(Types.AdministrationFinanceAndControl, vci, pds, perimeters);
                     break;
             }
             return element;
@@ -74,10 +62,11 @@ namespace UnitTests.ResidualRiskEstimates
             // Build perimeters analysis object
             PerimetersAnalysis perimeters = new PerimetersAnalysis
             {
-                { Types.InformationTechnology, 800, 700, 0.7},                  // Missing Perimeter Analysis
+                { Types.InformationTechnology, 800, 700, 0.72},                  // Missing Perimeter Analysis
                 { Types.AdministrationFinanceAndControl, 835, 630, 0.84},       // Complete Perimeter Analysis
             };
             return perimeters;
         }
+
     }
 }

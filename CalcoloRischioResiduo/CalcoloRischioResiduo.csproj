@@ -40,16 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Element.cs" />
+    <Compile Include="RiskAssessment\Elements\AbsentElement.cs" />
+    <Compile Include="RiskAssessment\Elements\CompleteElement.cs" />
+    <Compile Include="RiskAssessment\Elements\IElement.cs" />
+    <Compile Include="RiskAssessment\Elements\Element.cs" />
     <Compile Include="FunctionalPerimeters\PerimetersAnalysis.cs" />
     <Compile Include="FunctionalPerimeters\AnalysisStatus.cs" />
     <Compile Include="FunctionalPerimeters\Types.cs" />
     <Compile Include="FunctionalPerimeters\Perimeter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RiskAssessment\SlimPDS.cs" />
-    <Compile Include="RiskAssessment\SlimVCI.cs" />
+    <Compile Include="RiskAssessment\Elements\IncompleteElement.cs" />
+    <Compile Include="RiskAssessment\Elements\NotClassifiedElement.cs" />
+    <Compile Include="RiskAssessment\Analysis\SlimPDS.cs" />
+    <Compile Include="RiskAssessment\Analysis\SlimVCI.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="RiskAssessment\Requirements\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

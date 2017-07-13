@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using CalcoloRischioResiduo.RiskAssessment;
+using CalcoloRischioResiduo.RiskAssessment.Analysis;
 
 namespace CalcoloRischioResiduo.FunctionalPerimeters
 {

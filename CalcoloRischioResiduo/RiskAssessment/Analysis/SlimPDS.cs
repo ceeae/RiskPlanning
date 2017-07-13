@@ -1,5 +1,5 @@
 ﻿
-namespace CalcoloRischioResiduo.RiskAssessment
+namespace CalcoloRischioResiduo.RiskAssessment.Analysis
 {
     public class SlimPDS
     {
