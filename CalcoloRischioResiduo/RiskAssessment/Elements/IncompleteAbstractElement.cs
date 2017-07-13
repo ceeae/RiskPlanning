@@ -3,9 +3,9 @@ using CalcoloRischioResiduo.RiskAssessment.Analysis;
 
 namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
-    public class IncompleteElement: Element { 
+    public class IncompleteAbstractElement: AbstractElement { 
 
-        public IncompleteElement(Types perimeter, SlimVCI vci, PerimetersAnalysis perimeters) : base(vci)
+        public IncompleteAbstractElement(Types perimeter, SlimVCI vci, PerimetersAnalysis perimeters) : base(vci)
         {
             this.Perimeter = perimeter;
             this.AssociateWith(perimeters);

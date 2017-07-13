@@ -8,13 +8,14 @@ using CalcoloRischioResiduo.RiskAssessment.Analysis;
 
 namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
-    public class AbsentElement : Element
+    public class NotClassifiedAbstractElement : AbstractElement
     {
-        public AbsentElement(Types perimeter, PerimetersAnalysis perimeters) : base(true)
+        public NotClassifiedAbstractElement(Types perimeter, PerimetersAnalysis perimeters) : base()
         {
             this.Perimeter = perimeter;
             this.AssociateWith(perimeters);
         }
+
         public override double EstimateResidualRisk()
         {
             if (BelongsToAnalyzedPerimeter())

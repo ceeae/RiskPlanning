@@ -17,8 +17,8 @@ namespace UnitTests.ResidualRiskEstimates
         [InlineData(Scenarios.ClassifiedAbsentElementWithCompletePerimeterAnalysis, 730.8)]
         [InlineData(Scenarios.IncompleteElementWithMissingPerimeterAnalysis, 750)]
         [InlineData(Scenarios.IncompleteElementWithCompletePerimeterAnalysis, 750)]
-        [InlineData(Scenarios.CompleteElementWithMissingPerimeterAnalysis, 536)]
-        [InlineData(Scenarios.CompleteElementWithCompletePerimeterAnalysis, 536)]
+        //[InlineData(Scenarios.CompleteElementWithMissingPerimeterAnalysis, 536)]
+        //[InlineData(Scenarios.CompleteElementWithCompletePerimeterAnalysis, 536)]
         public void ResidualRiskEstimate_DifferentScenarios(Scenarios scenario, double expectedresidualriskvalue)
         {
             IElement element = (IElement) ElementsBuilder.CreateFromScenario(scenario);

@@ -81,9 +81,12 @@
     <Compile Include="FakeUnitTest.cs" />
     <Compile Include="FunctionalPerimeters\PerimetersAnalysisUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requirements\ExtendedRequirementUnitTests.cs" />
+    <Compile Include="Requirements\ExtendedRequirementsUnitTests.cs" />
     <Compile Include="ResidualRiskEstimates\ElementsBuilder.cs" />
     <Compile Include="ResidualRiskEstimates\Scenarios.cs" />
     <Compile Include="ResidualRiskEstimates\ResidualRiskEstimatesUnitTests.cs" />
+    <Compile Include="ResidualRiskEstimates\SlimPDSUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -94,9 +97,7 @@
       <Name>CalcoloRischioResiduo</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RiskAssessment\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -22,36 +22,36 @@ namespace UnitTests.ResidualRiskEstimates
             {
 
                 case Scenarios.NotClassifiedAbsentElementWithMissingPerimeterAnalysis:
-                    element = new NotClassifiedElement(Types.InformationTechnology, perimeters);
+                    element = new NotClassifiedAbstractElement(Types.InformationTechnology, perimeters);
                     break;
 
                 case Scenarios.NotClassifiedAbsentElementWithCompletePerimeterAnalysis:
-                    element = new NotClassifiedElement(Types.AdministrationFinanceAndControl, perimeters);
+                    element = new NotClassifiedAbstractElement(Types.AdministrationFinanceAndControl, perimeters);
                     break;
 
                 case Scenarios.ClassifiedAbsentElementWithMissingPerimeterAnalysis:
-                    element = new AbsentElement(Types.InformationTechnology, perimeters);
+                    element = new AbsentAbstractElement(Types.InformationTechnology, perimeters);
                     break;
 
                 case Scenarios.ClassifiedAbsentElementWithCompletePerimeterAnalysis:
-                    element = new AbsentElement(Types.AdministrationFinanceAndControl, perimeters);
+                    element = new AbsentAbstractElement(Types.AdministrationFinanceAndControl, perimeters);
 
                     break;
 
                 case Scenarios.IncompleteElementWithMissingPerimeterAnalysis:
-                    element = new IncompleteElement(Types.InformationTechnology, vci, perimeters);
+                    element = new IncompleteAbstractElement(Types.InformationTechnology, vci, perimeters);
                     break;
 
                 case Scenarios.IncompleteElementWithCompletePerimeterAnalysis:
-                    element = new IncompleteElement(Types.AdministrationFinanceAndControl, vci, perimeters);
+                    element = new IncompleteAbstractElement(Types.AdministrationFinanceAndControl, vci, perimeters);
                     break;
 
                 case Scenarios.CompleteElementWithMissingPerimeterAnalysis:
-                    element = new CompleteElement(Types.InformationTechnology, vci, pds, perimeters);
+                    element = new CompleteAbstractElement(Types.InformationTechnology, vci, pds, perimeters);
                     break;
 
                 case Scenarios.CompleteElementWithCompletePerimeterAnalysis:
-                    element = new CompleteElement(Types.AdministrationFinanceAndControl, vci, pds, perimeters);
+                    element = new CompleteAbstractElement(Types.AdministrationFinanceAndControl, vci, pds, perimeters);
                     break;
             }
             return element;

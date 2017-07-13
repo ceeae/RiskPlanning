@@ -3,7 +3,7 @@ using CalcoloRischioResiduo.RiskAssessment.Analysis;
 
 namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
-    public abstract class Element : IElement
+    public abstract class AbstractElement : IElement
     {
         protected bool _classified = false;
         protected SlimVCI _vci = null;
@@ -15,22 +15,22 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         #region constructors
 
-        public Element()
+        public AbstractElement()
         {
             Initialize(false, null, null);
         }
 
-        public Element(bool isClassified)
+        public AbstractElement(bool isClassified)
         {
             Initialize(isClassified, null, null);
         }
 
-        public Element(SlimVCI vci)
+        public AbstractElement(SlimVCI vci)
         {
             Initialize(true, vci, null);
         }
 
-        public Element(SlimVCI vci, SlimPDS pds)
+        public AbstractElement(SlimVCI vci, SlimPDS pds)
         {
             Initialize(true, vci, pds);
         }

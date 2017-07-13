@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,19 +8,21 @@ using CalcoloRischioResiduo.RiskAssessment.Analysis;
 
 namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
-
-    public class CompleteElement : Element
+    public class AbsentAbstractElement : AbstractElement
     {
-
-        public CompleteElement(Types perimeter, SlimVCI vci, SlimPDS pds, PerimetersAnalysis perimeters) : base(vci, pds)
+        public AbsentAbstractElement(Types perimeter, PerimetersAnalysis perimeters) : base(true)
         {
             this.Perimeter = perimeter;
             this.AssociateWith(perimeters);
         }
-
         public override double EstimateResidualRisk()
         {
-            return _pds.GetResidualRiskValue();
+            if (BelongsToAnalyzedPerimeter())
+            {
+                return GetAssociatedPerimeter().EstimatedResidualRisk(IsClassified());
+            }
+
+            return SlimVCI.VCIMAX;
         }
     }
 }
