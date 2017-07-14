@@ -2,7 +2,7 @@
 using Xunit;
 using FluentAssertions;
 
-namespace UnitTests
+namespace UnitTests.Common
 {
     public class TubleUnitTests
     {

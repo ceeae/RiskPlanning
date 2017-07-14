@@ -51,7 +51,7 @@ namespace UnitTests.Requirements
             CorrectionFactor Alpha = new CorrectionFactor(alpha);
             Requirement sr = new Requirement(101, PAS, Alpha);
 
-            sr.InitializeWeightsWithIntArray(0, 
+            sr.InitializeWeightsWithIntArray( 
                 new int[38]
                 {
                     3, 1, 2,

@@ -4,7 +4,7 @@ using CalcoloRischioResiduo.RiskAssessment.Requirements;
 using Xunit;
 using FluentAssertions;
 
-namespace UnitTests
+namespace UnitTests.Requirements
 {
     public class RequirementsSetUnitTests
     {
