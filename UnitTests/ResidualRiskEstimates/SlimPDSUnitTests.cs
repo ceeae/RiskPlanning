@@ -17,10 +17,6 @@ namespace UnitTests.ResidualRiskEstimates
         [Fact]
         public void NewSlimPDS_WithoutRequirements_RaisesException()
         {
-            ExtentedRequirements requirements = null;
-            SlimPDS pds = new SlimPDS(requirements);
-
-            Assert.Throws<MissingRequirementsException>(() => pds.GetResidualRiskValue());
         }
 
 

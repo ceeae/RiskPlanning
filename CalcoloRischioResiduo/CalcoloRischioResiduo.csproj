@@ -40,9 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FunctionalPerimeters\ElementTypes.cs" />
     <Compile Include="RiskAssessment\Common\Tuple.cs" />
     <Compile Include="RiskAssessment\Common\Weights.cs" />
-    <Compile Include="RiskAssessment\Elements\AbsentAbstractElement.cs" />
+    <Compile Include="RiskAssessment\Elements\AbsentElement.cs" />
     <Compile Include="RiskAssessment\Elements\CompleteAbstractElement.cs" />
     <Compile Include="RiskAssessment\Elements\IElement.cs" />
     <Compile Include="RiskAssessment\Elements\AbstractElement.cs" />
@@ -65,12 +66,7 @@
     <Compile Include="RiskAssessment\Exceptions\InvalidKeyException.cs" />
     <Compile Include="RiskAssessment\Exceptions\OutOfRangeIndexException.cs" />
     <Compile Include="RiskAssessment\Exceptions\WrongWeightValueException.cs" />
-    <Compile Include="RiskAssessment\Requirements\BIAValues.cs" />
-    <Compile Include="RiskAssessment\Requirements\COMPLIANCEValues.cs" />
     <Compile Include="RiskAssessment\Common\CorrectionFactor.cs" />
-    <Compile Include="RiskAssessment\Requirements\ExtendedRequirement.cs" />
-    <Compile Include="RiskAssessment\Requirements\ExtentedRequirements.cs" />
-    <Compile Include="RiskAssessment\Requirements\AbstractSlimRequirement.cs" />
     <Compile Include="RiskAssessment\Common\FractionWeight.cs" />
     <Compile Include="RiskAssessment\Requirements\Requirement.cs" />
     <Compile Include="RiskAssessment\Common\Weight.cs" />

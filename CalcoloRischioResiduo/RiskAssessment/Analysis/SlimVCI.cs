@@ -28,7 +28,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Analysis
             return _biavalue;
         }
 
-        public double GetPotentialRIskCOMPLIANCEValue()
+        public double GetPotentialRiskCOMPLIANCEValue()
         {
             return _compliancevalue;
         }

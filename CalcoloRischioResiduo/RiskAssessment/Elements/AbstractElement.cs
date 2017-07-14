@@ -5,7 +5,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
     public abstract class AbstractElement : IElement
     {
-        protected bool _classified = false;
+        protected ElementTypes classification = ElementTypes.NotClassified;
         protected SlimVCI _vci = null;
         protected SlimPDS _pds = null;
 
@@ -17,27 +17,27 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         public AbstractElement()
         {
-            Initialize(false, null, null);
+            Initialize(ElementTypes.NotClassified, null, null);
         }
 
-        public AbstractElement(bool isClassified)
+        public AbstractElement(ElementTypes classification)
         {
-            Initialize(isClassified, null, null);
+            Initialize(classification, null, null);
         }
 
         public AbstractElement(SlimVCI vci)
         {
-            Initialize(true, vci, null);
+            Initialize(ElementTypes.Classified, vci, null);
         }
 
         public AbstractElement(SlimVCI vci, SlimPDS pds)
         {
-            Initialize(true, vci, pds);
+            Initialize(ElementTypes.Classified, vci, pds);
         }
 
-        private void Initialize(bool isClassified, SlimVCI vci, SlimPDS pds)
+        private void Initialize(ElementTypes type, SlimVCI vci, SlimPDS pds)
         {
-            _classified = isClassified;
+            classification = type;
             _vci = vci;
             _pds = pds;
         }
@@ -69,7 +69,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         public bool IsClassified()
         {
-            return _classified;
+            return classification == ElementTypes.Classified;
         }
 
         public abstract double EstimateResidualRisk();

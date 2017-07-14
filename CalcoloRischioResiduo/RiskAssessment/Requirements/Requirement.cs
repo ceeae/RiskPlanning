@@ -1,12 +1,6 @@
-﻿
-
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Dynamic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using CalcoloRischioResiduo.RiskAssessment.Common;
 using CalcoloRischioResiduo.RiskAssessment.Exceptions;
 
@@ -73,11 +67,11 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
         {
             double correctedPAS = PAS.Value + Alpha.Value;
 
-            List<double> f = DivideWeightsBy(totals); // f = weights / Totals
+            List<double> f = DivideWeightsBy(totals);                       // f = weights / Totals
 
-            _prbia = f.Take(3).Sum() * correctedPAS;
-            _prbiaid = f.Skip(1).Take(2).Sum() * correctedPAS;
-            _prcompl = f.Skip(3).Sum() * correctedPAS;
+            _prbia =    f.Take(3).Sum()         * correctedPAS;
+            _prbiaid =  f.Skip(1).Take(2).Sum() * correctedPAS;
+            _prcompl =  f.Skip(3).Sum()         * correctedPAS;
         }
 
 

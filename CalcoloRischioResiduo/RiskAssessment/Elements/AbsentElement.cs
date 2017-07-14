@@ -8,9 +8,9 @@ using CalcoloRischioResiduo.RiskAssessment.Analysis;
 
 namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
-    public class AbsentAbstractElement : AbstractElement
+    public class AbsentElement : AbstractElement
     {
-        public AbsentAbstractElement(Types perimeter, PerimetersAnalysis perimeters) : base(true)
+        public AbsentElement(Types perimeter, PerimetersAnalysis perimeters) : base(ElementTypes.Classified)
         {
             this.Perimeter = perimeter;
             this.AssociateWith(perimeters);
@@ -19,7 +19,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
         {
             if (BelongsToAnalyzedPerimeter())
             {
-                return GetAssociatedPerimeter().GetResidualRiskEstimate(IsClassified());
+                return GetAssociatedPerimeter().GetResidualRiskEstimate(classification);
             }
 
             return SlimVCI.VCIMAX;

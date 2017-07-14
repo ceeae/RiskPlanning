@@ -8,7 +8,7 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
     public class Perimeter
     {
 
-        public const double THRESHOLD = 0.75; // by req a perimetertype is "covered by analysis" if 75% elements owns a VCI
+        public const double THRESHOLD = 0.75;       // by req a perimetertype is "covered by analysis" if 75% elements owns a VCI
 
         private Types _perimetertype;
         private double _avgVCIC3;
@@ -33,12 +33,12 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
             return _perimetertype == perimetertype;
         }
 
-        public double GetResidualRiskEstimate(bool isClassifiedElement)
+        public double GetResidualRiskEstimate(ElementTypes classification)
         {
             double correctionFactor = 1 - _withVCI;
             double result = 0;
 
-            if (!isClassifiedElement)
+            if (classification == ElementTypes.NotClassified)
             {
                 result = IsAnalyzed() ? _avgVCIC3*(1 + correctionFactor) : SlimVCI.VCIMAX;
             }
@@ -46,6 +46,7 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
             {
                 result = IsAnalyzed() ? _avgVCIAll * (1 + correctionFactor) : SlimVCI.VCIMAX;
             }
+
             return Math.Round(result, 2);
         }
 

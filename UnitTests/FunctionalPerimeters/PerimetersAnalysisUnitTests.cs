@@ -7,10 +7,6 @@ namespace UnitTests.FunctionalPerimeters
     public class PerimetersAnalysisUnitTests
     {
 
-        // UnitOfWork_Scenario_ExpectedResult
-        // e.g. class LogAnalyzerTests 
-        //      [Fact] IsValidFilename_BadExtension_ReturnFalse
-
         private PerimetersAnalysis perimeters;
 
         public PerimetersAnalysisUnitTests()
@@ -24,11 +20,11 @@ namespace UnitTests.FunctionalPerimeters
         }
 
         [Theory]
-        [InlineData(Types.RegulatoryAffairsAndEquivalence, AnalysisStatus.Missing)]                 // not found in perimeters
-        [InlineData(Types.InformationTechnology, AnalysisStatus.BelowThreshold)]                    // below 75% with VCI
-        [InlineData(Types.AdministrationFinanceAndControl, AnalysisStatus.Complete)]
-        [InlineData(Types.Technology, AnalysisStatus.Missing)]
-        public void CoverageStatus_DifferentFunctionalPerimeters_ReturnStatusAccordingly(Types perimeter, AnalysisStatus status)
+        [InlineData(Types.RegulatoryAffairsAndEquivalence,      AnalysisStatus.Missing)]                 // not found in perimeters
+        [InlineData(Types.InformationTechnology,                AnalysisStatus.BelowThreshold)]          // below 75% with VCI
+        [InlineData(Types.AdministrationFinanceAndControl,      AnalysisStatus.Complete)]
+        [InlineData(Types.Technology,                           AnalysisStatus.Missing)]
+        public void GetStatus_DifferentFunctionalPerimeters_ExpectedAnalysisStatus(Types perimeter, AnalysisStatus status)
         {
 
             AnalysisStatus result = perimeters.GetStatus(perimeter);
@@ -37,17 +33,17 @@ namespace UnitTests.FunctionalPerimeters
         }
 
         [Theory]
-        [InlineData(Types.InformationTechnology, false, 1250)]                  // not-classified element with perimeter covered
-        [InlineData(Types.AdministrationFinanceAndControl, false, 1069.5)]      // not-classified element with perimeter not covered
-        [InlineData(Types.InformationTechnology, true, 1250)]                   // classified element (absent) with perimeter covered
-        [InlineData(Types.AdministrationFinanceAndControl, true, 718.75)]       // classified element (absent) with perimeter not covered
-        public void EstimateVCI_DifferentFunctionalPerimeters_ReturnValueAccordingly(
-            Types perimeter, bool isClassified, double expectedvci
-            )
+        [InlineData(Types.InformationTechnology,            ElementTypes.NotClassified, 1250)]                  // not-classified element with perimeter covered
+        [InlineData(Types.AdministrationFinanceAndControl,  ElementTypes.NotClassified, 1069.5)]                // not-classified element with perimeter not covered
+        [InlineData(Types.InformationTechnology,            ElementTypes.Classified,    1250)]                  // classified element (absent) with perimeter covered
+        [InlineData(Types.AdministrationFinanceAndControl,  ElementTypes.Classified,    718.75)]                // classified element (absent) with perimeter not covered
+        public void GetResidualRiskEstimate_DifferentFunctionalPerimeters_ReturnRREstimate(
+                                                Types perimeter, ElementTypes classification, double expectedvci
+                                                )
         {
             Perimeter analysis = perimeters.FindByType(perimeter);
 
-            double estimatedVCI = analysis.GetResidualRiskEstimate(isClassified);
+            double estimatedVCI = analysis.GetResidualRiskEstimate(classification);
 
             estimatedVCI.Should().Be(expectedvci);
         }

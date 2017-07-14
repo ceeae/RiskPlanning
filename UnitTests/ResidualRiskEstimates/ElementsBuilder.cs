@@ -30,11 +30,11 @@ namespace UnitTests.ResidualRiskEstimates
                     break;
 
                 case Scenarios.ClassifiedAbsentElementWithMissingPerimeterAnalysis:
-                    element = new AbsentAbstractElement(Types.InformationTechnology, perimeters);
+                    element = new AbsentElement(Types.InformationTechnology, perimeters);
                     break;
 
                 case Scenarios.ClassifiedAbsentElementWithCompletePerimeterAnalysis:
-                    element = new AbsentAbstractElement(Types.AdministrationFinanceAndControl, perimeters);
+                    element = new AbsentElement(Types.AdministrationFinanceAndControl, perimeters);
 
                     break;
 
