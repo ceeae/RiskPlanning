@@ -28,10 +28,10 @@ namespace UnitTests.FunctionalPerimeters
         [InlineData(Types.InformationTechnology, AnalysisStatus.BelowThreshold)]                    // below 75% with VCI
         [InlineData(Types.AdministrationFinanceAndControl, AnalysisStatus.Complete)]
         [InlineData(Types.Technology, AnalysisStatus.Missing)]
-        public void CoverageStatus_DifferentFunctionalPerimeters_ReturnStatusAccordingly(Types perimeter, int status)
+        public void CoverageStatus_DifferentFunctionalPerimeters_ReturnStatusAccordingly(Types perimeter, AnalysisStatus status)
         {
 
-            int result = perimeters.GetAnalysisStatus(perimeter);
+            AnalysisStatus result = perimeters.GetStatus(perimeter);
 
             result.Should().Be(status);
         }
@@ -47,7 +47,7 @@ namespace UnitTests.FunctionalPerimeters
         {
             Perimeter analysis = perimeters.FindByType(perimeter);
 
-            double estimatedVCI = analysis.EstimatedResidualRisk(isClassified);
+            double estimatedVCI = analysis.GetResidualRiskEstimate(isClassified);
 
             estimatedVCI.Should().Be(expectedvci);
         }

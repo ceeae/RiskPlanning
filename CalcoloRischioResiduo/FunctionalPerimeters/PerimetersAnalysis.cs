@@ -12,7 +12,7 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
             this.Add(perimeter);
         }
 
-        public int GetAnalysisStatus(Types type)
+        public AnalysisStatus GetStatus(Types type)
         {
             Perimeter perimeter = FindByType(type);
             if (perimeter == null)

@@ -33,7 +33,7 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
             return _perimetertype == perimetertype;
         }
 
-        public double EstimatedResidualRisk(bool isClassifiedElement)
+        public double GetResidualRiskEstimate(bool isClassifiedElement)
         {
             double correctionFactor = 1 - _withVCI;
             double result = 0;

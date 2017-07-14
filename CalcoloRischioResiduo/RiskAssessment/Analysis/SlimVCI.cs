@@ -22,11 +22,13 @@ namespace CalcoloRischioResiduo.RiskAssessment.Analysis
         {
             return _vcivalue;
         }
-        public double GetBIAValue()
+
+        public double GetPotentialRiskBIAValue()
         {
             return _biavalue;
         }
-        public double GetCOMPLIANCEValue()
+
+        public double GetPotentialRIskCOMPLIANCEValue()
         {
             return _compliancevalue;
         }

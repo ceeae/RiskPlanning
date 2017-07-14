@@ -19,7 +19,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
         {
             if (BelongsToAnalyzedPerimeter())
             {
-                return GetAssociatedPerimeter().EstimatedResidualRisk(IsClassified());
+                return GetAssociatedPerimeter().GetResidualRiskEstimate(IsClassified());
             }
 
             return SlimVCI.VCIMAX;

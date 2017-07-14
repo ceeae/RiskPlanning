@@ -1,9 +1,9 @@
 ﻿namespace CalcoloRischioResiduo.FunctionalPerimeters
 {
-    public static class AnalysisStatus
+    public enum AnalysisStatus : int
     {
-        public const int Missing = 0;
-        public const int Complete = 1;
-        public const int BelowThreshold = 2;
+        Missing = 0,
+        Complete = 1,
+        BelowThreshold = 2
     }
 }
