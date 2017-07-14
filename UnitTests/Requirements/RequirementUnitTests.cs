@@ -8,7 +8,7 @@ using FluentAssertions;
 
 namespace UnitTests.Requirements
 {
-    public class _AbstractSlimRequirementUnitTests
+    public class RequirementUnitTests
     {
 
         [Theory]
@@ -37,7 +37,7 @@ namespace UnitTests.Requirements
             sr.PAS.Value.Should().Be(pas);
             sr.Alpha.Value.Should().Be(alpha);
             sr.Id.Should().Be(id);
-            sr.Weights[n].Value.Should().Be(1); // check complianceweight n-element as default value
+            sr.weights[n].Value.Should().Be(1); // check complianceweight n-element as default value
         }
 
         [Theory]

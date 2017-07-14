@@ -85,7 +85,8 @@
     <Compile Include="Requirements\ExtendedRequirementUnitTests.cs" />
     <Compile Include="Requirements\ExtendedRequirementsUnitTests.cs" />
     <Compile Include="Common\WeightUnitTests.cs" />
-    <Compile Include="Requirements\_AbstractSlimRequirementUnitTests.cs" />
+    <Compile Include="Requirements\RequirementsSetUnitTests.cs" />
+    <Compile Include="Requirements\RequirementUnitTests.cs" />
     <Compile Include="ResidualRiskEstimates\ElementsBuilder.cs" />
     <Compile Include="ResidualRiskEstimates\Scenarios.cs" />
     <Compile Include="ResidualRiskEstimates\ResidualRiskEstimatesUnitTests.cs" />

@@ -19,9 +19,10 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
         public long Id { get; }
 
         public FractionWeight PAS { get; }
+
         public CorrectionFactor Alpha { get; }
 
-        public List<Weight> Weights { get;  }     // RID + 35 compliance weights
+        public Weights weights { get;  }     // RID + 35 compliance weights
 
         #region calculated factors
         // Calculated factors
@@ -48,7 +49,8 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
             PAS = pas;
             Alpha = alpha;
 
-            Weights = Enumerable.Repeat((Weight) new DefaultWeight(), WEIGHTS_NUM).ToList();
+            weights = new Weights(Enumerable.Repeat((Weight)new DefaultWeight(), WEIGHTS_NUM).ToList()); 
+              
         }
 
         public void InitializeWeightsWithIntArray(int index, int[] values)
@@ -58,15 +60,20 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
                 i <= index + values.Length - 1;
                 i++)
             {
-                Weights[i] = new Weight(values[i - index]);
+                weights[i] = new Weight(values[i - index]);
             }
+        }
+
+        public void InitializeWeightsWithIntArray(int[] values)
+        {
+            InitializeWeightsWithIntArray(0, values);
         }
 
         public void CalculaterPotentialRiskFactors(List<int> totals)
         {
             double correctedPAS = PAS.Value + Alpha.Value;
 
-            List<double> f = DivideWeightsBy(totals); // f = Weights / Totals
+            List<double> f = DivideWeightsBy(totals); // f = weights / Totals
 
             _prbia = f.Take(3).Sum() * correctedPAS;
             _prbiaid = f.Skip(1).Take(2).Sum() * correctedPAS;
@@ -81,7 +88,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
 
             for (i = 0; i < WEIGHTS_NUM - 1; i++)
             {
-                fraction[i] = (double) Weights[i].Value/totals[i];
+                fraction[i] = (double) weights[i].Value/totals[i];
             }
             return fraction;
         }

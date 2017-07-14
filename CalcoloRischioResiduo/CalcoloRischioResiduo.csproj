@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RiskAssessment\Common\Tuple.cs" />
+    <Compile Include="RiskAssessment\Common\Weights.cs" />
     <Compile Include="RiskAssessment\Elements\AbsentAbstractElement.cs" />
     <Compile Include="RiskAssessment\Elements\CompleteAbstractElement.cs" />
     <Compile Include="RiskAssessment\Elements\IElement.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="RiskAssessment\Exceptions\InvalidCorrectionValueException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidProbabilityValueException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidWeightValueException.cs" />
+    <Compile Include="RiskAssessment\Exceptions\ListsWithDifferentSizesCannotBeAddedException.cs" />
     <Compile Include="RiskAssessment\Exceptions\MissingRequirementsException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidKeyException.cs" />
     <Compile Include="RiskAssessment\Exceptions\OutOfRangeIndexException.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="RiskAssessment\Common\FractionWeight.cs" />
     <Compile Include="RiskAssessment\Requirements\Requirement.cs" />
     <Compile Include="RiskAssessment\Common\Weight.cs" />
+    <Compile Include="RiskAssessment\Requirements\RequirementsSet.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,7 +10,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
 
         #region BIA
         
-        // RID Weights (3) weights 1..5
+        // RID weights (3) weights 1..5
         private int _r = 1;
         private int _i = 1;
         private int _d = 1;
@@ -32,7 +32,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
 
         #region COMPLIANCE
 
-        // COMPLIANCE Weights (35) weights 1..5
+        // COMPLIANCE weights (35) weights 1..5
         private int[] _complianceWeights;
 
         public int[] complianceWeights { get { return _complianceWeights; } }
