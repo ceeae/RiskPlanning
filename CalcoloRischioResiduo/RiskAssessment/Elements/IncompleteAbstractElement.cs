@@ -11,9 +11,9 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
             this.AssociateWith(perimeters);
         }
 
-        public override double EstimateResidualRisk()
+        public override double GetResidualRiskEstimate()
         {
-            return _vci.GetPotentialRiskValue(); // Residual Risk = Potential Risk (Managed Risk = 0)
+            return _vci.GetPotentialRisk(); // Residual Risk = Potential Risk (Managed Risk = 0)
         }
     }
 }

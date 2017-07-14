@@ -85,10 +85,10 @@
     <Compile Include="Common\WeightUnitTests.cs" />
     <Compile Include="Requirements\RequirementsSetUnitTests.cs" />
     <Compile Include="Requirements\RequirementUnitTests.cs" />
-    <Compile Include="ResidualRiskEstimates\ElementsBuilder.cs" />
-    <Compile Include="ResidualRiskEstimates\Scenarios.cs" />
-    <Compile Include="ResidualRiskEstimates\ResidualRiskEstimatesUnitTests.cs" />
-    <Compile Include="ResidualRiskEstimates\SlimPDSUnitTests.cs" />
+    <Compile Include="Elements\ScenarioElementsBuilder.cs" />
+    <Compile Include="Elements\Scenarios.cs" />
+    <Compile Include="Elements\ElementUnitTests.cs" />
+    <Compile Include="Analysis\SlimPDSUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

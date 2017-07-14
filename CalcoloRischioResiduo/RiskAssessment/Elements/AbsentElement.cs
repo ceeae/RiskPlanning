@@ -15,7 +15,8 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
             this.Perimeter = perimeter;
             this.AssociateWith(perimeters);
         }
-        public override double EstimateResidualRisk()
+
+        public override double GetResidualRiskEstimate()
         {
             if (BelongsToAnalyzedPerimeter())
             {

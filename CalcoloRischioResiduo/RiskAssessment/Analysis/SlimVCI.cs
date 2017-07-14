@@ -18,17 +18,17 @@ namespace CalcoloRischioResiduo.RiskAssessment.Analysis
             _vcivalue = biavalue + compliancevalue;
         }
 
-        public double GetPotentialRiskValue()
+        public double GetPotentialRisk()
         {
             return _vcivalue;
         }
 
-        public double GetPotentialRiskBIAValue()
+        public double GetPotentialRiskBIA()
         {
             return _biavalue;
         }
 
-        public double GetPotentialRiskCOMPLIANCEValue()
+        public double GetPotentialRiskCOMPLIANCE()
         {
             return _compliancevalue;
         }

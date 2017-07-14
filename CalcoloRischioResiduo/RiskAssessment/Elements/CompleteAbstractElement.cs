@@ -19,9 +19,9 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
             this.AssociateWith(perimeters);
         }
 
-        public override double EstimateResidualRisk()
+        public override double GetResidualRiskEstimate()
         {
-            return _pds.GetResidualRiskValue();
+            return _pds.GetResidualRisk();
         }
     }
 }

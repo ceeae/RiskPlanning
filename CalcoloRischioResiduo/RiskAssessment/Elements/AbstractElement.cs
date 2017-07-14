@@ -5,13 +5,16 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
     public abstract class AbstractElement : IElement
     {
+
         protected ElementTypes classification = ElementTypes.NotClassified;
+
+        protected Types Perimeter { get; set; }
+
         protected SlimVCI _vci = null;
+
         protected SlimPDS _pds = null;
 
         protected PerimetersAnalysis _perimeters = null;
-
-        protected Types Perimeter { get; set; }
 
         #region constructors
 
@@ -72,7 +75,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
             return classification == ElementTypes.Classified;
         }
 
-        public abstract double EstimateResidualRisk();
+        public abstract double GetResidualRiskEstimate();
 
     }
 }

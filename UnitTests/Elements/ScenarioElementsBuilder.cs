@@ -6,9 +6,9 @@ using CalcoloRischioResiduo.RiskAssessment.Elements;
 using Xunit;
 using FluentAssertions;
 
-namespace UnitTests.ResidualRiskEstimates
+namespace UnitTests.Elements
 {
-    public class ElementsBuilder
+    public class ScenarioElementsBuilder
     {
 
         public static IElement CreateFromScenario(Scenarios scenario)

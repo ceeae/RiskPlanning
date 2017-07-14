@@ -5,10 +5,10 @@ using CalcoloRischioResiduo.RiskAssessment.Elements;
 using Xunit;
 using FluentAssertions;
 
-namespace UnitTests.ResidualRiskEstimates
+namespace UnitTests.Elements
 {
 
-    public class ResidualRiskEstimatesUnitTests
+    public class ElementUnitTests
     {
         [Theory]
         [InlineData(Scenarios.NotClassifiedAbsentElementWithMissingPerimeterAnalysis, 1250)]
@@ -21,9 +21,9 @@ namespace UnitTests.ResidualRiskEstimates
         //[InlineData(Scenarios.CompleteElementWithCompletePerimeterAnalysis, 536)]
         public void ResidualRiskEstimate_DifferentScenarios(Scenarios scenario, double expectedresidualriskvalue)
         {
-            IElement element = (IElement) ElementsBuilder.CreateFromScenario(scenario);
+            IElement element = (IElement) ScenarioElementsBuilder.CreateFromScenario(scenario);
 
-            double result = element.EstimateResidualRisk();
+            double result = element.GetResidualRiskEstimate();
 
             result.Should().Be(expectedresidualriskvalue);
         }

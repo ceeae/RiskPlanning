@@ -5,7 +5,7 @@ using CalcoloRischioResiduo.RiskAssessment.Exceptions;
 using Xunit;
 using FluentAssertions;
 
-namespace UnitTests.ResidualRiskEstimates
+namespace UnitTests.Analysis
 {
     public class SlimPDSUnitTests
     {

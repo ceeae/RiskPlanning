@@ -1,5 +1,5 @@
 ﻿
-namespace UnitTests.ResidualRiskEstimates
+namespace UnitTests.Elements
 {
     public enum Scenarios
     {

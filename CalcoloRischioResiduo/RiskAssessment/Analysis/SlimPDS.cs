@@ -15,7 +15,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Analysis
             _riskresidualvalue = riskresidualvalue;
         }
 
-        public double GetResidualRiskValue()
+        public double GetResidualRisk()
         {
            return _riskresidualvalue;
         }
