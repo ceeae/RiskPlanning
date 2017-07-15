@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using CalcoloRischioResiduo.RiskAssessment;
 using CalcoloRischioResiduo.RiskAssessment.Analysis;
+using CalcoloRischioResiduo.RiskAssessment.Elements;
 
 namespace CalcoloRischioResiduo.FunctionalPerimeters
 {
@@ -10,10 +11,10 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
 
         public const double THRESHOLD = 0.75;       // by req a perimetertype is "covered by analysis" if 75% elements owns a VCI
 
-        private Types _perimetertype;
-        private double _avgVCIC3;
-        private double _avgVCIAll;
-        private double _withVCI;
+        private readonly Types _perimetertype;
+        private readonly double _avgVCIC3;
+        private readonly double _avgVCIAll;
+        private readonly double _withVCI;
 
         public Perimeter(Types perimetertype, double avgVCIC3, double avgVCIAll, double withVCI)
         {
@@ -50,5 +51,9 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
             return Math.Round(result, 2);
         }
 
+        public AnalysisStatus GetStatus()
+        {
+            return IsAnalyzed() ? AnalysisStatus.Complete : AnalysisStatus.BelowThreshold;
+        }
     }
 }

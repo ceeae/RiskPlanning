@@ -10,20 +10,10 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
     public class AbsentElement : AbstractElement
     {
-        public AbsentElement(Types perimeter, PerimetersAnalysis perimeters) : base(ElementTypes.Classified)
+        public AbsentElement(Types elperimeter, PerimetersAnalysis elperimeters) 
+            : base(ElementTypes.Classified, elperimeter, elperimeters)
         {
-            this.Perimeter = perimeter;
-            this.AssociateWith(perimeters);
-        }
 
-        public override double GetResidualRiskEstimate()
-        {
-            if (BelongsToAnalyzedPerimeter())
-            {
-                return GetAssociatedPerimeter().GetResidualRiskEstimate(classification);
-            }
-
-            return SlimVCI.VCIMAX;
         }
     }
 }

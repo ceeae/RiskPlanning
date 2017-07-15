@@ -40,11 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FunctionalPerimeters\ElementTypes.cs" />
+    <Compile Include="RiskAssessment\Elements\ElementTypes.cs" />
     <Compile Include="RiskAssessment\Common\Tuple.cs" />
     <Compile Include="RiskAssessment\Common\Weights.cs" />
     <Compile Include="RiskAssessment\Elements\AbsentElement.cs" />
-    <Compile Include="RiskAssessment\Elements\CompleteAbstractElement.cs" />
+    <Compile Include="RiskAssessment\Elements\CompleteElement.cs" />
     <Compile Include="RiskAssessment\Elements\IElement.cs" />
     <Compile Include="RiskAssessment\Elements\AbstractElement.cs" />
     <Compile Include="FunctionalPerimeters\PerimetersAnalysis.cs" />
@@ -52,13 +52,14 @@
     <Compile Include="FunctionalPerimeters\Types.cs" />
     <Compile Include="FunctionalPerimeters\Perimeter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RiskAssessment\Elements\IncompleteAbstractElement.cs" />
-    <Compile Include="RiskAssessment\Elements\NotClassifiedAbstractElement.cs" />
+    <Compile Include="RiskAssessment\Elements\IncompleteElement.cs" />
+    <Compile Include="RiskAssessment\Elements\NotClassifiedElement.cs" />
     <Compile Include="RiskAssessment\Analysis\SlimPDS.cs" />
     <Compile Include="RiskAssessment\Analysis\SlimVCI.cs" />
     <Compile Include="RiskAssessment\Exceptions\DuplicatedKeyException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidCorrectionFactorValueException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidCorrectionValueException.cs" />
+    <Compile Include="RiskAssessment\Exceptions\InvalidNullArgumentException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidProbabilityValueException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidWeightValueException.cs" />
     <Compile Include="RiskAssessment\Exceptions\ListsWithDifferentSizesCannotBeAddedException.cs" />

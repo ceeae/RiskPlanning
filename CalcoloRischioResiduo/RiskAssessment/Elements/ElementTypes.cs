@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalcoloRischioResiduo.FunctionalPerimeters
+namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
     public enum ElementTypes: int
     {

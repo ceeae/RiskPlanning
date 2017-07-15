@@ -10,18 +10,18 @@ using CalcoloRischioResiduo.RiskAssessment.Analysis;
 namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
 
-    public class CompleteAbstractElement : AbstractElement
+    public class CompleteElement : AbstractElement
     {
 
-        public CompleteAbstractElement(Types perimeter, SlimVCI vci, SlimPDS pds, PerimetersAnalysis perimeters) : base(vci, pds)
+        public CompleteElement(Types elperimeter, PerimetersAnalysis elperimeters, SlimVCI vci, SlimPDS pds) // Classified by default
+            : base(elperimeter, elperimeters, vci, pds)
         {
-            this.Perimeter = perimeter;
-            this.AssociateWith(perimeters);
+
         }
 
         public override double GetResidualRiskEstimate()
         {
-            return _pds.GetResidualRisk();
+            return pds.GetResidualRisk();
         }
     }
 }

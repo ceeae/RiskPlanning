@@ -22,11 +22,11 @@ namespace UnitTests.Elements
             {
 
                 case Scenarios.NotClassifiedAbsentElementWithMissingPerimeterAnalysis:
-                    element = new NotClassifiedAbstractElement(Types.InformationTechnology, perimeters);
+                    element = new NotClassifiedElement(Types.InformationTechnology, perimeters);
                     break;
 
                 case Scenarios.NotClassifiedAbsentElementWithCompletePerimeterAnalysis:
-                    element = new NotClassifiedAbstractElement(Types.AdministrationFinanceAndControl, perimeters);
+                    element = new NotClassifiedElement(Types.AdministrationFinanceAndControl, perimeters);
                     break;
 
                 case Scenarios.ClassifiedAbsentElementWithMissingPerimeterAnalysis:
@@ -39,19 +39,19 @@ namespace UnitTests.Elements
                     break;
 
                 case Scenarios.IncompleteElementWithMissingPerimeterAnalysis:
-                    element = new IncompleteAbstractElement(Types.InformationTechnology, vci, perimeters);
+                    element = new IncompleteElement(Types.InformationTechnology, perimeters, vci);
                     break;
 
                 case Scenarios.IncompleteElementWithCompletePerimeterAnalysis:
-                    element = new IncompleteAbstractElement(Types.AdministrationFinanceAndControl, vci, perimeters);
+                    element = new IncompleteElement(Types.AdministrationFinanceAndControl, perimeters, vci);
                     break;
 
                 case Scenarios.CompleteElementWithMissingPerimeterAnalysis:
-                    element = new CompleteAbstractElement(Types.InformationTechnology, vci, pds, perimeters);
+                    element = new CompleteElement(Types.InformationTechnology, perimeters, vci, pds);
                     break;
 
                 case Scenarios.CompleteElementWithCompletePerimeterAnalysis:
-                    element = new CompleteAbstractElement(Types.AdministrationFinanceAndControl, vci, pds, perimeters);
+                    element = new CompleteElement(Types.AdministrationFinanceAndControl, perimeters, vci, pds);
                     break;
             }
             return element;

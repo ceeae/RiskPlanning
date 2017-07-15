@@ -15,11 +15,7 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
         public AnalysisStatus GetStatus(Types type)
         {
             Perimeter perimeter = FindByType(type);
-            if (perimeter == null)
-            {
-                return AnalysisStatus.Missing;
-            }
-            return perimeter.IsAnalyzed() ? AnalysisStatus.Complete : AnalysisStatus.BelowThreshold;
+            return perimeter?.GetStatus() ?? AnalysisStatus.Missing;
         }
 
         public Perimeter FindByType(Types type)

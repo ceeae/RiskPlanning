@@ -1,81 +1,83 @@
 ﻿using CalcoloRischioResiduo.FunctionalPerimeters;
 using CalcoloRischioResiduo.RiskAssessment.Analysis;
+using CalcoloRischioResiduo.RiskAssessment.Exceptions;
 
 namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
     public abstract class AbstractElement : IElement
     {
 
-        protected ElementTypes classification = ElementTypes.NotClassified;
+        protected readonly ElementTypes classification = ElementTypes.NotClassified;
 
-        protected Types Perimeter { get; set; }
+        protected Types Perimeter { get; }
 
-        protected SlimVCI _vci = null;
+        protected readonly SlimVCI vci;
 
-        protected SlimPDS _pds = null;
+        protected readonly SlimPDS pds;
 
-        protected PerimetersAnalysis _perimeters = null;
+        protected readonly PerimetersAnalysis perimeters;
 
         #region constructors
-
-        public AbstractElement()
+        
+        protected AbstractElement(Types elperimeter, PerimetersAnalysis elperimeters)  // Not classified
         {
-            Initialize(ElementTypes.NotClassified, null, null);
+            Perimeter = elperimeter;
+            if (elperimeters == null)
+            {
+                throw new InvalidNullArgumentException();
+            }
+            perimeters = elperimeters;
         }
 
-        public AbstractElement(ElementTypes classification)
+        protected AbstractElement(ElementTypes elclassification, Types elperimeter, PerimetersAnalysis elperimeters) // For classified elements
+            : this (elperimeter, elperimeters)
         {
-            Initialize(classification, null, null);
+            classification = elclassification;
         }
 
-        public AbstractElement(SlimVCI vci)
+        protected AbstractElement(Types elperimeter, PerimetersAnalysis elperimeters, SlimVCI elvci)
+            : this(ElementTypes.Classified, elperimeter, elperimeters)
         {
-            Initialize(ElementTypes.Classified, vci, null);
+            if (elvci == null)
+            {
+                throw new InvalidNullArgumentException();
+            }
+            vci = elvci;
         }
 
-        public AbstractElement(SlimVCI vci, SlimPDS pds)
+        protected AbstractElement(Types elperimeter, PerimetersAnalysis elperimeters, SlimVCI elvci, SlimPDS elpds)
+            : this(elperimeter, elperimeters, elvci)
         {
-            Initialize(ElementTypes.Classified, vci, pds);
-        }
-
-        private void Initialize(ElementTypes type, SlimVCI vci, SlimPDS pds)
-        {
-            classification = type;
-            _vci = vci;
-            _pds = pds;
+            if (elpds == null)
+            {
+                throw new InvalidNullArgumentException();
+            }
+            pds = elpds;
         }
 
         #endregion
 
-        public void AssociateWith(PerimetersAnalysis perimeters)
+        public bool HasPerimeterAnalysis()
         {
-            _perimeters = perimeters;
-        }
+            if (perimeters == null) return false;
 
-        public bool IsAssociated()
-        {
-            return _perimeters != null;
-        }
-
-        public bool BelongsToAnalyzedPerimeter()
-        {
-            if (!IsAssociated()) return false;
-
-            Perimeter perimeter = GetAssociatedPerimeter();
+            Perimeter perimeter = TakeAssociatedPerimeter();
             return perimeter?.IsAnalyzed() ?? false;
         }
 
-        public Perimeter GetAssociatedPerimeter()
+        public Perimeter TakeAssociatedPerimeter()
         {
-            return _perimeters.FindByType(Perimeter);
+            return perimeters.FindByType(Perimeter);
         }
 
-        public bool IsClassified()
+        public virtual double GetResidualRiskEstimate()
         {
-            return classification == ElementTypes.Classified;
+            if (HasPerimeterAnalysis())
+            {
+                return TakeAssociatedPerimeter().GetResidualRiskEstimate(classification);
+            }
+
+            return SlimVCI.VCIMAX;
         }
-
-        public abstract double GetResidualRiskEstimate();
-
     }
 }

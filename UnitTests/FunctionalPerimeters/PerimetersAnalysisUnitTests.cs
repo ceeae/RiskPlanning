@@ -1,4 +1,5 @@
 ﻿using CalcoloRischioResiduo.FunctionalPerimeters;
+using CalcoloRischioResiduo.RiskAssessment.Elements;
 using Xunit;
 using FluentAssertions;
 
