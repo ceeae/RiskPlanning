@@ -88,7 +88,7 @@
     <Compile Include="Elements\ScenarioElementsBuilder.cs" />
     <Compile Include="Elements\Scenarios.cs" />
     <Compile Include="Elements\ElementUnitTests.cs" />
-    <Compile Include="Analysis\SlimPDSUnitTests.cs" />
+    <Compile Include="Analysis\RPpdsUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

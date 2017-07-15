@@ -22,62 +22,54 @@ namespace UnitTests.Requirements
             Assert.Throws<InvalidKeyException>(() =>
             {
                 Requirement sr = new Requirement(id, PAS, Alpha);
+
             });
         }
 
         [Theory]
         [InlineData(100, 1, 3, 0)]
         [InlineData(101, 2, 4, 34)]
-        public void NewRequirement_ValidParameter_ExceptedValues(long id, double pas, double alpha, int n)
+        public void NewRequirement_ValidParameter_ExceptedPropertiesAndDefaultWeightIsOne(long id, double pas, double alpha, int n)
         {
             FractionWeight PAS = new FractionWeight(pas);
-            CorrectionFactor Alpha = new CorrectionFactor(alpha);
-            Requirement sr = new Requirement(id, PAS, Alpha);
 
-            sr.PAS.Value.Should().Be(pas);
-            sr.Alpha.Value.Should().Be(alpha);
-            sr.Id.Should().Be(id);
-            sr.weights[n].Value.Should().Be(1); // check complianceweight n-element as default value
+            CorrectionFactor Alpha = new CorrectionFactor(alpha);
+
+            Requirement req = new Requirement(id, PAS, Alpha); // Weights are 1 by default
+
+            req.PAS.Value.Should().Be(pas);
+            req.Alpha.Value.Should().Be(alpha);
+            req.Id.Should().Be(id);
+            req.ReqWeights[n].Value.Should().Be(1); // check complianceweight n-element as default value
         }
 
         [Theory]
         [InlineData(4.8, 0.2,   2.7, 1.8, 65.4)]
         [InlineData(3.2, 0,     1.7, 1.2, 41.8)]
-        public void CalculatePotentilRiskFactors_Scenario_CheckPotentialRiskBIA(
+        public void CalculatePotentilRiskFactors_Scenario_CheckFactorsValue(
             double pas, double alpha, 
             double prbia, double prbiaid, double prcompl)
         {
+
             FractionWeight PAS = new FractionWeight(pas);
+
             CorrectionFactor Alpha = new CorrectionFactor(alpha);
-            Requirement sr = new Requirement(101, PAS, Alpha);
 
-            sr.InitializeWeightsWithIntArray( 
-                new int[38]
+            Requirement req = new Requirement(101, PAS, Alpha, new int[38] 
                 {
-                    3, 1, 2,
-                    5,5,5,5,5,5,5,
-                    5,5,5,5,5,5,5,
-                    5,5,5,5,5,5,5,
-                    5,5,5,5,5,5,5,
-                    5,5,5,5,5,5,5,
+                    3, 1, 2, 5 ,5 ,5 ,5 ,5 ,5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
                 });
 
-            List<int> totals = new List<int>(
-                new int[38]
+            List<int> totals = new List<int>(new int[38]
                 {
-                    17, 13, 7,
-                    13,13,13,13,13,13,13,
-                    13,13,13,13,13,13,13,
-                    13,13,13,13,13,13,13,
-                    13,13,13,13,13,13,13,
-                    13,13,13,13,13,13,13,
+                    17,13,7,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
                 });
 
-            sr.CalculaterPotentialRiskFactors(totals);
+            req.CalculatePotentialRiskFactors(totals);
 
-            sr.PRbia.Should().Be(prbia);
-            sr.PRbiaID.Should().Be(prbiaid);
-            sr.PRcompl.Should().Be(prcompl);
+            req.PRbia.Should().Be(prbia);
+            req.PRbiaID.Should().Be(prbiaid);
+            req.PRcompl.Should().Be(prcompl);
         }
 
 

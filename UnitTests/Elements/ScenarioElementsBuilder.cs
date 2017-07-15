@@ -15,8 +15,8 @@ namespace UnitTests.Elements
         {
             IElement element = null;
             PerimetersAnalysis perimeters = CreatePerimetersAnalysis();
-            SlimVCI vci = new SlimVCI(450, 300); // vci=750
-            SlimPDS pds = new SlimPDS(536);
+            RPvci vci = new RPvci(450, 300); // vci=750
+            RPpds pds = new RPpds(536);
 
             switch (scenario)
             {

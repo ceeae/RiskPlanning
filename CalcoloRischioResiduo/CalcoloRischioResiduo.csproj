@@ -54,8 +54,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RiskAssessment\Elements\IncompleteElement.cs" />
     <Compile Include="RiskAssessment\Elements\NotClassifiedElement.cs" />
-    <Compile Include="RiskAssessment\Analysis\SlimPDS.cs" />
-    <Compile Include="RiskAssessment\Analysis\SlimVCI.cs" />
+    <Compile Include="RiskAssessment\Analysis\RPpds.cs" />
+    <Compile Include="RiskAssessment\Analysis\RPvci.cs" />
     <Compile Include="RiskAssessment\Exceptions\DuplicatedKeyException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidCorrectionFactorValueException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidCorrectionValueException.cs" />

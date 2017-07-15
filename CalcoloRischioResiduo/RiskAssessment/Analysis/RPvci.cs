@@ -3,7 +3,7 @@ using System.Security.Claims;
 
 namespace CalcoloRischioResiduo.RiskAssessment.Analysis
 {
-    public class SlimVCI
+    public class RPvci
     {
         public static double VCIMAX = 1250;
 
@@ -11,7 +11,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Analysis
         private double _biavalue;
         private double _compliancevalue;
 
-        public SlimVCI(double biavalue, double compliancevalue)
+        public RPvci(double biavalue, double compliancevalue)
         {
             _biavalue = biavalue;
             _compliancevalue = compliancevalue;

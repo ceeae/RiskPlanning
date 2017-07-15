@@ -7,15 +7,15 @@ using FluentAssertions;
 
 namespace UnitTests.Analysis
 {
-    public class SlimPDSUnitTests
+    public class RPpdsUnitTests
     {
-        public SlimPDSUnitTests()
+        public RPpdsUnitTests()
         {
             
         }
 
         [Fact]
-        public void NewSlimPDS_WithoutRequirements_RaisesException()
+        public void NewRPPDS_WithoutRequirements_RaisesException()
         {
         }
 

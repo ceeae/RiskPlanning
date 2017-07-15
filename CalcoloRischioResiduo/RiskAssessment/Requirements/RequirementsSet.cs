@@ -7,23 +7,36 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
     public class RequirementsSet : List<Requirement>
     {
 
-        public List<int> Totals()
+        public List<int> CalculateTotals()
         {
             List<int> result = Enumerable.Repeat(0, Requirement.WEIGHTS_NUM).ToList();
 
             foreach (var req in this)
             {
-                result += req.weights;
+                result += req.ReqWeights;
             }
 
             return result;
         }
 
-        public void Append(int id, double pas, double alpha, int[] values)
+        public void AddRequirement(int id, double pas, double alpha, int[] values)
         {
-            Requirement requirement = new Requirement(id, new FractionWeight(pas), new CorrectionFactor(alpha));
-            requirement.InitializeWeightsWithIntArray(values);
+            Requirement requirement = new Requirement(id, new FractionWeight(pas), new CorrectionFactor(alpha), values);
             Add(requirement);
         }
+
+        public Dictionary<long, double> GetPotentialRiskDistributionBIA()
+        {
+            return new Dictionary<long, double>
+            {
+                { 101, 0.5 },
+                { 102, 0.5 },
+                { 103, 0.5 },
+                { 104, 0.5 },
+                { 105, 0.5 },
+
+            };
+        }
+
     }
 }

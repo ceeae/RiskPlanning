@@ -41,11 +41,11 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
 
             if (classification == ElementTypes.NotClassified)
             {
-                result = IsAnalyzed() ? _avgVCIC3*(1 + correctionFactor) : SlimVCI.VCIMAX;
+                result = IsAnalyzed() ? _avgVCIC3*(1 + correctionFactor) : RPvci.VCIMAX;
             }
             else
             {
-                result = IsAnalyzed() ? _avgVCIAll * (1 + correctionFactor) : SlimVCI.VCIMAX;
+                result = IsAnalyzed() ? _avgVCIAll * (1 + correctionFactor) : RPvci.VCIMAX;
             }
 
             return Math.Round(result, 2);

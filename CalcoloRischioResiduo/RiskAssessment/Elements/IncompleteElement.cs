@@ -5,7 +5,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
     public class IncompleteElement: AbstractElement { 
 
-        public IncompleteElement(Types elperimeter, PerimetersAnalysis elperimeters, SlimVCI elvci) // Classified by default
+        public IncompleteElement(Types elperimeter, PerimetersAnalysis elperimeters, RPvci elvci) // Classified by default
             : base(elperimeter, elperimeters, elvci)
         {
 

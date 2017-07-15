@@ -13,7 +13,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
     public class CompleteElement : AbstractElement
     {
 
-        public CompleteElement(Types elperimeter, PerimetersAnalysis elperimeters, SlimVCI vci, SlimPDS pds) // Classified by default
+        public CompleteElement(Types elperimeter, PerimetersAnalysis elperimeters, RPvci vci, RPpds pds) // Classified by default
             : base(elperimeter, elperimeters, vci, pds)
         {
 

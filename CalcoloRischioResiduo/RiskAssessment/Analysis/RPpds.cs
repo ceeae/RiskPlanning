@@ -6,11 +6,11 @@ using CalcoloRischioResiduo.RiskAssessment.Requirements;
 
 namespace CalcoloRischioResiduo.RiskAssessment.Analysis
 {
-    public class SlimPDS
+    public class RPpds
     {
         private double _riskresidualvalue;
  
-        public SlimPDS(double riskresidualvalue)
+        public RPpds(double riskresidualvalue)
         {
             _riskresidualvalue = riskresidualvalue;
         }

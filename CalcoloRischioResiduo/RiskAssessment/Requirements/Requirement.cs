@@ -16,10 +16,9 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
 
         public CorrectionFactor Alpha { get; }
 
-        public Weights weights { get;  }     // RID + 35 compliance weights
+        public Weights ReqWeights { get;  }     // RID + 35 compliance ReqWeights
 
-        #region calculated factors
-        // Calculated factors
+        #region Potential Risk Factors (calculated - BIA, BIAID, COMPL - format 00.0)
 
         private double _prbia = 0;
         private double _prbiaid = 0;
@@ -30,6 +29,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
         public double PRbiaID => Math.Round(_prbiaid, 1);
 
         public double PRcompl => Math.Round(_prcompl, 1);
+
         #endregion calculated factors
 
         public Requirement(long id, FractionWeight pas, CorrectionFactor alpha)
@@ -42,19 +42,23 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
             Id = id;
             PAS = pas;
             Alpha = alpha;
-
-            weights = new Weights(Enumerable.Repeat((Weight)new DefaultWeight(), WEIGHTS_NUM).ToList()); 
-              
+            ReqWeights = new Weights(Enumerable.Repeat((Weight)new DefaultWeight(), WEIGHTS_NUM).ToList()); 
         }
 
-        public void InitializeWeightsWithIntArray(int index, int[] values)
+        public Requirement(long id, FractionWeight pas, CorrectionFactor alpha, int[] values) 
+            : this(id, pas, alpha)
+        {
+            InitializeWeightsWithIntArray(values);
+        }
+
+        public void InitializeWeightsWithIntArray(int startIndex, int[] values)
         {
             int i;
-            for (i = index;
-                i <= index + values.Length - 1;
+            for (i = startIndex;
+                i <= startIndex + values.Length - 1;
                 i++)
             {
-                weights[i] = new Weight(values[i - index]);
+                ReqWeights[i] = new Weight(values[i - startIndex]);
             }
         }
 
@@ -63,11 +67,11 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
             InitializeWeightsWithIntArray(0, values);
         }
 
-        public void CalculaterPotentialRiskFactors(List<int> totals)
+        public void CalculatePotentialRiskFactors(List<int> totals)
         {
             double correctedPAS = PAS.Value + Alpha.Value;
 
-            List<double> f = DivideWeightsBy(totals);                       // f = weights / Totals
+            List<double> f = DivideWeightsBy(totals);                       // f = ReqWeights / CalculateTotals
 
             _prbia =    f.Take(3).Sum()         * correctedPAS;
             _prbiaid =  f.Skip(1).Take(2).Sum() * correctedPAS;
@@ -82,7 +86,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
 
             for (i = 0; i < WEIGHTS_NUM - 1; i++)
             {
-                fraction[i] = (double) weights[i].Value/totals[i];
+                fraction[i] = (double) ReqWeights[i].Value/totals[i];
             }
             return fraction;
         }

@@ -8,6 +8,6 @@ namespace CalcoloRischioResiduo.RiskAssessment.Exceptions
 {
     public class MissingRequirementsException : Exception
     {
-        // thrown when SlimPDS missing requirements (at least one)
+        // thrown when RPpds missing requirements (at least one)
     }
 }

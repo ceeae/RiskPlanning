@@ -11,9 +11,9 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         protected Types Perimeter { get; }
 
-        protected readonly SlimVCI vci;
+        protected readonly RPvci vci;
 
-        protected readonly SlimPDS pds;
+        protected readonly RPpds pds;
 
         protected readonly PerimetersAnalysis perimeters;
 
@@ -35,7 +35,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
             classification = elclassification;
         }
 
-        protected AbstractElement(Types elperimeter, PerimetersAnalysis elperimeters, SlimVCI elvci)
+        protected AbstractElement(Types elperimeter, PerimetersAnalysis elperimeters, RPvci elvci)
             : this(ElementTypes.Classified, elperimeter, elperimeters)
         {
             if (elvci == null)
@@ -45,7 +45,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
             vci = elvci;
         }
 
-        protected AbstractElement(Types elperimeter, PerimetersAnalysis elperimeters, SlimVCI elvci, SlimPDS elpds)
+        protected AbstractElement(Types elperimeter, PerimetersAnalysis elperimeters, RPvci elvci, RPpds elpds)
             : this(elperimeter, elperimeters, elvci)
         {
             if (elpds == null)
@@ -77,7 +77,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
                 return TakeAssociatedPerimeter().GetResidualRiskEstimate(classification);
             }
 
-            return SlimVCI.VCIMAX;
+            return RPvci.VCIMAX;
         }
     }
 }
