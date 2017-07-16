@@ -48,7 +48,7 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
                 result = IsAnalyzed() ? _avgVCIAll * (1 + correctionFactor) : RPvci.VCIMAX;
             }
 
-            return Math.Round(result, 2);
+            return result;
         }
 
         public AnalysisStatus GetStatus()

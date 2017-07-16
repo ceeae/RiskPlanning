@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using CalcoloRischioResiduo.RiskAssessment.Common;
 using CalcoloRischioResiduo.RiskAssessment.Exceptions;
@@ -67,11 +68,15 @@ namespace UnitTests.Requirements
 
             req.CalculatePotentialRiskFactors(totals);
 
-            req.PRbia.Should().Be(prbia);
-            req.PRbiaID.Should().Be(prbiaid);
-            req.PRcompl.Should().Be(prcompl);
+            R2(req.PRbia).Should().Be(prbia);
+            R2(req.PRbiaID).Should().Be(prbiaid);
+            R2(req.PRcompl).Should().Be(prcompl);
         }
 
+        public static double R2(double result)
+        {
+            return Math.Round(result, 2);
+        }
 
     }
 }

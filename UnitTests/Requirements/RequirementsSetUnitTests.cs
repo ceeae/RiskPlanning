@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CalcoloRischioResiduo.RiskAssessment.Common;
 using CalcoloRischioResiduo.RiskAssessment.Requirements;
 using Xunit;
@@ -76,9 +77,9 @@ namespace UnitTests.Requirements
 
             });
 
-            set.PRbiaTot.Should().Be(6.35);
-            set.PRbiaIDTot.Should().Be(4.24);
-            set.PRcomplTot.Should().Be(115.09);
+            R2(set.PRbiaTot).Should().Be(6.34);
+            R2(set.PRbiaIDTot).Should().Be(4.25);
+            R2(set.PRcomplTot).Should().Be(115.08);
         }
 
         [Fact]
@@ -87,9 +88,8 @@ namespace UnitTests.Requirements
             double MRbia = set.GetManagedRiskBIAFactor();
             double MRcompl = set.GetManagedRiskCOMPLFactor();
 
-
-            MRbia.Should().Be(3.25);
-            MRcompl.Should().Be(68.0);
+            R2(MRbia).Should().Be(3.25);
+            R2(MRcompl).Should().Be(68.0);
         }
 
         [Fact]
@@ -98,13 +98,15 @@ namespace UnitTests.Requirements
             double RRbia = set.GetResidualRiskBIAFactor();
             double RRcompl = set.GetResidualRiskCOMPLFactor();
 
-
-            RRbia.Should().Be(3.10);
-            RRcompl.Should().Be(47.09);
+            R2(RRbia).Should().Be(3.10);
+            R2(RRcompl).Should().Be(47.08);
         }
 
 
-
+        public static double R2(double result)
+        {
+            return Math.Round(result, 2);
+        }
         // Managed Risk (single value)
 
         // Residual Risk (BIA * COMPL values)

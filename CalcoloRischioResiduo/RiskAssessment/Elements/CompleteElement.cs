@@ -21,49 +21,32 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         public override double GetResidualRisk()
         {
-            return MathRound0(
-                GetResidualRiskBIA() + GetResidualRiskCOMPL()
-                );
+            return GetResidualRiskBIA() + GetResidualRiskCOMPL();
         }
 
-        public int GetResidualRiskBIA()
+        public double GetResidualRiskBIA()
         {
-            return MathRound0(
-                    vci.GetPotentialRiskBIA() * pds.GetResidualRiskBIAFactor() / pds.GetPRBiaTotal()
-                );
+            return vci.GetPotentialRiskBIA() * pds.GetResidualRiskBIAFactor() / pds.GetPRBiaTotal();
         }
 
-        public int GetResidualRiskCOMPL()
+        public double GetResidualRiskCOMPL()
         {
-            return MathRound0(
-                    vci.GetPotentialRiskCOMPLIANCE() * pds.GetResidualRiskCOMPLFactor() / pds.GetPRCOMPLTotal()
-                );
+            return vci.GetPotentialRiskCOMPLIANCE() * pds.GetResidualRiskCOMPLFactor() / pds.GetPRCOMPLTotal();
         }
 
-        public int GetManagedRisk()
+        public double GetManagedRisk()
         {
-            return MathRound0(
-                    GetManagedRiskBIA() + GetManagedRiskCOMPL()
-                );
+            return GetManagedRiskBIA() + GetManagedRiskCOMPL();
         }
 
-        public int GetManagedRiskBIA()
+        public double GetManagedRiskBIA()
         {
-            return MathRound0(
-                    vci.GetPotentialRiskBIA() * pds.GetManagedRiskBIAFactor() / pds.GetPRBiaTotal()
-                );
+            return vci.GetPotentialRiskBIA() * pds.GetManagedRiskBIAFactor() / pds.GetPRBiaTotal();
         }
 
-        public int GetManagedRiskCOMPL()
+        public double GetManagedRiskCOMPL()
         {
-            return MathRound0( 
-                vci.GetPotentialRiskCOMPLIANCE() * pds.GetManagedRiskCOMPLFactor() / pds.GetPRCOMPLTotal()
-                );
-        }
-
-        public static int MathRound0(double result)
-        {
-            return (int) Math.Round(result, 0);
+            return vci.GetPotentialRiskCOMPLIANCE() * pds.GetManagedRiskCOMPLFactor() / pds.GetPRCOMPLTotal();
         }
 
     }

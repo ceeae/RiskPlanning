@@ -27,11 +27,11 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
         private double _prbiaid = 0;
         private double _prcompl = 0;
 
-        public double PRbia => Math.Round(_prbia, 2);
+        public double PRbia => _prbia;
 
-        public double PRbiaID => Math.Round(_prbiaid, 2);
+        public double PRbiaID => _prbiaid;
 
-        public double PRcompl => Math.Round(_prcompl, 2);
+        public double PRcompl => _prcompl;
 
         #endregion calculated factors
 

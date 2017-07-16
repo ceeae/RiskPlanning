@@ -24,11 +24,11 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
         private double _prbiaidtot = 0;
         private double _prcompltot = 0;
 
-        public double PRbiaTot => Math.Round(_prbiatot, 2);
+        public double PRbiaTot => _prbiatot;
 
-        public double PRbiaIDTot => Math.Round(_prbiaidtot, 2);
+        public double PRbiaIDTot => _prbiaidtot;
 
-        public double PRcomplTot => Math.Round(_prcompltot, 2);
+        public double PRcomplTot => _prcompltot;
 
         #endregion calculated factors
 
@@ -96,30 +96,25 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
         public double GetManagedRiskBIAFactor()
         {
             GetPotentialRiskDistributionFactors();
-            return MathRound2( this.Where(req => req.Adequate).Sum(req => req.PRbia) );
+            return this.Where(req => req.Adequate).Sum(req => req.PRbia);
         }
 
         public double GetManagedRiskCOMPLFactor()
         {
             GetPotentialRiskDistributionFactors();
-            return MathRound2(this.Where(req => req.Adequate).Sum(req => req.PRcompl));
+            return this.Where(req => req.Adequate).Sum(req => req.PRcompl);
         }
 
         public double GetResidualRiskBIAFactor()
         {
             GetPotentialRiskDistributionFactors();
-            return MathRound2(this.Where(req => !req.Adequate).Sum(req => req.PRbia));
+            return this.Where(req => !req.Adequate).Sum(req => req.PRbia);
         }
 
         public double GetResidualRiskCOMPLFactor()
         {
             GetPotentialRiskDistributionFactors();
-            return MathRound2(this.Where(req => !req.Adequate).Sum(req => req.PRcompl));
-        }
-
-        private static double MathRound2(double result)
-        {
-            return Math.Round(result, 2);
+            return this.Where(req => !req.Adequate).Sum(req => req.PRcompl);
         }
 
     }
