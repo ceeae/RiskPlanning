@@ -44,8 +44,8 @@ namespace UnitTests.Requirements
         }
 
         [Theory]
-        [InlineData(4.8, 0.2,   2.7, 1.8, 65.4)]
-        [InlineData(3.2, 0,     1.7, 1.2, 41.8)]
+        [InlineData(4.8, 0.2,   2.70, 1.81, 65.38)]
+        [InlineData(3.2, 0.0,   1.73, 1.16, 41.85)]
         public void CalculatePotentilRiskFactors_Scenario_CheckFactorsValue(
             double pas, double alpha, 
             double prbia, double prbiaid, double prcompl)

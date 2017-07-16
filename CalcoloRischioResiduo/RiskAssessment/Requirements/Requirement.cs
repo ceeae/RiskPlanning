@@ -18,17 +18,17 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
 
         public Weights ReqWeights { get;  }     // RID + 35 compliance ReqWeights
 
-        #region Potential Risk Factors (calculated - BIA, BIAID, COMPL - format 00.0)
+        #region Potential Risk Factors (calculated - BIA, BIAID, COMPL - format 00.00)
 
         private double _prbia = 0;
         private double _prbiaid = 0;
         private double _prcompl = 0;
 
-        public double PRbia => Math.Round(_prbia, 1);
+        public double PRbia => Math.Round(_prbia, 2);
 
-        public double PRbiaID => Math.Round(_prbiaid, 1);
+        public double PRbiaID => Math.Round(_prbiaid, 2);
 
-        public double PRcompl => Math.Round(_prcompl, 1);
+        public double PRcompl => Math.Round(_prcompl, 2);
 
         #endregion calculated factors
 
