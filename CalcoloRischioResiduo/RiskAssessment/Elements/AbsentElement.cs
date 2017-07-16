@@ -10,7 +10,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
     public class AbsentElement : AbstractElement
     {
-        public AbsentElement(Types elperimeter, PerimetersAnalysis elperimeters) 
+        public AbsentElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters) 
             : base(ElementTypes.Classified, elperimeter, elperimeters)
         {
 

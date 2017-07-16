@@ -9,7 +9,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         protected readonly ElementTypes classification = ElementTypes.NotClassified;
 
-        protected Types Perimeter { get; }
+        protected PerimeterType Perimeter { get; }
 
         protected readonly RPvci vci;
 
@@ -19,7 +19,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         #region constructors
         
-        protected AbstractElement(Types elperimeter, PerimetersAnalysis elperimeters)  // Not classified
+        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters)  // Not classified
         {
             Perimeter = elperimeter;
             if (elperimeters == null)
@@ -29,13 +29,13 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
             perimeters = elperimeters;
         }
 
-        protected AbstractElement(ElementTypes elclassification, Types elperimeter, PerimetersAnalysis elperimeters) // For classified elements
+        protected AbstractElement(ElementTypes elclassification, PerimeterType elperimeter, PerimetersAnalysis elperimeters) // For classified elements
             : this (elperimeter, elperimeters)
         {
             classification = elclassification;
         }
 
-        protected AbstractElement(Types elperimeter, PerimetersAnalysis elperimeters, RPvci elvci)
+        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RPvci elvci)
             : this(ElementTypes.Classified, elperimeter, elperimeters)
         {
             if (elvci == null)
@@ -45,7 +45,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
             vci = elvci;
         }
 
-        protected AbstractElement(Types elperimeter, PerimetersAnalysis elperimeters, RPvci elvci, RPpds elpds)
+        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RPvci elvci, RPpds elpds)
             : this(elperimeter, elperimeters, elvci)
         {
             if (elpds == null)

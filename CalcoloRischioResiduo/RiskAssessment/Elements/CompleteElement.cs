@@ -13,10 +13,15 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
     public class CompleteElement : AbstractElement
     {
 
-        public CompleteElement(Types elperimeter, PerimetersAnalysis elperimeters, RPvci vci, RPpds pds) // Classified by default
+        public CompleteElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RPvci vci, RPpds pds) // Classified by default
             : base(elperimeter, elperimeters, vci, pds)
         {
 
+        }
+
+        public void SetVEF(double vef)
+        {
+            pds.SetVEF(vef);    
         }
 
         public override double GetResidualRisk()
@@ -47,6 +52,11 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
         public double GetManagedRiskCOMPL()
         {
             return vci.GetPotentialRiskCOMPLIANCE() * pds.GetManagedRiskCOMPLFactor() / pds.GetPRCOMPLTotal();
+        }
+
+        public Dictionary<long, double[]> GetPotentialRiskDistributionFactors()
+        {
+            return pds.GetPotentialRiskDistributionFactors();
         }
 
     }

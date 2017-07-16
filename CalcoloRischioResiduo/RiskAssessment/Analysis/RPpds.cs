@@ -8,8 +8,6 @@ namespace CalcoloRischioResiduo.RiskAssessment.Analysis
 {
     public class RPpds
     {
-        private double _riskresidualvalue;
-
         private RequirementsSet _set;
 
         public RPpds(RequirementsSet set)
@@ -22,9 +20,9 @@ namespace CalcoloRischioResiduo.RiskAssessment.Analysis
             _set = set;
         }
 
-        public RPpds(double riskresidualvalue)
+        public void SetVEF(double vef)
         {
-            _riskresidualvalue = riskresidualvalue;
+            _set.VEF = vef;
         }
 
         public Dictionary<long, double[]> GetPotentialRiskDistributionFactors()

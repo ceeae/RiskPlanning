@@ -9,50 +9,50 @@ using FluentAssertions;
 
 namespace UnitTests.Elements
 {
-    public class ScenarioElementsBuilder
+    public class ElementBuilder
     {
 
-        public static IElement CreateFromScenario(ScenariosType scenarioType)
+        public static IElement CreateCase(TestCase scenario)
         {
             IElement element = null;
             PerimetersAnalysis perimeters = CreatePerimetersAnalysis();
             RPvci vci = new RPvci(450, 300); // vci=750
             RPpds pds = CreateRPpds();
 
-            switch (scenarioType)
+            switch (scenario)
             {
 
-                case ScenariosType.NotClassifiedAbsentElementWithMissingPerimeterAnalysis:
-                    element = new NotClassifiedElement(Types.InformationTechnology, perimeters);
+                case TestCase.NotClassifiedAbsentElementWithMissingPerimeterAnalysis:
+                    element = new NotClassifiedElement(PerimeterType.InformationTechnology, perimeters);
                     break;
 
-                case ScenariosType.NotClassifiedAbsentElementWithCompletePerimeterAnalysis:
-                    element = new NotClassifiedElement(Types.AdministrationFinanceAndControl, perimeters);
+                case TestCase.NotClassifiedAbsentElementWithCompletePerimeterAnalysis:
+                    element = new NotClassifiedElement(PerimeterType.AdministrationFinanceAndControl, perimeters);
                     break;
 
-                case ScenariosType.ClassifiedAbsentElementWithMissingPerimeterAnalysis:
-                    element = new AbsentElement(Types.InformationTechnology, perimeters);
+                case TestCase.ClassifiedAbsentElementWithMissingPerimeterAnalysis:
+                    element = new AbsentElement(PerimeterType.InformationTechnology, perimeters);
                     break;
 
-                case ScenariosType.ClassifiedAbsentElementWithCompletePerimeterAnalysis:
-                    element = new AbsentElement(Types.AdministrationFinanceAndControl, perimeters);
+                case TestCase.ClassifiedAbsentElementWithCompletePerimeterAnalysis:
+                    element = new AbsentElement(PerimeterType.AdministrationFinanceAndControl, perimeters);
 
                     break;
 
-                case ScenariosType.IncompleteElementWithMissingPerimeterAnalysis:
-                    element = new IncompleteElement(Types.InformationTechnology, perimeters, vci);
+                case TestCase.IncompleteElementWithMissingPerimeterAnalysis:
+                    element = new IncompleteElement(PerimeterType.InformationTechnology, perimeters, vci);
                     break;
 
-                case ScenariosType.IncompleteElementWithCompletePerimeterAnalysis:
-                    element = new IncompleteElement(Types.AdministrationFinanceAndControl, perimeters, vci);
+                case TestCase.IncompleteElementWithCompletePerimeterAnalysis:
+                    element = new IncompleteElement(PerimeterType.AdministrationFinanceAndControl, perimeters, vci);
                     break;
 
-                case ScenariosType.CompleteElementWithMissingPerimeterAnalysis:
-                    element = new CompleteElement(Types.InformationTechnology, perimeters, vci, pds);
+                case TestCase.CompleteElementWithMissingPerimeterAnalysis:
+                    element = new CompleteElement(PerimeterType.InformationTechnology, perimeters, vci, pds);
                     break;
 
-                case ScenariosType.CompleteElementWithCompletePerimeterAnalysis:
-                    element = new CompleteElement(Types.AdministrationFinanceAndControl, perimeters, vci, pds);
+                case TestCase.CompleteElementWithCompletePerimeterAnalysis:
+                    element = new CompleteElement(PerimeterType.AdministrationFinanceAndControl, perimeters, vci, pds);
                     break;
             }
             return element;
@@ -63,8 +63,8 @@ namespace UnitTests.Elements
             // Build perimeters analysis object
             PerimetersAnalysis perimeters = new PerimetersAnalysis
             {
-                { Types.InformationTechnology, 800, 700, 0.72},                  // Missing Perimeter Analysis
-                { Types.AdministrationFinanceAndControl, 835, 630, 0.84},       // Complete Perimeter Analysis
+                { PerimeterType.InformationTechnology, 800, 700, 0.72},                  // Missing Perimeter Analysis
+                { PerimeterType.AdministrationFinanceAndControl, 835, 630, 0.84},       // Complete Perimeter Analysis
             };
             return perimeters;
         }

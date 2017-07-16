@@ -5,7 +5,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
     public class NotClassifiedElement : AbstractElement
     {
-        public NotClassifiedElement(Types elperimeter, PerimetersAnalysis elperimeters) 
+        public NotClassifiedElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters) 
             : base(elperimeter, elperimeters)
         {
 

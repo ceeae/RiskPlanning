@@ -11,12 +11,12 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
 
         public const double THRESHOLD = 0.75;       // by req a perimetertype is "covered by analysis" if 75% elements owns a VCI
 
-        private readonly Types _perimetertype;
+        private readonly PerimeterType _perimetertype;
         private readonly double _avgVCIC3;
         private readonly double _avgVCIAll;
         private readonly double _withVCI;
 
-        public Perimeter(Types perimetertype, double avgVCIC3, double avgVCIAll, double withVCI)
+        public Perimeter(PerimeterType perimetertype, double avgVCIC3, double avgVCIAll, double withVCI)
         {
             _perimetertype = perimetertype;
             _avgVCIC3 = avgVCIC3;
@@ -29,7 +29,7 @@ namespace CalcoloRischioResiduo.FunctionalPerimeters
             return _withVCI >= THRESHOLD;
         }
 
-        public bool IsTypeOf(Types perimetertype)
+        public bool IsTypeOf(PerimeterType perimetertype)
         {
             return _perimetertype == perimetertype;
         }

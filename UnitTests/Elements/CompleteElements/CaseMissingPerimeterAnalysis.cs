@@ -1,49 +1,36 @@
-﻿
-
-using CalcoloRischioResiduo.FunctionalPerimeters;
+﻿using CalcoloRischioResiduo.FunctionalPerimeters;
 using CalcoloRischioResiduo.RiskAssessment.Analysis;
 using CalcoloRischioResiduo.RiskAssessment.Elements;
 using CalcoloRischioResiduo.RiskAssessment.Requirements;
 
 namespace UnitTests.Elements.CompleteElements
 {
-    public class ScenarioOne : IScenarioBuilder
+    class CaseMissingPerimeterAnalysis : AbstractCase
     {
 
-
-        public CompleteElement CreateScenario()
+        protected override PerimeterType SelectPerimeter()
         {
-            Types perimeter = SelectPerimeter();                                    // take just a pseudo-default perimeter
-            PerimetersAnalysis perimeters = CreatePerimetersAnalysis();
-            RPvci vci = CreateRPVci();                                               // vci=750
-            RPpds pds = CreateRPpds();
-
-            return new CompleteElement(perimeter, perimeters, vci, pds);
+            return PerimeterType.InformationTechnology;                   // Selected Complete Perimeter 
         }
 
-        protected Types SelectPerimeter()
-        {
-            return Types.InformationTechnology;
-        }
-
-        protected PerimetersAnalysis CreatePerimetersAnalysis()
+        protected override PerimetersAnalysis CreatePerimetersAnalysis()
         {
             // Build perimeters analysis object
             PerimetersAnalysis perimeters = new PerimetersAnalysis
             {
-                { Types.InformationTechnology, 800, 700, 0.72},                  // Missing Perimeter Analysis
-                { Types.AdministrationFinanceAndControl, 835, 630, 0.84},       // Complete Perimeter Analysis
+                { PerimeterType.InformationTechnology,              800, 700, 0.72},       // Missing Perimeter Analysis
+                { PerimeterType.AdministrationFinanceAndControl,    835, 630, 0.84},       // Complete Perimeter Analysis
             };
             return perimeters;
         }
 
-        protected RPvci CreateRPVci()
+        protected override RPvci CreateRPVci()
         {
-            return null;
+            return new RPvci(450, 300);
         }
 
 
-        protected RPpds CreateRPpds()
+        protected override RPpds CreateRPpds()
         {
             RequirementsSet set = new RequirementsSet();
 

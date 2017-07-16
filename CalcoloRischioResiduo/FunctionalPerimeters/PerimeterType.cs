@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalcoloRischioResiduo.FunctionalPerimeters
 {
-    public enum Types: int
+    public enum PerimeterType: int
     {
         InformationTechnology = 1,
         Technology = 2,

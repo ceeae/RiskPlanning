@@ -49,7 +49,7 @@
     <Compile Include="RiskAssessment\Elements\AbstractElement.cs" />
     <Compile Include="FunctionalPerimeters\PerimetersAnalysis.cs" />
     <Compile Include="FunctionalPerimeters\AnalysisStatus.cs" />
-    <Compile Include="FunctionalPerimeters\Types.cs" />
+    <Compile Include="FunctionalPerimeters\PerimeterType.cs" />
     <Compile Include="FunctionalPerimeters\Perimeter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RiskAssessment\Elements\IncompleteElement.cs" />

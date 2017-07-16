@@ -8,23 +8,16 @@ namespace UnitTests.Elements
 
     public class ElementUnitTests
     {
-        public static double R0(double result)
-        {
-            return Math.Round(result, 0);
-        }
-
         [Theory]
-        [InlineData(ScenariosType.NotClassifiedAbsentElementWithMissingPerimeterAnalysis, 1250)]
-        [InlineData(ScenariosType.NotClassifiedAbsentElementWithCompletePerimeterAnalysis, 969)]
-        [InlineData(ScenariosType.ClassifiedAbsentElementWithMissingPerimeterAnalysis, 1250)]
-        [InlineData(ScenariosType.ClassifiedAbsentElementWithCompletePerimeterAnalysis, 731)]
-        [InlineData(ScenariosType.IncompleteElementWithMissingPerimeterAnalysis, 750)]
-        [InlineData(ScenariosType.IncompleteElementWithCompletePerimeterAnalysis, 750)]
-        [InlineData(ScenariosType.CompleteElementWithMissingPerimeterAnalysis, 342)]
-        [InlineData(ScenariosType.CompleteElementWithCompletePerimeterAnalysis, 342)]
-        public void ResidualRisk_DifferentElements(ScenariosType scenarioType, double expectedresidualriskvalue)
+        [InlineData(TestCase.NotClassifiedAbsentElementWithMissingPerimeterAnalysis, 1250)]
+        [InlineData(TestCase.NotClassifiedAbsentElementWithCompletePerimeterAnalysis, 969)]
+        [InlineData(TestCase.ClassifiedAbsentElementWithMissingPerimeterAnalysis, 1250)]
+        [InlineData(TestCase.ClassifiedAbsentElementWithCompletePerimeterAnalysis, 731)]
+        [InlineData(TestCase.IncompleteElementWithMissingPerimeterAnalysis, 750)]
+        [InlineData(TestCase.IncompleteElementWithCompletePerimeterAnalysis, 750)]
+        public void ResidualRisk_DifferentElements(TestCase testCase, double expectedresidualriskvalue)
         {
-            IElement element = (IElement) ScenarioElementsBuilder.CreateFromScenario(scenarioType);
+            IElement element = (IElement) ElementBuilder.CreateCase(testCase);
 
             double result = element.GetResidualRisk();
 
@@ -32,10 +25,10 @@ namespace UnitTests.Elements
         }
 
         [Theory]
-        [InlineData(ScenariosType.CompleteElementWithCompletePerimeterAnalysis, 230)]
-        public void ManagedRiskBIA_CompleteElementGivenScenario(ScenariosType scenarioType, double expectedmanagedriskvalue)
+        [InlineData(TestCase.CompleteElementWithCompletePerimeterAnalysis, 230)]
+        public void ManagedRiskBIA_CompleteElementGivenScenario(TestCase testCase, double expectedmanagedriskvalue)
         {
-            CompleteElement element = (CompleteElement) ScenarioElementsBuilder.CreateFromScenario(scenarioType);
+            CompleteElement element = (CompleteElement) ElementBuilder.CreateCase(testCase);
 
             double result = element.GetManagedRiskBIA();
 
@@ -43,10 +36,10 @@ namespace UnitTests.Elements
         }
 
         [Theory]
-        [InlineData(ScenariosType.CompleteElementWithCompletePerimeterAnalysis, 177)]
-        public void ManagedRiskCOMPL_CompleteElementGivenScenario(ScenariosType scenarioType, double expectedmanagedriskvalue)
+        [InlineData(TestCase.CompleteElementWithCompletePerimeterAnalysis, 177)]
+        public void ManagedRiskCOMPL_CompleteElementGivenScenario(TestCase testCase, double expectedmanagedriskvalue)
         {
-            CompleteElement element = (CompleteElement)ScenarioElementsBuilder.CreateFromScenario(scenarioType);
+            CompleteElement element = (CompleteElement)ElementBuilder.CreateCase(testCase);
 
             double result = element.GetManagedRiskCOMPL();
 
@@ -54,10 +47,10 @@ namespace UnitTests.Elements
         }
 
         [Theory]
-        [InlineData(ScenariosType.CompleteElementWithCompletePerimeterAnalysis, 220)]
-        public void ResidualRiskBIA_CompleteElementGivenScenario(ScenariosType scenarioType, double expectedmanagedriskvalue)
+        [InlineData(TestCase.CompleteElementWithCompletePerimeterAnalysis, 220)]
+        public void ResidualRiskBIA_CompleteElementGivenScenario(TestCase testCase, double expectedmanagedriskvalue)
         {
-            CompleteElement element = (CompleteElement)ScenarioElementsBuilder.CreateFromScenario(scenarioType);
+            CompleteElement element = (CompleteElement)ElementBuilder.CreateCase(testCase);
 
             double result = element.GetResidualRiskBIA();
 
@@ -65,16 +58,20 @@ namespace UnitTests.Elements
         }
 
         [Theory]
-        [InlineData(ScenariosType.CompleteElementWithCompletePerimeterAnalysis, 123)]
-        public void ResidualRiskCOMPL_CompleteElementGivenScenario(ScenariosType scenarioType, double expectedmanagedriskvalue)
+        [InlineData(TestCase.CompleteElementWithCompletePerimeterAnalysis, 123)]
+        public void ResidualRiskCOMPL_CompleteElementGivenScenario(TestCase testCase, double expectedmanagedriskvalue)
         {
-            CompleteElement element = (CompleteElement)ScenarioElementsBuilder.CreateFromScenario(scenarioType);
+            CompleteElement element = (CompleteElement)ElementBuilder.CreateCase(testCase);
 
             double result = element.GetResidualRiskCOMPL();
 
             R0(result).Should().Be(expectedmanagedriskvalue);
         }
 
+        public static double R0(double result)
+        {
+            return Math.Round(result, 0);
+        }
     }
 }
 
