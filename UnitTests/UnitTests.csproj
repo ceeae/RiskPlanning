@@ -102,7 +102,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CalcoloRischioResiduo\CalcoloRischioResiduo.csproj">
+    <ProjectReference Include="..\ResidualRisk\ResidualRisk.csproj">
       <Project>{abfe4a16-6837-4c7f-b4c5-1d76aa14206f}</Project>
       <Name>CalcoloRischioResiduo</Name>
     </ProjectReference>

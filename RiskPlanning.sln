@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{45B8896D-85C2-4600-8E49-39E48DCAB76E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcoloRischioResiduo", "CalcoloRischioResiduo\CalcoloRischioResiduo.csproj", "{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResidualRisk", "ResidualRisk\ResidualRisk.csproj", "{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
