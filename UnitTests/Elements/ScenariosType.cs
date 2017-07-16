@@ -1,7 +1,7 @@
 ﻿
 namespace UnitTests.Elements
 {
-    public enum Scenarios
+    public enum ScenariosType
     {
         NotClassifiedAbsentElementWithMissingPerimeterAnalysis = 1,
         NotClassifiedAbsentElementWithCompletePerimeterAnalysis = 2,

@@ -121,5 +121,6 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
         {
             return Math.Round(result, 2);
         }
+
     }
 }

@@ -12,46 +12,46 @@ namespace UnitTests.Elements
     public class ScenarioElementsBuilder
     {
 
-        public static IElement CreateFromScenario(Scenarios scenario)
+        public static IElement CreateFromScenario(ScenariosType scenarioType)
         {
             IElement element = null;
             PerimetersAnalysis perimeters = CreatePerimetersAnalysis();
             RPvci vci = new RPvci(450, 300); // vci=750
             RPpds pds = CreateRPpds();
 
-            switch (scenario)
+            switch (scenarioType)
             {
 
-                case Scenarios.NotClassifiedAbsentElementWithMissingPerimeterAnalysis:
+                case ScenariosType.NotClassifiedAbsentElementWithMissingPerimeterAnalysis:
                     element = new NotClassifiedElement(Types.InformationTechnology, perimeters);
                     break;
 
-                case Scenarios.NotClassifiedAbsentElementWithCompletePerimeterAnalysis:
+                case ScenariosType.NotClassifiedAbsentElementWithCompletePerimeterAnalysis:
                     element = new NotClassifiedElement(Types.AdministrationFinanceAndControl, perimeters);
                     break;
 
-                case Scenarios.ClassifiedAbsentElementWithMissingPerimeterAnalysis:
+                case ScenariosType.ClassifiedAbsentElementWithMissingPerimeterAnalysis:
                     element = new AbsentElement(Types.InformationTechnology, perimeters);
                     break;
 
-                case Scenarios.ClassifiedAbsentElementWithCompletePerimeterAnalysis:
+                case ScenariosType.ClassifiedAbsentElementWithCompletePerimeterAnalysis:
                     element = new AbsentElement(Types.AdministrationFinanceAndControl, perimeters);
 
                     break;
 
-                case Scenarios.IncompleteElementWithMissingPerimeterAnalysis:
+                case ScenariosType.IncompleteElementWithMissingPerimeterAnalysis:
                     element = new IncompleteElement(Types.InformationTechnology, perimeters, vci);
                     break;
 
-                case Scenarios.IncompleteElementWithCompletePerimeterAnalysis:
+                case ScenariosType.IncompleteElementWithCompletePerimeterAnalysis:
                     element = new IncompleteElement(Types.AdministrationFinanceAndControl, perimeters, vci);
                     break;
 
-                case Scenarios.CompleteElementWithMissingPerimeterAnalysis:
+                case ScenariosType.CompleteElementWithMissingPerimeterAnalysis:
                     element = new CompleteElement(Types.InformationTechnology, perimeters, vci, pds);
                     break;
 
-                case Scenarios.CompleteElementWithCompletePerimeterAnalysis:
+                case ScenariosType.CompleteElementWithCompletePerimeterAnalysis:
                     element = new CompleteElement(Types.AdministrationFinanceAndControl, perimeters, vci, pds);
                     break;
             }

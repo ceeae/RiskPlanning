@@ -68,11 +68,11 @@ namespace UnitTests.Requirements
 
             PRdistrib.Should().Equals(new Dictionary<long, double[]>
             {
-                {101, new double[] {2.7, 1.8, 65.4, 853.60 }},
-                {102, new double[] {1.7, 1.2, 41.8, 546.30 }},
-                {103, new double[] {0.7, 0.5, 2.6, 212.11 }},
-                {104, new double[] {0.6, 0.5, 2.6, 212.11 }},
-                {105, new double[] {0.6, 0.4, 2.6, 175.89 }},
+                { 101, new double[] {2.7, 1.8, 65.4, 853.60 }},
+                { 102, new double[] {1.7, 1.2, 41.8, 546.30 }},
+                { 103, new double[] {0.7, 0.5, 2.6, 212.11 }},
+                { 104, new double[] {0.6, 0.5, 2.6, 212.11 }},
+                { 105, new double[] {0.6, 0.4, 2.6, 175.89 }},
 
             });
 

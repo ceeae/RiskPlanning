@@ -80,13 +80,19 @@
   <ItemGroup>
     <Compile Include="Common\TubleUnitTests.cs" />
     <Compile Include="Common\FakeUnitTest.cs" />
+    <Compile Include="Elements\CompleteElements\CompleteElementsUnitTests.cs" />
+    <Compile Include="Elements\CompleteElements\IScenarioBuilder.cs" />
+    <Compile Include="Elements\CompleteElements\ScenarioOne.cs" />
+    <Compile Include="Elements\CompleteElements\CompleteScenarioTypes.cs" />
+    <Compile Include="Elements\CompleteElements\ScenarioCompleteElementsBuilder.cs" />
+    <Compile Include="Elements\CompleteElements\ScenarioTwo.cs" />
     <Compile Include="FunctionalPerimeters\PerimetersAnalysisUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\WeightUnitTests.cs" />
     <Compile Include="Requirements\RequirementsSetUnitTests.cs" />
     <Compile Include="Requirements\RequirementUnitTests.cs" />
     <Compile Include="Elements\ScenarioElementsBuilder.cs" />
-    <Compile Include="Elements\Scenarios.cs" />
+    <Compile Include="Elements\ScenariosType.cs" />
     <Compile Include="Elements\ElementUnitTests.cs" />
     <Compile Include="Analysis\RPpdsUnitTests.cs" />
   </ItemGroup>
