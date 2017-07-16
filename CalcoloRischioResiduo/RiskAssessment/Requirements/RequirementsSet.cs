@@ -8,14 +8,15 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
     public class RequirementsSet : List<Requirement>
     {
 
+        public double VEF { get; set; }
+
         private bool calcTotalsneeded = true;
+
         private bool calcDistribneeded = true;
 
         private List<int> totals = null;
 
         private Dictionary<long, double[]> distrib = null;
-
-        public double VEF { get; set; }
 
         #region Potential Risk Factors Totals (calculated - BIA, BIAID, COMPL - format 00.0)
 
@@ -31,16 +32,16 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
 
         #endregion calculated factors
 
-        public void AddRequirement(int id, double pas, double alpha, int[] values)
+        public void AddRequirement(int id, double pas, double alpha, bool adequate, int[] values)
         {
-            Requirement requirement = new Requirement(id, new FractionWeight(pas), new CorrectionFactor(alpha), values);
+            Requirement requirement = new Requirement(id, new FractionWeight(pas), new CorrectionFactor(alpha), adequate, values);
             Add(requirement);
 
             calcTotalsneeded = true;
             calcDistribneeded = true;
         }
 
-        public List<int> CalculateTotals()
+        public List<int> CalculateWeightsTotals()
         {
 
             if (!calcTotalsneeded && totals != null)
@@ -73,14 +74,14 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
 
             distrib = new Dictionary<long, double[]>();
 
-            totals = CalculateTotals();
+            totals = CalculateWeightsTotals();
 
             foreach (var req in this)
             {
 
                 req.CalculatePotentialRiskFactors(totals);
 
-                distrib.Add(req.Id, new double[3] { req.PRbia, req.PRbiaID, req.PRcompl });
+                distrib.Add(req.Id, new double[4] { req.PRbia, req.PRbiaID, req.PRcompl, VEF * req.PRbiaID }); // Potential Risk BIA, BIAID, COMPL factors
 
                 _prbiatot += req.PRbia;
                 _prbiaidtot += req.PRbiaID;
@@ -88,19 +89,37 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
             }
 
             calcDistribneeded = false;
+
             return distrib;
         }
 
-        public Dictionary<long, double> GetVEFDistribution()
+        public double GetManagedRiskBIAFactor()
         {
-            return new Dictionary<long, double>
-            {
-                    {101, 853.60},
-                    {102, 546.30},
-                    {103, 212.11},
-                    {104, 212.11},
-                    {105, 175.89},
-            };
+            GetPotentialRiskDistributionFactors();
+            return MathRound2( this.Where(req => req.Adequate).Sum(req => req.PRbia) );
+        }
+
+        public double GetManagedRiskCOMPLFactor()
+        {
+            GetPotentialRiskDistributionFactors();
+            return MathRound2(this.Where(req => req.Adequate).Sum(req => req.PRcompl));
+        }
+
+        public double GetResidualRiskBIAFactor()
+        {
+            GetPotentialRiskDistributionFactors();
+            return MathRound2(this.Where(req => !req.Adequate).Sum(req => req.PRbia));
+        }
+
+        public double GetResidualRiskCOMPLFactor()
+        {
+            GetPotentialRiskDistributionFactors();
+            return MathRound2(this.Where(req => !req.Adequate).Sum(req => req.PRcompl));
+        }
+
+        private static double MathRound2(double result)
+        {
+            return Math.Round(result, 2);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace UnitTests.Requirements
 
             Assert.Throws<InvalidKeyException>(() =>
             {
-                Requirement sr = new Requirement(id, PAS, Alpha);
+                Requirement sr = new Requirement(id, PAS, Alpha, true);
 
             });
         }
@@ -35,7 +35,7 @@ namespace UnitTests.Requirements
 
             CorrectionFactor Alpha = new CorrectionFactor(alpha);
 
-            Requirement req = new Requirement(id, PAS, Alpha); // Weights are 1 by default
+            Requirement req = new Requirement(id, PAS, Alpha, true); // Weights are 1 by default
 
             req.PAS.Value.Should().Be(pas);
             req.Alpha.Value.Should().Be(alpha);
@@ -55,7 +55,7 @@ namespace UnitTests.Requirements
 
             CorrectionFactor Alpha = new CorrectionFactor(alpha);
 
-            Requirement req = new Requirement(101, PAS, Alpha, new int[38] 
+            Requirement req = new Requirement(101, PAS, Alpha, true, new int[38] 
                 {
                     3, 1, 2, 5 ,5 ,5 ,5 ,5 ,5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
                 });

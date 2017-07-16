@@ -19,9 +19,52 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         }
 
-        public override double GetResidualRiskEstimate()
+        public override double GetResidualRisk()
         {
-            return pds.GetResidualRisk();
+            return MathRound0(
+                GetResidualRiskBIA() + GetResidualRiskCOMPL()
+                );
         }
+
+        public int GetResidualRiskBIA()
+        {
+            return MathRound0(
+                    vci.GetPotentialRiskBIA() * pds.GetResidualRiskBIAFactor() / pds.GetPRBiaTotal()
+                );
+        }
+
+        public int GetResidualRiskCOMPL()
+        {
+            return MathRound0(
+                    vci.GetPotentialRiskCOMPLIANCE() * pds.GetResidualRiskCOMPLFactor() / pds.GetPRCOMPLTotal()
+                );
+        }
+
+        public int GetManagedRisk()
+        {
+            return MathRound0(
+                    GetManagedRiskBIA() + GetManagedRiskCOMPL()
+                );
+        }
+
+        public int GetManagedRiskBIA()
+        {
+            return MathRound0(
+                    vci.GetPotentialRiskBIA() * pds.GetManagedRiskBIAFactor() / pds.GetPRBiaTotal()
+                );
+        }
+
+        public int GetManagedRiskCOMPL()
+        {
+            return MathRound0( 
+                vci.GetPotentialRiskCOMPLIANCE() * pds.GetManagedRiskCOMPLFactor() / pds.GetPRCOMPLTotal()
+                );
+        }
+
+        public static int MathRound0(double result)
+        {
+            return (int) Math.Round(result, 0);
+        }
+
     }
 }

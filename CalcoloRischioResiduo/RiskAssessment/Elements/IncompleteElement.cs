@@ -11,7 +11,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         }
 
-        public override double GetResidualRiskEstimate()
+        public override double GetResidualRisk()
         {
             return vci.GetPotentialRisk();                          // Residual Risk = Potential Risk (Managed Risk = 0)
         }

@@ -3,6 +3,7 @@ using CalcoloRischioResiduo.FunctionalPerimeters;
 using CalcoloRischioResiduo.RiskAssessment;
 using CalcoloRischioResiduo.RiskAssessment.Analysis;
 using CalcoloRischioResiduo.RiskAssessment.Elements;
+using CalcoloRischioResiduo.RiskAssessment.Requirements;
 using Xunit;
 using FluentAssertions;
 
@@ -16,7 +17,7 @@ namespace UnitTests.Elements
             IElement element = null;
             PerimetersAnalysis perimeters = CreatePerimetersAnalysis();
             RPvci vci = new RPvci(450, 300); // vci=750
-            RPpds pds = new RPpds(536);
+            RPpds pds = CreateRPpds();
 
             switch (scenario)
             {
@@ -66,6 +67,41 @@ namespace UnitTests.Elements
                 { Types.AdministrationFinanceAndControl, 835, 630, 0.84},       // Complete Perimeter Analysis
             };
             return perimeters;
+        }
+
+        public static RPpds CreateRPpds()
+        {
+            RequirementsSet set = new RequirementsSet();
+
+            set.AddRequirement(101, 4.8, 0.2, true, new int[38]
+            {
+                3, 1, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                5, 5, 5,
+
+            });
+
+            set.AddRequirement(102, 3.2, 0.0, false, new int[38]
+            {
+                3, 1, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                5, 5, 5,
+            });
+
+            set.AddRequirement(103, 1.0, 0.0, false, new int[3]
+            {
+                5, 4, 1
+            });
+
+            set.AddRequirement(104, 1.0, 0.0, false, new int[3]
+            {
+                3, 4, 1
+            });
+
+            set.AddRequirement(105, 1.0, 0.0, true, new int[3]
+            {
+                3, 3, 1
+            });
+
+            return new RPpds(set);
         }
 
     }

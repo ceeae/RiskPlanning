@@ -70,7 +70,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
             return perimeters.FindByType(Perimeter);
         }
 
-        public virtual double GetResidualRiskEstimate()
+        public virtual double GetResidualRisk()
         {
             if (HasPerimeterAnalysis())
             {

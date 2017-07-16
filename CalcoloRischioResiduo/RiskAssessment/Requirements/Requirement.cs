@@ -16,8 +16,11 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
 
         public CorrectionFactor Alpha { get; }
 
+        public bool Adequate { get; }
+
         public Weights ReqWeights { get;  }     // RID + 35 compliance ReqWeights
 
+  
         #region Potential Risk Factors (calculated - BIA, BIAID, COMPL - format 00.00)
 
         private double _prbia = 0;
@@ -32,7 +35,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
 
         #endregion calculated factors
 
-        public Requirement(long id, FractionWeight pas, CorrectionFactor alpha)
+        public Requirement(long id, FractionWeight pas, CorrectionFactor alpha, bool adequate)
         {
             if (id <= 0)
             {
@@ -42,11 +45,13 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
             Id = id;
             PAS = pas;
             Alpha = alpha;
+            Adequate = adequate;
+
             ReqWeights = new Weights(Enumerable.Repeat((Weight)new DefaultWeight(), WEIGHTS_NUM).ToList()); 
         }
 
-        public Requirement(long id, FractionWeight pas, CorrectionFactor alpha, int[] values) 
-            : this(id, pas, alpha)
+        public Requirement(long id, FractionWeight pas, CorrectionFactor alpha, bool adequate, int[] values) 
+            : this(id, pas, alpha, adequate)
         {
             InitializeWeightsWithIntArray(values);
         }
@@ -71,7 +76,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
         {
             double correctedPAS = PAS.Value + Alpha.Value;
 
-            List<double> f = DivideWeightsBy(totals);                       // f = ReqWeights / CalculateTotals
+            List<double> f = DivideWeightsBy(totals);                       // f = ReqWeights / CalculateWeightsTotals
 
             _prbia =    f.Take(3).Sum()         * correctedPAS;
             _prbiaid =  f.Skip(1).Take(2).Sum() * correctedPAS;

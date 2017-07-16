@@ -9,6 +9,6 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 {
     public interface IElement
     {
-        double GetResidualRiskEstimate();
+        double GetResidualRisk();
     }
 }
