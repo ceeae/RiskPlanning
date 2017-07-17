@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WhatIfAnalysis.Elements;
+﻿using WhatIfAnalysis.Elements;
 
 namespace WhatIfAnalysis.CoverageAnalysis
 {
     public class CoverageActivity
     {
-        private Element _element;
+        private readonly Element _element;
+
         public  ActivityType _activityType;
+
         public int _cost;
+
         public int _ingcost;
+
         public double _mrreduction;
 
         public double _order = 0;
