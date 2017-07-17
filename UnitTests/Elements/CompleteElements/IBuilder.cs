@@ -1,5 +1,5 @@
-﻿using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment.Elements;
+﻿using ResidualRisk.FunctionalPerimeters;
+using ResidualRisk.RiskAssessment.Elements;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTests.Elements.CompleteElements

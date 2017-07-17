@@ -1,6 +1,6 @@
-﻿using CalcoloRischioResiduo.RiskAssessment.Analysis;
-using CalcoloRischioResiduo.RiskAssessment.Requirements;
-using CalcoloRischioResiduo.RiskAssessment.Exceptions;
+﻿using ResidualRisk.RiskAssessment.Analysis;
+using ResidualRisk.RiskAssessment.Requirements;
+using ResidualRisk.RiskAssessment.Exceptions;
 
 using Xunit;
 using FluentAssertions;

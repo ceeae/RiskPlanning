@@ -1,7 +1,7 @@
 ﻿
 using System.Security.Claims;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Analysis
+namespace ResidualRisk.RiskAssessment.Analysis
 {
     public class RPvci
     {

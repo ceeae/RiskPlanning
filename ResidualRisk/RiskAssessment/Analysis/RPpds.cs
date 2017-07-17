@@ -1,10 +1,10 @@
 ﻿
 using System.Collections.Generic;
 using System.ComponentModel;
-using CalcoloRischioResiduo.RiskAssessment.Exceptions;
-using CalcoloRischioResiduo.RiskAssessment.Requirements;
+using ResidualRisk.RiskAssessment.Exceptions;
+using ResidualRisk.RiskAssessment.Requirements;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Analysis
+namespace ResidualRisk.RiskAssessment.Analysis
 {
     public class RPpds
     {

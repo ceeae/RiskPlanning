@@ -1,7 +1,7 @@
-﻿using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
-using CalcoloRischioResiduo.RiskAssessment.Elements;
-using CalcoloRischioResiduo.RiskAssessment.Requirements;
+﻿using ResidualRisk.FunctionalPerimeters;
+using ResidualRisk.RiskAssessment.Analysis;
+using ResidualRisk.RiskAssessment.Elements;
+using ResidualRisk.RiskAssessment.Requirements;
 
 namespace UnitTests.Elements.CompleteElements
 {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CalcoloRischioResiduo.RiskAssessment.Common;
-using CalcoloRischioResiduo.RiskAssessment.Exceptions;
+using ResidualRisk.RiskAssessment.Common;
+using ResidualRisk.RiskAssessment.Exceptions;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Requirements
+namespace ResidualRisk.RiskAssessment.Requirements
 {
     public class Requirement
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CalcoloRischioResiduo.RiskAssessment.Common;
+using ResidualRisk.RiskAssessment.Common;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Requirements
+namespace ResidualRisk.RiskAssessment.Requirements
 {
     public class RequirementsSet : List<Requirement>
     {

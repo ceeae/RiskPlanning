@@ -4,10 +4,10 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using CalcoloRischioResiduo.RiskAssessment.Common;
-using CalcoloRischioResiduo.RiskAssessment.Exceptions;
+using ResidualRisk.RiskAssessment.Common;
+using ResidualRisk.RiskAssessment.Exceptions;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Common
+namespace ResidualRisk.RiskAssessment.Common
 {
     public class Weight
     {
@@ -28,7 +28,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Common
     }
 }
 
-namespace CalcoloRischioResiduo.RiskAssessment.Requirements
+namespace ResidualRisk.RiskAssessment.Requirements
 {
     public class DefaultWeight : Weight
     {

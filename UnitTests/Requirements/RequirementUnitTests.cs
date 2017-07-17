@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using CalcoloRischioResiduo.RiskAssessment.Common;
-using CalcoloRischioResiduo.RiskAssessment.Exceptions;
-using CalcoloRischioResiduo.RiskAssessment.Requirements;
+using ResidualRisk.RiskAssessment.Common;
+using ResidualRisk.RiskAssessment.Exceptions;
+using ResidualRisk.RiskAssessment.Requirements;
 using Xunit;
 using FluentAssertions;
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CalcoloRischioResiduo.FunctionalPerimeters
+namespace ResidualRisk.FunctionalPerimeters
 {
 
     public class PerimetersAnalysis : List<Perimeter>

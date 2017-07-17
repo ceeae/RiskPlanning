@@ -1,6 +1,6 @@
-﻿using CalcoloRischioResiduo.RiskAssessment.Exceptions;
+﻿using ResidualRisk.RiskAssessment.Exceptions;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Common
+namespace ResidualRisk.RiskAssessment.Common
 {
     public class CorrectionFactor
     {

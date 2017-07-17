@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResidualRisk", "ResidualRisk\ResidualRisk.csproj", "{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatIfAnalysis", "WhatIfAnalysis\WhatIfAnalysis.csproj", "{325A5D40-7342-4E75-8A7A-F2B610BCE125}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatIfAnalysis.UnitTests", "WhatIfAnalysis.UnitTests\WhatIfAnalysis.UnitTests.csproj", "{8225B2E0-5E17-42A0-A0AD-A64C77D40538}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABFE4A16-6837-4C7F-B4C5-1D76AA14206F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{325A5D40-7342-4E75-8A7A-F2B610BCE125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{325A5D40-7342-4E75-8A7A-F2B610BCE125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{325A5D40-7342-4E75-8A7A-F2B610BCE125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{325A5D40-7342-4E75-8A7A-F2B610BCE125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8225B2E0-5E17-42A0-A0AD-A64C77D40538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8225B2E0-5E17-42A0-A0AD-A64C77D40538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8225B2E0-5E17-42A0-A0AD-A64C77D40538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8225B2E0-5E17-42A0-A0AD-A64C77D40538}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

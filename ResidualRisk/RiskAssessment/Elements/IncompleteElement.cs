@@ -1,7 +1,7 @@
-﻿using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
+﻿using ResidualRisk.FunctionalPerimeters;
+using ResidualRisk.RiskAssessment.Analysis;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Elements
+namespace ResidualRisk.RiskAssessment.Elements
 {
     public class IncompleteElement: AbstractElement { 
 

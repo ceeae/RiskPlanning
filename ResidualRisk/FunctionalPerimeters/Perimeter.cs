@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
-using CalcoloRischioResiduo.RiskAssessment;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
-using CalcoloRischioResiduo.RiskAssessment.Elements;
+using ResidualRisk.RiskAssessment;
+using ResidualRisk.RiskAssessment.Analysis;
+using ResidualRisk.RiskAssessment.Elements;
 
-namespace CalcoloRischioResiduo.FunctionalPerimeters
+namespace ResidualRisk.FunctionalPerimeters
 {
     public class Perimeter
     {

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
+using ResidualRisk.FunctionalPerimeters;
+using ResidualRisk.RiskAssessment.Analysis;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Elements
+namespace ResidualRisk.RiskAssessment.Elements
 {
     public class AbsentElement : AbstractElement
     {

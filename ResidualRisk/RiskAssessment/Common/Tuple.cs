@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Common
+namespace ResidualRisk.RiskAssessment.Common
 {
     public class Tuble : List<double>
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
-using CalcoloRischioResiduo.RiskAssessment.Elements;
+using ResidualRisk.RiskAssessment.Elements;
 using Xunit;
 using FluentAssertions;
 

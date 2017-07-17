@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using CalcoloRischioResiduo.RiskAssessment.Common;
-using CalcoloRischioResiduo.RiskAssessment.Requirements;
+using ResidualRisk.RiskAssessment.Common;
+using ResidualRisk.RiskAssessment.Requirements;
 using Xunit;
 using FluentAssertions;
 

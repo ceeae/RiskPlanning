@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CalcoloRischioResiduo.RiskAssessment.Exceptions;
+using ResidualRisk.RiskAssessment.Exceptions;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Common
+namespace ResidualRisk.RiskAssessment.Common
 {
     public class Weights : List<Weight>
     {

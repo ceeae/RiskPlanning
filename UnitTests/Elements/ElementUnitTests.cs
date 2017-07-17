@@ -1,5 +1,5 @@
 ﻿using System;
-using CalcoloRischioResiduo.RiskAssessment.Elements;
+using ResidualRisk.RiskAssessment.Elements;
 using Xunit;
 using FluentAssertions;
 

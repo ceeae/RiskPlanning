@@ -1,8 +1,8 @@
-﻿using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
-using CalcoloRischioResiduo.RiskAssessment.Exceptions;
+﻿using ResidualRisk.FunctionalPerimeters;
+using ResidualRisk.RiskAssessment.Analysis;
+using ResidualRisk.RiskAssessment.Exceptions;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Elements
+namespace ResidualRisk.RiskAssessment.Elements
 {
     public abstract class AbstractElement : IElement
     {

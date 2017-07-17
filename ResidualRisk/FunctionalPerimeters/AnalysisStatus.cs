@@ -1,4 +1,4 @@
-﻿namespace CalcoloRischioResiduo.FunctionalPerimeters
+﻿namespace ResidualRisk.FunctionalPerimeters
 {
     public enum AnalysisStatus : int
     {

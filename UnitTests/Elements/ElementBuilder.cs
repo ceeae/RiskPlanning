@@ -1,9 +1,9 @@
-﻿using CalcoloRischioResiduo;
-using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
-using CalcoloRischioResiduo.RiskAssessment.Elements;
-using CalcoloRischioResiduo.RiskAssessment.Requirements;
+﻿using ResidualRisk;
+using ResidualRisk.FunctionalPerimeters;
+using ResidualRisk.RiskAssessment;
+using ResidualRisk.RiskAssessment.Analysis;
+using ResidualRisk.RiskAssessment.Elements;
+using ResidualRisk.RiskAssessment.Requirements;
 using Xunit;
 using FluentAssertions;
 

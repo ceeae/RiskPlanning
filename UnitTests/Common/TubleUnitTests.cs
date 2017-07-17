@@ -1,4 +1,4 @@
-﻿using CalcoloRischioResiduo.RiskAssessment.Common;
+﻿using ResidualRisk.RiskAssessment.Common;
 using Xunit;
 using FluentAssertions;
 

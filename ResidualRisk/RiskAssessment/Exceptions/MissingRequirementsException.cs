@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Exceptions
+namespace ResidualRisk.RiskAssessment.Exceptions
 {
     public class MissingRequirementsException : Exception
     {
