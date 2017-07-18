@@ -28,7 +28,7 @@ namespace ResidualRisk.RiskAssessment.Requirements
 
         public List<int> Totals => _totals;
 
-        public double TotalPotentialRiskBia { get; private set; } = 0;
+        public double TotalPotentialRiskBIA { get; private set; } = 0;
 
         public double TotalPotentialRiskBIAID { get; private set; } = 0;
 
@@ -110,8 +110,10 @@ namespace ResidualRisk.RiskAssessment.Requirements
                     
                 // Potential Risk BIA, BIAID, COMPL factors
 
-                TotalPotentialRiskBia += requirement.PotentialRiskBIA;
+                TotalPotentialRiskBIA += requirement.PotentialRiskBIA;
+
                 TotalPotentialRiskBIAID += requirement.PotentialRiskBIAID;
+
                 TotalPotentialRiskCOMPL += requirement.PotentialRiskCOMPL;
             }
         }
@@ -120,7 +122,7 @@ namespace ResidualRisk.RiskAssessment.Requirements
         {
             TotalPotentialRiskBIAID = 0;
 
-            TotalPotentialRiskBia = 0;
+            TotalPotentialRiskBIA = 0;
 
             TotalPotentialRiskCOMPL = 0;
 

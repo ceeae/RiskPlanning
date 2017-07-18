@@ -9,7 +9,7 @@ namespace UnitTests.Requirements
 {
     public class RequirementsSetUnitTests
     {
-        private RequirementsSet _requirements;
+        private readonly RequirementsSet _requirements;
 
         public RequirementsSetUnitTests()
         {
@@ -49,6 +49,7 @@ namespace UnitTests.Requirements
         public void CreateNewRequirementsSet_ValidRequirements_ExpectedTotals()
         {
             _requirements.GetPotentialRiskDistribution();
+
             List<int> totals = _requirements.Totals;
 
             totals.Should().Equals(new int[38]
@@ -77,7 +78,7 @@ namespace UnitTests.Requirements
 
             });
 
-            R2(_requirements.TotalPotentialRiskBia).Should().Be(6.34);
+            R2(_requirements.TotalPotentialRiskBIA).Should().Be(6.34);
             R2(_requirements.TotalPotentialRiskBIAID).Should().Be(4.25);
             R2(_requirements.TotalPotentialRiskCOMPL).Should().Be(115.08);
         }
@@ -103,13 +104,10 @@ namespace UnitTests.Requirements
         }
 
 
-        public static double R2(double result)
+        private static double R2(double result)
         {
             return Math.Round(result, 2);
         }
-        // Managed Risk (single value)
-
-        // Residual Risk (BIA * COMPL values)
 
     }
 }

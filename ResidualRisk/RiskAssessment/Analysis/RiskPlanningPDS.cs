@@ -32,7 +32,7 @@ namespace ResidualRisk.RiskAssessment.Analysis
 
         public double GetPotentialRiskBIATotal()
         {
-            return _requirements.TotalPotentialRiskBia;
+            return _requirements.TotalPotentialRiskBIA;
         }
 
         public double GetPotentialRiskCOMPLTotal()
