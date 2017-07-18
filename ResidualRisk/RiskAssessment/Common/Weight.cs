@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using ResidualRisk.RiskAssessment.Common;
-using ResidualRisk.RiskAssessment.Exceptions;
+﻿using ResidualRisk.RiskAssessment.Exceptions;
 
 namespace ResidualRisk.RiskAssessment.Common
 {
@@ -26,10 +19,7 @@ namespace ResidualRisk.RiskAssessment.Common
             Value = value;
         }
     }
-}
 
-namespace ResidualRisk.RiskAssessment.Requirements
-{
     public class DefaultWeight : Weight
     {
         public DefaultWeight() : base(1)

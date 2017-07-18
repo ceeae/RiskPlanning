@@ -20,7 +20,7 @@ namespace ResidualRisk.RiskAssessment.Common
         {
             if (a.Count != b.Count)
             {
-                throw new ListsWithDifferentSizesCannotBeAddedException();
+                throw new ListsWithDifferentSizesCannotBeManagedException();
             }
             int i;
             List<int> result = Enumerable.Repeat(0, a.Count).ToList();
@@ -31,6 +31,23 @@ namespace ResidualRisk.RiskAssessment.Common
             }
             return result;
         }
+
+        public static List<double> operator /(Weights a, List<int> b)
+        {
+            if (a.Count != b.Count)
+            {
+                throw new ListsWithDifferentSizesCannotBeManagedException();
+            }
+            int i;
+            List<double> result = Enumerable.Repeat((double) 0, a.Count).ToList();
+
+            for (i = 0; i < a.Count; i++)
+            {
+                result[i] = (double) a[i].Value / b[i];
+            }
+            return result;
+        }
+
     }
 
 }

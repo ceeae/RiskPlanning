@@ -17,17 +17,22 @@ namespace ResidualRisk.RiskAssessment.Analysis
                 throw new InvalidNullArgumentException();
             }
 
+            requirements.CalculateRisk();
+
             _requirements = requirements;
+
         }
 
         public void SetVEF(double vef)
         {
             _requirements.VEF = vef;
+
+            _requirements.CalculateRisk(); // Changing VEF requires new calculation of risk
         }
 
         public Dictionary<long, double[]> GetPotentialRiskDistributionFactors()
         {
-            return _requirements.GetPotentialRiskDistribution();
+            return _requirements.Distribution;
         }
 
         public double GetPotentialRiskBIATotal()
@@ -42,22 +47,22 @@ namespace ResidualRisk.RiskAssessment.Analysis
 
         public double GetManagedRiskBIAFactor()
         {
-            return _requirements.GetManagedRiskBIA();
+            return _requirements.ManagedRiskBIA;
         }
 
         public double GetManagedRiskCOMPLFactor()
         {
-            return _requirements.GetManagedRiskCOMPL();
+            return _requirements.ManagedRiskCOMPL;
         }
 
         public double GetResidualRiskBIAFactor()
         {
-            return _requirements.GetResidualRiskBIA();
+            return _requirements.ResidualRiskBIA;
         }
 
         public double GetResidualRiskCOMPLFactor()
         {
-            return _requirements.GetResidualRiskCOMPL();
+            return _requirements.ResidualRiskCOMPL;
         }
 
     }

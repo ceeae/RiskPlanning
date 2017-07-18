@@ -29,35 +29,34 @@ namespace UnitTests.Elements.CompleteElements
 
         protected override RiskPlanningPDS CreateRPpds()
         {
-            RequirementsSet set = new RequirementsSet();
+            RequirementsSet requirements = new RequirementsSet();
 
-            set.AddRequirement(101, 5.0, 0.0, false, new int[3]
+            requirements.AddRequirement(101, 5.0, 0.0, false, new int[3]
             {
                 1, 5, 2, 
-
             });
 
-            set.AddRequirement(102, 5.0, 1.0, false, new int[3]
+            requirements.AddRequirement(102, 5.0, 1.0, false, new int[3]
             {
                 1, 5, 1,
             });
 
-            set.AddRequirement(103, 1.0, 0.0, true, new int[3]
+            requirements.AddRequirement(103, 1.0, 0.0, true, new int[3]
             {
                 5, 4, 1,
             });
 
-            set.AddRequirement(104, 1.0, 0.0, true, new int[3]
+            requirements.AddRequirement(104, 1.0, 0.0, true, new int[3]
             {
                 3, 4, 1,
             });
 
-            set.AddRequirement(105, 1.0, 0.0, true, new int[3]
+            requirements.AddRequirement(105, 1.0, 0.0, true, new int[3]
             {
                 2, 2, 5,
             });
 
-            return new RiskPlanningPDS(set);
+            return new RiskPlanningPDS(requirements);
         }
     }
 }

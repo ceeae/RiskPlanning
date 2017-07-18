@@ -57,11 +57,12 @@ namespace ResidualRisk.RiskAssessment.Elements
 
         #endregion
 
-        public bool HasPerimeterAnalysis()
+        public bool IsAssociatedToAnalyzedPerimeter()
         {
             if (perimeters == null) return false;
 
             Perimeter perimeter = TakeAssociatedPerimeter();
+
             return perimeter?.IsAnalyzed() ?? false;
         }
 
@@ -72,7 +73,7 @@ namespace ResidualRisk.RiskAssessment.Elements
 
         public virtual double GetResidualRisk()
         {
-            if (HasPerimeterAnalysis())
+            if (IsAssociatedToAnalyzedPerimeter())
             {
                 return TakeAssociatedPerimeter().GetResidualRiskEstimate(classification);
             }

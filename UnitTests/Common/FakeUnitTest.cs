@@ -3,7 +3,7 @@ using FluentAssertions;
 
 namespace UnitTests.Common
 {
-    public class FakeTest
+    public class FakeUnitTest
     {
 
         // UnitOfWork_Scenario_ExpectedResult

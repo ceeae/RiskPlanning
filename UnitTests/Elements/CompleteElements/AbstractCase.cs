@@ -11,8 +11,11 @@ namespace UnitTests.Elements.CompleteElements
         public CompleteElement CreateCase()
         {
             PerimeterType perimeter = SelectPerimeter();
+
             PerimetersAnalysis perimeters = CreatePerimetersAnalysis();
+
             RiskPlanningVCI vci = CreateRPVci();                                               // vci=750
+
             RiskPlanningPDS pds = CreateRPpds();
 
             return new CompleteElement(perimeter, perimeters, vci, pds);

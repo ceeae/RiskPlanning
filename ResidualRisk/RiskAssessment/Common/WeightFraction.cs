@@ -3,14 +3,15 @@ using ResidualRisk.RiskAssessment.Exceptions;
 
 namespace ResidualRisk.RiskAssessment.Common
 {
-    public class FractionWeight
+    public class WeightFraction
     {
         public static int MIN = 1;
+
         public static int MAX = 5;
 
         public double Value { get; }
 
-        public FractionWeight(double value)
+        public WeightFraction(double value)
         {
             if (value < MIN || value > MAX)
             {
@@ -24,9 +25,9 @@ namespace ResidualRisk.RiskAssessment.Common
 
 namespace ResidualRisk.RiskAssessment.Requirements
 {
-    public class DefaulFractiontWeight : Weight
+    public class DefaultWeightFraction : Weight
     {
-        public DefaulFractiontWeight() : base(0)
+        public DefaultWeightFraction() : base(0)
         {
 
         }

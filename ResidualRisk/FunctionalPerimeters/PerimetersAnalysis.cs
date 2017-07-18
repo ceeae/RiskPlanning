@@ -6,15 +6,17 @@ namespace ResidualRisk.FunctionalPerimeters
     public class PerimetersAnalysis : List<Perimeter>
     {
 
-        public void Add(PerimeterType perimeterType, double avgVCIC3, double avgVCIAll, double withVCI)
+        public void Add(PerimeterType perimeterType, double averageVCIC3, double averageVCI, double fractionWithVCI)
         {
-            Perimeter perimeter = new Perimeter(perimeterType, avgVCIC3, avgVCIAll, withVCI);
+            Perimeter perimeter = new Perimeter(perimeterType, averageVCIC3, averageVCI, fractionWithVCI);
+
             this.Add(perimeter);
         }
 
         public AnalysisStatus GetStatus(PerimeterType perimeterType)
         {
             Perimeter perimeter = FindByType(perimeterType);
+
             return perimeter?.GetStatus() ?? AnalysisStatus.Missing;
         }
 
