@@ -24,13 +24,13 @@ namespace UnitTests.Elements.CompleteElements
             return perimeters;
         }
 
-        protected override RPvci CreateRPVci()
+        protected override RiskPlanningVCI CreateRPVci()
         {
-            return new RPvci(450, 300);
+            return new RiskPlanningVCI(450, 300);
         }
 
 
-        protected override RPpds CreateRPpds()
+        protected override RiskPlanningPDS CreateRPpds()
         {
             RequirementsSet set = new RequirementsSet();
 
@@ -62,7 +62,7 @@ namespace UnitTests.Elements.CompleteElements
                 3, 3, 1
             });
 
-            return new RPpds(set);
+            return new RiskPlanningPDS(set);
         }
 
     }

@@ -8,6 +8,6 @@ namespace ResidualRisk.RiskAssessment.Exceptions
 {
     public class MissingRequirementsException : Exception
     {
-        // thrown when RPpds missing requirements (at least one)
+        // thrown when RiskPlanningPDS missing requirements (at least one)
     }
 }

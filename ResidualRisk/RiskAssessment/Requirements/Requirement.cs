@@ -8,7 +8,9 @@ namespace ResidualRisk.RiskAssessment.Requirements
 {
     public class Requirement
     {
-        public const int WEIGHTS_NUM = 3 + 35;  // indexed by 0..
+        public const int WEIGHTS_NUM = 3 + 35;  // RID + 35 compliance Weights indexed by 0..
+
+        #region Properties Risk Factors (calculated - BIA, BIAID, COMPL - format 00.00)
 
         public long Id { get; }
 
@@ -18,22 +20,15 @@ namespace ResidualRisk.RiskAssessment.Requirements
 
         public bool Adequate { get; }
 
-        public Weights ReqWeights { get;  }     // RID + 35 compliance ReqWeights
+        public Weights Weights { get; }    
 
-  
-        #region Potential Risk Factors (calculated - BIA, BIAID, COMPL - format 00.00)
+        public double PotentialRiskBIA { get; private set; } = 0;
 
-        private double _prbia = 0;
-        private double _prbiaid = 0;
-        private double _prcompl = 0;
+        public double PotentialRiskBIAID { get; private set; } = 0;
 
-        public double PRbia => _prbia;
+        public double PotentialRiskCOMPL { get; private set; } = 0;
 
-        public double PRbiaID => _prbiaid;
-
-        public double PRcompl => _prcompl;
-
-        #endregion calculated factors
+        #endregion 
 
         public Requirement(long id, FractionWeight pas, CorrectionFactor alpha, bool adequate)
         {
@@ -47,40 +42,46 @@ namespace ResidualRisk.RiskAssessment.Requirements
             Alpha = alpha;
             Adequate = adequate;
 
-            ReqWeights = new Weights(Enumerable.Repeat((Weight)new DefaultWeight(), WEIGHTS_NUM).ToList()); 
+            Weights = new Weights(Enumerable.Repeat((Weight)new DefaultWeight(), WEIGHTS_NUM).ToList()); 
         }
 
-        public Requirement(long id, FractionWeight pas, CorrectionFactor alpha, bool adequate, int[] values) 
+        public Requirement(long id, FractionWeight pas, CorrectionFactor alpha, bool adequate, int[] weights)
             : this(id, pas, alpha, adequate)
         {
-            InitializeWeightsWithIntArray(values);
+            InitializeWeightsWithIntArray(weights);
         }
 
-        public void InitializeWeightsWithIntArray(int startIndex, int[] values)
+        //public Requirement(long id, FractionWeight pas, CorrectionFactor alpha, bool adequate, int[] weights) 
+        //    : this(id, pas, alpha, adequate)
+        //{
+        //    InitializeWeightsWithIntArray(weights);
+        //}
+
+        public void InitializeWeightsWithIntArray(int startIndex, int[] weights)
         {
             int i;
             for (i = startIndex;
-                i <= startIndex + values.Length - 1;
+                i <= startIndex + weights.Length - 1;
                 i++)
             {
-                ReqWeights[i] = new Weight(values[i - startIndex]);
+                Weights[i] = new Weight(weights[i - startIndex]);
             }
         }
 
-        public void InitializeWeightsWithIntArray(int[] values)
+        public void InitializeWeightsWithIntArray(int[] weights)
         {
-            InitializeWeightsWithIntArray(0, values);
+            InitializeWeightsWithIntArray(0, weights);
         }
 
         public void CalculatePotentialRiskFactors(List<int> totals)
         {
             double correctedPAS = PAS.Value + Alpha.Value;
 
-            List<double> f = DivideWeightsBy(totals);                       // f = ReqWeights / CalculateWeightsTotals
+            List<double> f = DivideWeightsBy(totals);                       // f = Weights / CalculateWeightsTotals
 
-            _prbia =    f.Take(3).Sum()         * correctedPAS;
-            _prbiaid =  f.Skip(1).Take(2).Sum() * correctedPAS;
-            _prcompl =  f.Skip(3).Sum()         * correctedPAS;
+            PotentialRiskBIA =    f.Take(3).Sum()         * correctedPAS;
+            PotentialRiskBIAID =  f.Skip(1).Take(2).Sum() * correctedPAS;
+            PotentialRiskCOMPL =  f.Skip(3).Sum()         * correctedPAS;
         }
 
 
@@ -91,7 +92,7 @@ namespace ResidualRisk.RiskAssessment.Requirements
 
             for (i = 0; i < WEIGHTS_NUM - 1; i++)
             {
-                fraction[i] = (double) ReqWeights[i].Value/totals[i];
+                fraction[i] = (double) Weights[i].Value/totals[i];
             }
             return fraction;
         }

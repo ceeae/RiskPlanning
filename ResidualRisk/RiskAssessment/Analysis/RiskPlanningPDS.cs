@@ -1,63 +1,63 @@
 ﻿
 using System.Collections.Generic;
-using System.ComponentModel;
 using ResidualRisk.RiskAssessment.Exceptions;
 using ResidualRisk.RiskAssessment.Requirements;
 
 namespace ResidualRisk.RiskAssessment.Analysis
 {
-    public class RPpds
+    public class RiskPlanningPDS
     {
-        private RequirementsSet _set;
 
-        public RPpds(RequirementsSet set)
+        private readonly RequirementsSet _requirements;
+
+        public RiskPlanningPDS(RequirementsSet requirements)
         {
-            if (set == null)
+            if (requirements == null)
             {
                 throw new InvalidNullArgumentException();
             }
 
-            _set = set;
+            _requirements = requirements;
         }
 
         public void SetVEF(double vef)
         {
-            _set.VEF = vef;
+            _requirements.VEF = vef;
         }
 
         public Dictionary<long, double[]> GetPotentialRiskDistributionFactors()
         {
-            return _set.GetPotentialRiskDistributionFactors();
+            return _requirements.GetPotentialRiskDistribution();
         }
 
-        public double GetPRBiaTotal()
+        public double GetPotentialRiskBIATotal()
         {
-            return _set.PRbiaTot;
+            return _requirements.TotalPotentialRiskBia;
         }
 
-        public double GetPRCOMPLTotal()
+        public double GetPotentialRiskCOMPLTotal()
         {
-            return _set.PRcomplTot;
+            return _requirements.TotalPotentialRiskCOMPL;
         }
 
         public double GetManagedRiskBIAFactor()
         {
-            return _set.GetManagedRiskBIAFactor();
+            return _requirements.GetManagedRiskBIA();
         }
 
         public double GetManagedRiskCOMPLFactor()
         {
-            return _set.GetManagedRiskCOMPLFactor();
+            return _requirements.GetManagedRiskCOMPL();
         }
 
         public double GetResidualRiskBIAFactor()
         {
-            return _set.GetResidualRiskBIAFactor();
+            return _requirements.GetResidualRiskBIA();
         }
 
         public double GetResidualRiskCOMPLFactor()
         {
-            return _set.GetResidualRiskCOMPLFactor();
+            return _requirements.GetResidualRiskCOMPL();
         }
 
     }

@@ -41,7 +41,7 @@ namespace UnitTests.Requirements
             req.PAS.Value.Should().Be(pas);
             req.Alpha.Value.Should().Be(alpha);
             req.Id.Should().Be(id);
-            req.ReqWeights[n].Value.Should().Be(1); // check complianceweight n-element as default value
+            req.Weights[n].Value.Should().Be(1); // check complianceweight n-element as default value
         }
 
         [Theory]
@@ -68,12 +68,12 @@ namespace UnitTests.Requirements
 
             req.CalculatePotentialRiskFactors(totals);
 
-            R2(req.PRbia).Should().Be(prbia);
-            R2(req.PRbiaID).Should().Be(prbiaid);
-            R2(req.PRcompl).Should().Be(prcompl);
+            R2(req.PotentialRiskBIA).Should().Be(prbia);
+            R2(req.PotentialRiskBIAID).Should().Be(prbiaid);
+            R2(req.PotentialRiskCOMPL).Should().Be(prcompl);
         }
 
-        public static double R2(double result)
+        private static double R2(double result)
         {
             return Math.Round(result, 2);
         }

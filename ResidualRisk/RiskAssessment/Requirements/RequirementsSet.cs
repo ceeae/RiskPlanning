@@ -8,113 +8,158 @@ namespace ResidualRisk.RiskAssessment.Requirements
     public class RequirementsSet : List<Requirement>
     {
 
+        #region private variables
+
+        private List<int> _totals;
+
+        // Distribution Factors (for each requirement):
+        // long:        Id;
+        // double[4]: PotentialRiskBIA, PotentialRiskBIAID, PotentialRiskCOMPL, VEF
+
+        private Dictionary<long, double[]> _distribution;
+
+        private bool _totalCalculationIsNeeded = true;
+
+        private bool _distributionCalculationIsNeeded = true;
+
+        #endregion
+
+        #region Properties Potential Risk Factors Totals (calculated - BIA, BIAID, COMPL - format 00.0)
+
+        public List<int> Totals => _totals;
+
+        public double TotalPotentialRiskBia { get; private set; } = 0;
+
+        public double TotalPotentialRiskBIAID { get; private set; } = 0;
+
+        public double TotalPotentialRiskCOMPL { get; private set; } = 0;
+
         public double VEF { get; set; }
-
-        private bool calcTotalsneeded = true;
-
-        private bool calcDistribneeded = true;
-
-        private List<int> totals = null;
-
-        private Dictionary<long, double[]> distrib = null;
-
-        #region Potential Risk Factors Totals (calculated - BIA, BIAID, COMPL - format 00.0)
-
-        private double _prbiatot = 0;
-        private double _prbiaidtot = 0;
-        private double _prcompltot = 0;
-
-        public double PRbiaTot => _prbiatot;
-
-        public double PRbiaIDTot => _prbiaidtot;
-
-        public double PRcomplTot => _prcompltot;
 
         #endregion calculated factors
 
-        public void AddRequirement(int id, double pas, double alpha, bool adequate, int[] values)
+        public void AddRequirement(int id, double pas, double alpha, bool adequate, int[] weights)
         {
-            Requirement requirement = new Requirement(id, new FractionWeight(pas), new CorrectionFactor(alpha), adequate, values);
+            Requirement requirement = new Requirement(id, new FractionWeight(pas), new CorrectionFactor(alpha), adequate, weights);
+
             Add(requirement);
 
-            calcTotalsneeded = true;
-            calcDistribneeded = true;
+            _totalCalculationIsNeeded = true;
+            _distributionCalculationIsNeeded = true;
         }
 
-        public List<int> CalculateWeightsTotals()
+
+        private void CalculateWeightsTotals()
         {
+            if (!TotalCalculationIsNeeded()) return;
 
-            if (!calcTotalsneeded && totals != null)
-            {
-                return totals;
-            }
+            ResetTotals();
 
-            totals = Enumerable.Repeat(0, Requirement.WEIGHTS_NUM).ToList();
+            SumRequirementsWeights();
 
+        }
+
+        private bool TotalCalculationIsNeeded()
+        {
+            return _totalCalculationIsNeeded || _totals == null;
+        }
+
+        private void SumRequirementsWeights()
+        {
             foreach (var req in this)
             {
-                totals += req.ReqWeights;
+                _totals += req.Weights; // Use +operator: List<int> = List<int> + Weights
             }
-
-            calcTotalsneeded = false;
-
-            return totals;
         }
 
-        public Dictionary<long, double[]> GetPotentialRiskDistributionFactors()
+        private void ResetTotals()
         {
-            if (!calcDistribneeded && distrib != null)
+            _totals = Enumerable.Repeat(0, Requirement.WEIGHTS_NUM).ToList();
+
+            _totalCalculationIsNeeded = false;
+        }
+        
+
+        // Distribution Factors (for each requirement):
+        // long:        Id;
+        // double[4]: PotentialRiskBIA, PotentialRiskBIAID, PotentialRiskCOMPL, VEF
+
+        public Dictionary<long, double[]> GetPotentialRiskDistribution()
+        {
+            if (!DistributionCalculationIsNeeded()) return _distribution;
+ 
+            ResetTotalPotentialRiskAndDistributionVariables();
+
+            CalculateWeightsTotals();
+
+            CalculateTotalPotentialRiskAndDistribution();
+
+            return _distribution;
+        }
+
+        private void CalculateTotalPotentialRiskAndDistribution()
+        {
+            foreach (var requirement in this)
             {
-                return distrib;
+                requirement.CalculatePotentialRiskFactors(_totals);
+
+                _distribution.Add(requirement.Id, new double[4]
+                {
+                    requirement.PotentialRiskBIA, requirement.PotentialRiskBIAID, requirement.PotentialRiskCOMPL, VEF*requirement.PotentialRiskBIAID
+                });
+                    
+                // Potential Risk BIA, BIAID, COMPL factors
+
+                TotalPotentialRiskBia += requirement.PotentialRiskBIA;
+                TotalPotentialRiskBIAID += requirement.PotentialRiskBIAID;
+                TotalPotentialRiskCOMPL += requirement.PotentialRiskCOMPL;
             }
-
-            _prbiaidtot = 0;
-            _prbiatot = 0;
-            _prcompltot = 0;
-
-            distrib = new Dictionary<long, double[]>();
-
-            totals = CalculateWeightsTotals();
-
-            foreach (var req in this)
-            {
-
-                req.CalculatePotentialRiskFactors(totals);
-
-                distrib.Add(req.Id, new double[4] { req.PRbia, req.PRbiaID, req.PRcompl, VEF * req.PRbiaID }); // Potential Risk BIA, BIAID, COMPL factors
-
-                _prbiatot += req.PRbia;
-                _prbiaidtot += req.PRbiaID;
-                _prcompltot += req.PRcompl;
-            }
-
-            calcDistribneeded = false;
-
-            return distrib;
         }
 
-        public double GetManagedRiskBIAFactor()
+        private void ResetTotalPotentialRiskAndDistributionVariables()
         {
-            GetPotentialRiskDistributionFactors();
-            return this.Where(req => req.Adequate).Sum(req => req.PRbia);
+            TotalPotentialRiskBIAID = 0;
+
+            TotalPotentialRiskBia = 0;
+
+            TotalPotentialRiskCOMPL = 0;
+
+            _distribution = new Dictionary<long, double[]>();
+
+            _distributionCalculationIsNeeded = false;
         }
 
-        public double GetManagedRiskCOMPLFactor()
+        private bool DistributionCalculationIsNeeded()
         {
-            GetPotentialRiskDistributionFactors();
-            return this.Where(req => req.Adequate).Sum(req => req.PRcompl);
+            return _distributionCalculationIsNeeded || _distribution == null;
+        }
+        
+        public double GetManagedRiskBIA()
+        {
+            GetPotentialRiskDistribution();
+
+            return this.Where(req => req.Adequate).Sum(req => req.PotentialRiskBIA);
         }
 
-        public double GetResidualRiskBIAFactor()
+        public double GetManagedRiskCOMPL()
         {
-            GetPotentialRiskDistributionFactors();
-            return this.Where(req => !req.Adequate).Sum(req => req.PRbia);
+            GetPotentialRiskDistribution();
+
+            return this.Where(req => req.Adequate).Sum(req => req.PotentialRiskCOMPL);
         }
 
-        public double GetResidualRiskCOMPLFactor()
+        public double GetResidualRiskBIA()
         {
-            GetPotentialRiskDistributionFactors();
-            return this.Where(req => !req.Adequate).Sum(req => req.PRcompl);
+            GetPotentialRiskDistribution();
+
+            return this.Where(req => !req.Adequate).Sum(req => req.PotentialRiskBIA);
+        }
+
+        public double GetResidualRiskCOMPL()
+        {
+            GetPotentialRiskDistribution();
+
+            return this.Where(req => !req.Adequate).Sum(req => req.PotentialRiskCOMPL);
         }
 
     }

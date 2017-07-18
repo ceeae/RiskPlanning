@@ -41,11 +41,11 @@ namespace ResidualRisk.FunctionalPerimeters
 
             if (classification == ElementTypes.NotClassified)
             {
-                result = IsAnalyzed() ? _avgVCIC3*(1 + correctionFactor) : RPvci.VCIMAX;
+                result = IsAnalyzed() ? _avgVCIC3*(1 + correctionFactor) : RiskPlanningVCI.VCI_MAX;
             }
             else
             {
-                result = IsAnalyzed() ? _avgVCIAll * (1 + correctionFactor) : RPvci.VCIMAX;
+                result = IsAnalyzed() ? _avgVCIAll * (1 + correctionFactor) : RiskPlanningVCI.VCI_MAX;
             }
 
             return result;

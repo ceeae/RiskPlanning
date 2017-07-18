@@ -11,9 +11,9 @@ namespace ResidualRisk.RiskAssessment.Elements
 
         protected PerimeterType Perimeter { get; }
 
-        protected readonly RPvci vci;
+        protected readonly RiskPlanningVCI vci;
 
-        protected readonly RPpds pds;
+        protected readonly RiskPlanningPDS pds;
 
         protected readonly PerimetersAnalysis perimeters;
 
@@ -35,7 +35,7 @@ namespace ResidualRisk.RiskAssessment.Elements
             classification = elclassification;
         }
 
-        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RPvci elvci)
+        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RiskPlanningVCI elvci)
             : this(ElementTypes.Classified, elperimeter, elperimeters)
         {
             if (elvci == null)
@@ -45,7 +45,7 @@ namespace ResidualRisk.RiskAssessment.Elements
             vci = elvci;
         }
 
-        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RPvci elvci, RPpds elpds)
+        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RiskPlanningVCI elvci, RiskPlanningPDS elpds)
             : this(elperimeter, elperimeters, elvci)
         {
             if (elpds == null)
@@ -77,7 +77,7 @@ namespace ResidualRisk.RiskAssessment.Elements
                 return TakeAssociatedPerimeter().GetResidualRiskEstimate(classification);
             }
 
-            return RPvci.VCIMAX;
+            return RiskPlanningVCI.VCI_MAX;
         }
     }
 }

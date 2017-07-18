@@ -16,8 +16,8 @@ namespace UnitTests.Elements
         {
             IElement element = null;
             PerimetersAnalysis perimeters = CreatePerimetersAnalysis();
-            RPvci vci = new RPvci(450, 300); // vci=750
-            RPpds pds = CreateRPpds();
+            RiskPlanningVCI vci = new RiskPlanningVCI(450, 300); // vci=750
+            RiskPlanningPDS pds = CreateRPpds();
 
             switch (scenario)
             {
@@ -69,7 +69,7 @@ namespace UnitTests.Elements
             return perimeters;
         }
 
-        public static RPpds CreateRPpds()
+        public static RiskPlanningPDS CreateRPpds()
         {
             RequirementsSet set = new RequirementsSet();
 
@@ -101,7 +101,7 @@ namespace UnitTests.Elements
                 3, 3, 1
             });
 
-            return new RPpds(set);
+            return new RiskPlanningPDS(set);
         }
 
     }

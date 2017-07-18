@@ -9,36 +9,36 @@ namespace UnitTests.Requirements
 {
     public class RequirementsSetUnitTests
     {
-        private RequirementsSet set;
+        private RequirementsSet _requirements;
 
         public RequirementsSetUnitTests()
         {
-            set = new RequirementsSet();
+            _requirements = new RequirementsSet();
 
-            set.AddRequirement(101, 4.8, 0.2, true, new int[38]
+            _requirements.AddRequirement(101, 4.8, 0.2, true, new int[38]
             {
                 3, 1, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
                 5, 5, 5,
 
             });
 
-            set.AddRequirement(102, 3.2, 0.0, false, new int[38]
+            _requirements.AddRequirement(102, 3.2, 0.0, false, new int[38]
             {
                 3, 1, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
                 5, 5, 5,
             });
 
-            set.AddRequirement(103, 1.0, 0.0, false, new int[3]
+            _requirements.AddRequirement(103, 1.0, 0.0, false, new int[3]
             {
                 5, 4, 1
             });
 
-            set.AddRequirement(104, 1.0, 0.0, false, new int[3]
+            _requirements.AddRequirement(104, 1.0, 0.0, false, new int[3]
             {
                 3, 4, 1
             });
 
-            set.AddRequirement(105, 1.0, 0.0, true, new int[3]
+            _requirements.AddRequirement(105, 1.0, 0.0, true, new int[3]
             {
                 3, 3, 1
             });
@@ -48,8 +48,8 @@ namespace UnitTests.Requirements
         [Fact]
         public void CreateNewRequirementsSet_ValidRequirements_ExpectedTotals()
         {
-
-            List<int> totals = set.CalculateWeightsTotals();
+            _requirements.GetPotentialRiskDistribution();
+            List<int> totals = _requirements.Totals;
 
             totals.Should().Equals(new int[38]
             {
@@ -63,9 +63,9 @@ namespace UnitTests.Requirements
         public void GetPotentialRiskDistributionFactors_GivenValidScenario_ExpectedDistribution()
         {
 
-            set.VEF = 2000.0;
+            _requirements.VEF = 2000.0;
 
-            Dictionary<long, double[]> PRdistrib = set.GetPotentialRiskDistributionFactors(); // Id, RPbia, RPbiaID, RPcompl, VEFreq
+            Dictionary<long, double[]> PRdistrib = _requirements.GetPotentialRiskDistribution(); // Id, RPbia, RPbiaID, RPcompl, VEFreq
 
             PRdistrib.Should().Equals(new Dictionary<long, double[]>
             {
@@ -77,16 +77,16 @@ namespace UnitTests.Requirements
 
             });
 
-            R2(set.PRbiaTot).Should().Be(6.34);
-            R2(set.PRbiaIDTot).Should().Be(4.25);
-            R2(set.PRcomplTot).Should().Be(115.08);
+            R2(_requirements.TotalPotentialRiskBia).Should().Be(6.34);
+            R2(_requirements.TotalPotentialRiskBIAID).Should().Be(4.25);
+            R2(_requirements.TotalPotentialRiskCOMPL).Should().Be(115.08);
         }
 
         [Fact]
         public void GetManagedRiskBIAAndCOMPLFactors_GiveScenario_ExpectedValues()
         {
-            double MRbia = set.GetManagedRiskBIAFactor();
-            double MRcompl = set.GetManagedRiskCOMPLFactor();
+            double MRbia = _requirements.GetManagedRiskBIA();
+            double MRcompl = _requirements.GetManagedRiskCOMPL();
 
             R2(MRbia).Should().Be(3.25);
             R2(MRcompl).Should().Be(68.0);
@@ -95,8 +95,8 @@ namespace UnitTests.Requirements
         [Fact]
         public void GetResidualRiskBIAAndCOMPLFactors_GiveScenario_ExpectedValues()
         {
-            double RRbia = set.GetResidualRiskBIAFactor();
-            double RRcompl = set.GetResidualRiskCOMPLFactor();
+            double RRbia = _requirements.GetResidualRiskBIA();
+            double RRcompl = _requirements.GetResidualRiskCOMPL();
 
             R2(RRbia).Should().Be(3.10);
             R2(RRcompl).Should().Be(47.08);

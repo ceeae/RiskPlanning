@@ -104,10 +104,9 @@
   <ItemGroup>
     <ProjectReference Include="..\ResidualRisk\ResidualRisk.csproj">
       <Project>{abfe4a16-6837-4c7f-b4c5-1d76aa14206f}</Project>
-      <Name>CalcoloRischioResiduo</Name>
+      <Name>ResidualRisk</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
