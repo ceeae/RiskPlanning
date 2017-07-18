@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WhatIfAnalysis.Elements
 {
-    public enum ElementVCIClass : int
+    public enum VCIClass : int
     {
         C1 = 1,
         C2 = 2,

@@ -42,11 +42,11 @@
   <ItemGroup>
     <Compile Include="CoverageAnalysis\ActivityType.cs" />
     <Compile Include="CoverageAnalysis\CoverageActivity.cs" />
-    <Compile Include="CoverageAnalysis\Engine.cs" />
+    <Compile Include="CoverageAnalysis\WhatIfEngine.cs" />
     <Compile Include="Elements\Element.cs" />
     <Compile Include="Elements\ElementsSet.cs" />
     <Compile Include="Elements\ElementType.cs" />
-    <Compile Include="Elements\ElementVCIClass.cs" />
+    <Compile Include="Elements\VCIClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

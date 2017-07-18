@@ -9,127 +9,143 @@ namespace WhatIfAnalysis.Elements
     {
         #region private variables
 
-        private int _prtot = 0;
+        private int _totalPotentialRisk = 0;
 
-        private int _mrtot = 0;
+        private int _totalManagedRisk = 0;
 
-        private int _nIc = 0;
+        private int _countOfIncompleteAndComplete = 0;
 
-        private int _pric = 0;
+        private int _potentialRiskOfIncompleteAndComplete = 0;
 
-        private int _prc = 0;
+        private int _potentialRiskOfComplete = 0;
 
-        private int _nC3 = 0;
+        private int _countOfC3Class = 0;
 
-        private int _prc3 = 0;
+        private int _potentialRiskOfC3Class = 0;
 
-        private double _avgPR = 0;
+        private double _averagePotentialRisk = 0;
 
-        private double _avgPrC3 = 0;
+        private double _averagePotentialRiskOfC3Class = 0;
 
-        private double _withVCI = 0;
+        private double _fractionOfIncompleteAndComplete = 0;        // own a VCI analysis
 
-        private double _mrredfactor = 0;
+        private double _managedRiskReductionFactor = 0;
 
         #endregion
 
-        public int PR_Tot => _prtot;
+        #region properties
 
-        public int MR_Tot => _mrtot;
+        public int TotalPotentialRisk => _totalPotentialRisk;
 
-        public int N_IC => _nIc;
+        public int TotalManagedRisk => _totalManagedRisk;
 
-        public int N_C3 => _nC3;
+        public int CountOfIncompleteAndComplete => _countOfIncompleteAndComplete;
 
-        public int PR_IC => _pric;
+        public int CountOfC3Class => _countOfC3Class;
 
-        public int PR_C => _prc;
+        public int PotentialRiskOfIncompleteAndComplete => _potentialRiskOfIncompleteAndComplete;
 
-        public int PR_C3 => _prc3;
+        public int PotentialRiskOfComplete => _potentialRiskOfComplete;
 
-        public double AvgPR => _avgPR;
+        public int PotentialRiskOfC3Class => _potentialRiskOfC3Class;
 
-        public double AvgPR_C3 => _avgPrC3;
+        public double AveragePotentialRisk => _averagePotentialRisk;
 
-        public double WithVCI => _withVCI;
+        public double AveragePotentialRiskOfC3Class => _averagePotentialRiskOfC3Class;
 
-        public double MRReductionFactor => _mrredfactor;
+        public double FractionOfIncompleteAndComplete => _fractionOfIncompleteAndComplete;
 
-        public void MakePerimeterAnalysis()
+        public double ManagedRiskReductionFactor => _managedRiskReductionFactor;
+
+        #endregion
+
+        public void Analyze()
         {
-            _nIc = this.Count(IsIncompleteOrComplete);
+            CalculateRiskAndCountValues();
 
-            _pric = this.Sum(element => IsIncompleteOrComplete(element) ? element.PR : 0);
-
-            _prc = this.Sum(element => IsComplete(element) ? element.PR : 0);
-
-            _nC3 = this.Count(IsC3);
-
-            _prc3 = this.Sum(element => IsC3(element) ? element.PR : 0);
-
-            _avgPR = (double)_pric / _nIc;
-
-            _avgPrC3 = (double)_prc3 / _nC3;
-
-            _withVCI = (double)_nIc / this.Count();
-
-            UpdateAbsentElementsPR();
+            UpdatePotentialRiskOfAbsentElements();  // as estimate from functional perimeter
 
             CalculateTotals();
 
-            _mrredfactor = (double) _mrtot/_prc;
-
+            CalculateManagedRiskReductionFactor();
         }
 
-
-        public void UpdateAbsentElementsPR()
+        private void CalculateRiskAndCountValues()
         {
-            this.ForEach(AssignPREstimateToAbsentElements );
+            _countOfIncompleteAndComplete = this.Count(IsIncompleteOrComplete);
+
+            _countOfC3Class = this.Count(IsC3Class);
+
+            _potentialRiskOfIncompleteAndComplete = this.Sum(element => IsIncompleteOrComplete(element) ? element.PotentialRisk : 0);
+
+            _potentialRiskOfComplete = this.Sum(element => IsComplete(element) ? element.PotentialRisk : 0);
+
+            _potentialRiskOfC3Class = this.Sum(element => IsC3Class(element) ? element.PotentialRisk : 0);
+
+            _averagePotentialRisk = (double) _potentialRiskOfIncompleteAndComplete / _countOfIncompleteAndComplete;
+
+            _averagePotentialRiskOfC3Class = (double) _potentialRiskOfC3Class / _countOfC3Class;
+
+            _fractionOfIncompleteAndComplete = (double) _countOfIncompleteAndComplete / this.Count();
+
         }
 
-        public void CalculateTotals()
+        private void UpdatePotentialRiskOfAbsentElements()
         {
-            _prtot = this.Sum(element => element.PR);
-            _mrtot = this.Sum(element => element.MR);
+            this.ForEach(UpdatePotentialRiskOfAbsentElement );
         }
 
-        private void AssignPREstimateToAbsentElements(Element element)
+            private void UpdatePotentialRiskOfAbsentElement(Element element)
         {
             if (IsAbsent(element))
             {
-                element.SetPRAsEstimate(GetPREstimate());
+                element.SetPotentialRisk(EstimatePotentialRisk());
             }
         }
 
-        private int GetPREstimate()
+            private int EstimatePotentialRisk()
         {
-            double estimate = IsPerimeterAnalysed() ? AvgPR : AvgPR_C3;
-            return (int) estimate;
+            double estimate = IsPerimeterAnalysed() ? AveragePotentialRisk : AveragePotentialRiskOfC3Class;
+            return (int)estimate;
+        }
+
+        private void CalculateTotals()
+        {
+            _totalPotentialRisk = this.Sum(element => element.PotentialRisk);
+
+            _totalManagedRisk = this.Sum(element => element.ManagedRisk);
+        }
+
+        private void CalculateManagedRiskReductionFactor()
+        {
+            _managedRiskReductionFactor = (double)_totalManagedRisk / _potentialRiskOfComplete;
         }
 
         private bool IsPerimeterAnalysed()
         {
-            return WithVCI >= 0.75;
+            return FractionOfIncompleteAndComplete >= 0.75;
         }
 
         private bool IsIncompleteOrComplete(Element element)
         {
-            return element.GetType() == ElementType.Incomplete ||
-                   element.GetType() == ElementType.Complete;
+            ElementType elementType = element.GetElementType();
+
+            return elementType == ElementType.Incomplete || elementType == ElementType.Complete;
         }
 
         private bool IsComplete(Element element)
         {
-            return element.GetType() == ElementType.Complete;
-        }
-        private bool IsAbsent(Element element)
-        {
-            return element.GetType() == ElementType.Absent;
+            return element.GetElementType() == ElementType.Complete;
         }
 
-        private bool IsC3(Element element)
+        private bool IsAbsent(Element element)
         {
-            return element.VCIClass == ElementVCIClass.C3;
+            return element.GetElementType() == ElementType.Absent;
+        }
+
+        private bool IsC3Class(Element element)
+        {
+            return element.VciClass == VCIClass.C3;
         }
 
     }

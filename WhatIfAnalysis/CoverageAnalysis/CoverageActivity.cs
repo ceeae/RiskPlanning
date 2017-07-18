@@ -6,30 +6,42 @@ namespace WhatIfAnalysis.CoverageAnalysis
     {
         private readonly Element _element;
 
-        public  ActivityType _activityType;
+        #region properties
 
-        public int _cost;
+        public  ActivityType ActivityType { get; }
 
-        public int _ingcost;
+        public int Cost { get; }
 
-        public double _mrreduction;
+        public int IngCost { get; }
 
-        public double _order = 0;
+        public double ManagedRiskReduction;
 
-        public CoverageActivity(Element element, ActivityType activityType, int cost, int ingcost, double mrreduction)
+        public double Ranking = 0;
+        #endregion
+
+        public CoverageActivity(Element element, ActivityType activityType, int cost, int ingCost, double managedRiskReduction)
         {
             _element = element;
-            _activityType = activityType;
-            _cost = cost;
-            _ingcost = ingcost;
-            _mrreduction = mrreduction;
 
-            _order = (double) mrreduction/(cost + ingcost);
+            ActivityType = activityType;
+
+            Cost = cost;
+
+            IngCost = ingCost;
+
+            ManagedRiskReduction = managedRiskReduction;
+
+            Ranking = (double) managedRiskReduction/(cost + ingCost);
         }
 
         public long GetElementId()
         {
             return _element.Id;
+        }
+
+        public bool IsPDS()
+        {
+            return ActivityType == ActivityType.PDS;
         }
     }
 }

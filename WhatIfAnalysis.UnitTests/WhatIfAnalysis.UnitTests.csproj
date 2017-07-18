@@ -78,7 +78,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CoverageAnalysis\EngineUnitTests.cs" />
+    <Compile Include="CoverageAnalysis\WhatIfEngineUnitTests.cs" />
     <Compile Include="Elements\ElementsSetUnitTests.cs" />
     <Compile Include="Elements\ElementUnitTests.cs" />
     <Compile Include="FakeTest.cs" />

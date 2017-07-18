@@ -8,20 +8,22 @@ namespace WhatIfAnalysis.UnitTests.Elements
     {
 
         [Theory]
-        [InlineData(700, 0, ElementType.Incomplete, ElementVCIClass.C3)]
-        [InlineData(0, 0, ElementType.Absent, ElementVCIClass.C1)]
-        [InlineData(0, 400, ElementType.Absent, ElementVCIClass.C1)]
-        [InlineData(800, 400, ElementType.Complete, ElementVCIClass.C3)]
-        [InlineData(350, 100, ElementType.Complete, ElementVCIClass.C2)]
+        [InlineData(700, 0,     ElementType.Incomplete, VCIClass.C3)]
+        [InlineData(0, 0,       ElementType.Absent,     VCIClass.C1)]
+        [InlineData(0, 400,     ElementType.Absent,     VCIClass.C1)]
+        [InlineData(800, 400,   ElementType.Complete,   VCIClass.C3)]
+        [InlineData(350, 100,   ElementType.Complete,   VCIClass.C2)]
         public void NewElement_GivenParamters_ExcptedElementType(
-            int prvalue, int mrvalue, ElementType expectedtype, ElementVCIClass vciclass)
+            int potentialRiskvalue, int managedRiskvalue, ElementType expectedType, VCIClass expectedVCIclass)
         {
 
-            Element element = new Element(101, prvalue, mrvalue);
+            Element element = new Element(101, potentialRiskvalue, managedRiskvalue);
 
-            element.GetType().Should().Be(expectedtype);
-            element.VCIClass.Should().Be(vciclass);
+            ElementType elementType = element.GetElementType();
+            VCIClass vciClass = element.VciClass;
 
+            elementType.Should().Be(expectedType);
+            vciClass.Should().Be(expectedVCIclass);
         }
     }
 }

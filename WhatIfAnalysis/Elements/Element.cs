@@ -1,49 +1,53 @@
-﻿using WhatIfAnalysis.CoverageAnalysis;
-
-namespace WhatIfAnalysis.Elements
+﻿namespace WhatIfAnalysis.Elements
 {
     public class Element
     {
 
-        private int _pr = 0;
+        private int _potentialRisk = 0;
 
         public long Id { get; }
 
-        public int PR => _pr;
+        public int PotentialRisk => _potentialRisk;
 
-        public int MR { get;  }
+        public int ManagedRisk { get;  }
 
-        public ElementVCIClass VCIClass = ElementVCIClass.C3;
+        public VCIClass VciClass;
 
-        public Element(long id, int prvalue, int mrvalue)
+        public Element(long id, int potentialRisk, int managedRisk)
         {
-            _pr = prvalue;
-            MR = mrvalue;
             Id = id;
+            _potentialRisk = potentialRisk;
+            ManagedRisk = managedRisk;
+            VciClass = getVciClass(potentialRisk);
+        }
 
-            if (prvalue < 250)
+        private VCIClass getVciClass(int potentialRisk)
+        {
+            if (potentialRisk < 250)
             {
-                VCIClass = ElementVCIClass.C1;
+                return VCIClass.C1;
 
-            } else if (prvalue >= 250 && prvalue < 400)
-            {
-                VCIClass = ElementVCIClass.C2;
             }
+            else if (potentialRisk >= 250 && potentialRisk < 400)
+            {
+                return VCIClass.C2;
+            }
+            return VCIClass.C3;
         }
 
-        public void SetPRAsEstimate(int value)
+        public void SetPotentialRisk(int newPotentialRisk)
         {
-            _pr = value;
+            _potentialRisk = newPotentialRisk;
         }
 
-        public ElementType GetType()
+        public ElementType GetElementType()
         {
-            if (PR == 0)
+            if (PotentialRisk == 0)
             {
                 return ElementType.Absent;
 
             }
-            else if (PR != 0 && MR == 0)
+            else if (PotentialRisk != 0 && ManagedRisk == 0)
             {
                 return ElementType.Incomplete;
             }
