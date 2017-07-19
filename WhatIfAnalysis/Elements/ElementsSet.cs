@@ -7,61 +7,35 @@ namespace WhatIfAnalysis.Elements
 
     public class ElementsSet : List<Element>
     {
-        #region private variables
+        #region Properties
 
-        private int _totalPotentialRisk = 0;
+        public int TotalPotentialRisk { get; private set; } = 0;
 
-        private int _totalManagedRisk = 0;
+        public int TotalManagedRisk { get; private set; } = 0;
 
-        private int _countOfIncompleteAndComplete = 0;
+        public int CountOfIncompleteAndComplete { get; private set; } = 0;
 
-        private int _potentialRiskOfIncompleteAndComplete = 0;
+        public int CountOfC3Class { get; private set; } = 0;
 
-        private int _potentialRiskOfComplete = 0;
+        public int PotentialRiskOfIncompleteAndComplete { get; private set; } = 0;
 
-        private int _countOfC3Class = 0;
+        public int PotentialRiskOfComplete { get; private set; } = 0;
 
-        private int _potentialRiskOfC3Class = 0;
+        public int PotentialRiskOfC3Class { get; private set; } = 0;
 
-        private double _averagePotentialRisk = 0;
+        public double AveragePotentialRisk { get; private set; } = 0;
 
-        private double _averagePotentialRiskOfC3Class = 0;
+        public double AveragePotentialRiskOfC3Class { get; private set; } = 0;
 
-        private double _fractionOfIncompleteAndComplete = 0;        // own a VCI analysis
+        public double FractionOfIncompleteAndComplete { get; private set; } = 0;
 
-        private double _managedRiskReductionFactor = 0;
-
-        #endregion
-
-        #region properties
-
-        public int TotalPotentialRisk => _totalPotentialRisk;
-
-        public int TotalManagedRisk => _totalManagedRisk;
-
-        public int CountOfIncompleteAndComplete => _countOfIncompleteAndComplete;
-
-        public int CountOfC3Class => _countOfC3Class;
-
-        public int PotentialRiskOfIncompleteAndComplete => _potentialRiskOfIncompleteAndComplete;
-
-        public int PotentialRiskOfComplete => _potentialRiskOfComplete;
-
-        public int PotentialRiskOfC3Class => _potentialRiskOfC3Class;
-
-        public double AveragePotentialRisk => _averagePotentialRisk;
-
-        public double AveragePotentialRiskOfC3Class => _averagePotentialRiskOfC3Class;
-
-        public double FractionOfIncompleteAndComplete => _fractionOfIncompleteAndComplete;
-
-        public double ManagedRiskReductionFactor => _managedRiskReductionFactor;
+        public double ManagedRiskReductionFactor { get; private set; } = 0;
 
         #endregion
 
-        public void Analyze()
+        public void CalculatePerimeterRiskFactorsAndUpdateAbsentElements()
         {
-            CalculateRiskAndCountValues();
+            CalculatePotentialRisksAndCounters();
 
             UpdatePotentialRiskOfAbsentElements();  // as estimate from functional perimeter
 
@@ -70,23 +44,23 @@ namespace WhatIfAnalysis.Elements
             CalculateManagedRiskReductionFactor();
         }
 
-        private void CalculateRiskAndCountValues()
+        private void CalculatePotentialRisksAndCounters()
         {
-            _countOfIncompleteAndComplete = this.Count(IsIncompleteOrComplete);
+            CountOfIncompleteAndComplete = this.Count(IsIncompleteOrComplete);
 
-            _countOfC3Class = this.Count(IsC3Class);
+            CountOfC3Class = this.Count(IsC3Class);
 
-            _potentialRiskOfIncompleteAndComplete = this.Sum(element => IsIncompleteOrComplete(element) ? element.PotentialRisk : 0);
+            PotentialRiskOfIncompleteAndComplete = this.Sum(element => IsIncompleteOrComplete(element) ? element.PotentialRisk : 0);
 
-            _potentialRiskOfComplete = this.Sum(element => IsComplete(element) ? element.PotentialRisk : 0);
+            PotentialRiskOfComplete = this.Sum(element => IsComplete(element) ? element.PotentialRisk : 0);
 
-            _potentialRiskOfC3Class = this.Sum(element => IsC3Class(element) ? element.PotentialRisk : 0);
+            PotentialRiskOfC3Class = this.Sum(element => IsC3Class(element) ? element.PotentialRisk : 0);
 
-            _averagePotentialRisk = (double) _potentialRiskOfIncompleteAndComplete / _countOfIncompleteAndComplete;
+            AveragePotentialRisk = (double) PotentialRiskOfIncompleteAndComplete / CountOfIncompleteAndComplete;
 
-            _averagePotentialRiskOfC3Class = (double) _potentialRiskOfC3Class / _countOfC3Class;
+            AveragePotentialRiskOfC3Class = (double) PotentialRiskOfC3Class / CountOfC3Class;
 
-            _fractionOfIncompleteAndComplete = (double) _countOfIncompleteAndComplete / this.Count();
+            FractionOfIncompleteAndComplete = (double) CountOfIncompleteAndComplete / this.Count();
 
         }
 
@@ -111,14 +85,14 @@ namespace WhatIfAnalysis.Elements
 
         private void CalculateTotals()
         {
-            _totalPotentialRisk = this.Sum(element => element.PotentialRisk);
+            TotalPotentialRisk = this.Sum(element => element.PotentialRisk);
 
-            _totalManagedRisk = this.Sum(element => element.ManagedRisk);
+            TotalManagedRisk = this.Sum(element => element.ManagedRisk);
         }
 
         private void CalculateManagedRiskReductionFactor()
         {
-            _managedRiskReductionFactor = (double)_totalManagedRisk / _potentialRiskOfComplete;
+            ManagedRiskReductionFactor = (double)TotalManagedRisk / PotentialRiskOfComplete;
         }
 
         private bool IsPerimeterAnalysed()

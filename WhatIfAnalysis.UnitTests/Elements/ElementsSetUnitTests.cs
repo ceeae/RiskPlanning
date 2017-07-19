@@ -34,7 +34,7 @@ namespace WhatIfAnalysis.UnitTests.Elements
         public void Analyze_GivenSet_ExceptedCalculatedValues()
         {
 
-            _elements.Analyze();
+            _elements.CalculatePerimeterRiskFactorsAndUpdateAbsentElements();
 
             // Incomplete + Complete elements
             _elements.CountOfIncompleteAndComplete.Should().Be(8);

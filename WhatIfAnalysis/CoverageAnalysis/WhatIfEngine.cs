@@ -12,13 +12,7 @@ namespace WhatIfAnalysis.CoverageAnalysis
 
         private readonly ElementsSet _elements;
 
-        private bool _supportNCAnalysis = false;
-
-        private double _residualRisk = 0;
-
-        private double _totalCost = 0;
-
-        private double _totalIngCost = 0;
+        private bool _includeNotClassified = false;
 
         private int _targetBudget = 0;
 
@@ -28,99 +22,58 @@ namespace WhatIfAnalysis.CoverageAnalysis
 
         #region properties
 
-        public List<CoverageActivity> Activities = new List<CoverageActivity>();
+        public List<CoverageActivity> Activities;               // What <Projections> If Implement <Activities>
 
-        public Dictionary<long, double[]> Results;
+        public Dictionary<long, double[]> Projections;
 
-        public double ResidualRisk => _residualRisk;
+        public double TotalResidualRisk { get; private set; } = 0;
 
-        public double TotalCost => _totalCost;
+        public double TotalCost { get; private set; } = 0;
 
-        public double TotalIngCost => _totalIngCost;
+        public double TotalIngCost { get; private set; } = 0;
 
         #endregion
 
         public WhatIfEngine(ElementsSet elements)
         {
             _elements = elements;
+
+            _elements.CalculatePerimeterRiskFactorsAndUpdateAbsentElements();
         }
 
-        public void SupportNotClassifiedAnalysis(bool support)
+        public void IncludeNotClassified()
         {
-            _supportNCAnalysis = support;
+            _includeNotClassified = true;
         }
 
-        public void ExecuteAnalysis(int pdsCost, int pdsIngcost, int notClassifiedVolumeEstimate, int targetBudget, int targetResidualRisk)
+        public void ExecuteAnalysis(int pdsCost, int pdsIngcost, int notClassifiedVolumeEstimate)
         {
-            _targetBudget = targetBudget;
+            GenerateCoverageActivities(pdsCost, pdsIngcost);
 
-            _targetResidualRisk = targetResidualRisk;
+            OrderActivitiesByRanking();
 
-            _elements.Analyze();
+            ProduceRiskReductionScenario(notClassifiedVolumeEstimate);
+        }
 
+        private void GenerateCoverageActivities(int pdsCost, int pdsIngcost)
+        {
             Activities = new List<CoverageActivity>();
 
-            _elements.ForEach( element => GenerateCoverageActivities(element, pdsCost, pdsIngcost));
+            _elements.ForEach(element => GenerateCoverageActivity(element, pdsCost, pdsIngcost));
 
-            if (_supportNCAnalysis)
+            if (_includeNotClassified)
             {
                 GenerateCoverageActivitiesForNotClassifiedElements(0, 0); // Not implemented!
             }
-
-            Activities = Activities.OrderByDescending(activity => activity.Ranking).ToList();
-
-            CreateResidualRiskAndCostsFigures(notClassifiedVolumeEstimate);
-
         }
 
-        public KeyValuePair<long, double[]> GetTargetRisk()
+        private void GenerateCoverageActivitiesForNotClassifiedElements(int totalcost, int ingtotalcost)
         {
-            return Results.OrderBy(e => e.Value[3]).FirstOrDefault();
+            // Feature not implemented! ... generate VCI + PDS Activities for NotClassified elements
         }
 
-        public KeyValuePair<long, double[]> GetTargetBudget()
+        private void GenerateCoverageActivity(Element element, int pdscost, int ingpdscost)
         {
-            return Results.OrderBy(e => e.Value[4]).FirstOrDefault();
-        }
-
-        private void CreateResidualRiskAndCostsFigures(int notClassified)
-        {
-
-            double potentialrisk = (double)notClassified * _elements.AveragePotentialRiskOfC3Class + _elements.TotalPotentialRisk;
-
-            _residualRisk = potentialrisk - _elements.TotalManagedRisk;
-
-            _totalCost = 0;
-
-            Results = new Dictionary<long, double[]>();
-            
-            Activities.ForEach(CalculateResidualRiskAndCostsFigures );
-        }
-
-        private void CalculateResidualRiskAndCostsFigures(CoverageActivity activity)
-        {
-            long id = activity.GetElementId();
-
-            _residualRisk = _residualRisk - (double) activity.ManagedRiskReduction;
-
-            _totalCost += (double) activity.Cost;
-
-            _totalIngCost += (double) activity.IngCost;
-
-            // Calculate diff relative to target (easier to select result)
-            double riskDiff = _residualRisk - _targetResidualRisk;
-            riskDiff = riskDiff > 0 ? riskDiff : _residualRisk;
-
-            double bdgDiff = _targetBudget - _totalCost;
-            bdgDiff = bdgDiff > 0 ? bdgDiff : _targetBudget;
-
-            Results.Add(id, new double[] {_residualRisk, _totalCost, _totalIngCost, riskDiff, bdgDiff });
-        }
-        
-        private void GenerateCoverageActivities(Element element, int pdscost, int ingpdscost)
-        {
-            double mrreduction = _elements.ManagedRiskReductionFactor;
-            CoverageActivity activity = null;
 
             switch (element.GetElementType())
             {
@@ -128,22 +81,105 @@ namespace WhatIfAnalysis.CoverageAnalysis
                 case ElementType.Incomplete:
                 case ElementType.Absent:
                 {
-                    double abb = (double) element.PotentialRisk*mrreduction;
-                    activity = new CoverageActivity(element, ActivityType.PDS, pdscost, ingpdscost, abb);
+                    var managedRiskReduction = (double) element.PotentialRisk * _elements.ManagedRiskReductionFactor;
+
+                    Activities.Add(
+                            new CoverageActivity(element, ActivityType.PDS, pdscost, ingpdscost, managedRiskReduction)
+                        );
                 }
                 break;
 
             }
 
-            if (activity != null)
-            {
-                Activities.Add(activity);
-            }
         }
 
-        private void GenerateCoverageActivitiesForNotClassifiedElements(int totalcost, int ingtotalcost)
+        private void OrderActivitiesByRanking()
         {
-            // Feature not implemented! ... generate VCI + PDS Activities for NotClassified elements
+            Activities = Activities.OrderByDescending(activity => activity.Ranking).ToList();
+        }
+
+        private void ProduceRiskReductionScenario(int notClassified)
+        {
+
+            double totalPotentialRisk = (double) notClassified * _elements.AveragePotentialRiskOfC3Class + _elements.TotalPotentialRisk;
+
+            TotalResidualRisk = totalPotentialRisk - _elements.TotalManagedRisk;
+
+            TotalCost = 0;
+
+            Projections = new Dictionary<long, double[]>();
+            
+            Activities.ForEach(CalculateRiskProjectionsBy );
+        }
+
+        private void CalculateRiskProjectionsBy(CoverageActivity activity)
+        {
+            
+            DecreaseTotalRiskAndCostByActivity(activity);
+
+            // Calculate diff relative to target (easier to select result)
+            //double riskDiff = TotalResidualRisk - _targetResidualRisk;
+            //riskDiff = riskDiff > 0 ? riskDiff : TotalResidualRisk;
+
+            //double bdgDiff = _targetBudget - TotalCost;
+            //bdgDiff = bdgDiff > 0 ? bdgDiff : _targetBudget;
+
+            //Projections.Add(id, new double[] {TotalResidualRisk, TotalCost, TotalIngCost, riskDiff, bdgDiff });
+            Projections.Add(
+                activity.GetElementId(), 
+                new double[] { TotalResidualRisk, TotalCost, TotalIngCost, 0, 0 });
+        }
+
+        private void DecreaseTotalRiskAndCostByActivity(CoverageActivity activity)
+        {
+            TotalResidualRisk = TotalResidualRisk - (double) activity.ManagedRiskReduction;
+
+            TotalCost += (double) activity.Cost;
+
+            TotalIngCost += (double) activity.IngCost;
+        }
+
+        public KeyValuePair<long, double[]> GetClosestResidualRiskProjection(int targetRisk)
+        {
+            long nearestId = -1;
+
+            double nearestTargetRisk = TotalResidualRisk;
+
+            foreach (var projection in Projections)
+            {
+                double deltaRisk = projection.Value[0] - targetRisk;
+
+                if (deltaRisk >= 0 && deltaRisk < nearestTargetRisk)
+                {
+                    nearestId = (long)projection.Key;
+                    nearestTargetRisk = deltaRisk;
+                }
+            }
+
+            if (nearestId == -1) return new KeyValuePair<long, double[]>();
+
+            return new KeyValuePair<long, double[]>(nearestId, Projections[nearestId]);
+        }
+
+        public KeyValuePair<long, double[]> GetClosestBudgetProjection(int targetBudget)
+        {
+            long nearestId = -1;
+            double nearestTargetBudget = targetBudget;
+
+            foreach (var projection in Projections)
+            {
+                double deltaBudget = targetBudget - projection.Value[1];
+
+                if (deltaBudget >= 0 && deltaBudget < nearestTargetBudget)
+                {
+                    nearestId = (long) projection.Key;
+                    nearestTargetBudget = deltaBudget;
+                }
+            }
+
+            if (nearestId == -1) return new KeyValuePair<long, double[]>();
+
+            return new KeyValuePair<long, double[]>(nearestId, Projections[nearestId]);
         }
 
     }

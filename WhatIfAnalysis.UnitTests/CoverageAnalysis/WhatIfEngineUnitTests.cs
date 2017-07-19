@@ -34,8 +34,8 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
 
             _whatIfEngine = new WhatIfEngine(elements);
 
-            // PDS cost, IngPDS cost, NotClassified volume, Target Budget, Target Residual Risk
-            _whatIfEngine.ExecuteAnalysis(12, 2, 3, 50, 5300);
+            // PDS cost, IngPDS cost, NotClassified volume
+            _whatIfEngine.ExecuteAnalysis(12, 2, 3);
 
             _activities = _whatIfEngine.Activities;
 
@@ -61,7 +61,7 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
         {
 
             // Expected Figures
-            R0(_whatIfEngine.ResidualRisk).Should().Be(5132);
+            R0(_whatIfEngine.TotalResidualRisk).Should().Be(5132);
 
             R0(_whatIfEngine.TotalIngCost).Should().Be(10);
 
@@ -72,7 +72,7 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
         public void GetTargetRisk_GivenElementsAndStandardCosts_ExcpectedTargetFigure()
         {
 
-            KeyValuePair<long, double[]> target = _whatIfEngine.GetTargetRisk(); // 5300
+            KeyValuePair<long, double[]> target = _whatIfEngine.GetClosestResidualRiskProjection(5300); 
 
             // Target Residual Risk Found
             target.Key.Should().Be(2);
@@ -87,7 +87,7 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
         public void GetTargetBudget_GivenElementsAndStandardCosts_ExcpectedTargetFigure()
         {
 
-            KeyValuePair<long, double[]> target = _whatIfEngine.GetTargetBudget(); // 50
+            KeyValuePair<long, double[]> target = _whatIfEngine.GetClosestBudgetProjection(50); 
 
             // Target Budget Found
             target.Key.Should().Be(5);
@@ -96,7 +96,7 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
             R0(target.Value[2]).Should().Be(8);     // Actual IngCosts
 
         }
-        
+
         private double R0(double value)
         {
             return Math.Round(value, 0);

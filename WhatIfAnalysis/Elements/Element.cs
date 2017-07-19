@@ -2,42 +2,25 @@
 {
     public class Element
     {
-
-        private int _potentialRisk = 0;
-
         public long Id { get; }
 
-        public int PotentialRisk => _potentialRisk;
-
-        public int ManagedRisk { get;  }
+        public int PotentialRisk { get; private set; } = 0;
 
         public VCIClass VciClass;
+
+        public int ManagedRisk { get;  }
 
         public Element(long id, int potentialRisk, int managedRisk)
         {
             Id = id;
-            _potentialRisk = potentialRisk;
+            PotentialRisk = potentialRisk;
             ManagedRisk = managedRisk;
-            VciClass = getVciClass(potentialRisk);
-        }
-
-        private VCIClass getVciClass(int potentialRisk)
-        {
-            if (potentialRisk < 250)
-            {
-                return VCIClass.C1;
-
-            }
-            else if (potentialRisk >= 250 && potentialRisk < 400)
-            {
-                return VCIClass.C2;
-            }
-            return VCIClass.C3;
+            VciClass = GetVCIClass(potentialRisk);
         }
 
         public void SetPotentialRisk(int newPotentialRisk)
         {
-            _potentialRisk = newPotentialRisk;
+            PotentialRisk = newPotentialRisk;
         }
 
         public ElementType GetElementType()
@@ -53,6 +36,20 @@
             }
 
             return ElementType.Complete;
+        }
+
+        private static VCIClass GetVCIClass(int potentialRisk)
+        {
+            if (potentialRisk < 250)
+            {
+                return VCIClass.C1;
+
+            }
+            else if (potentialRisk >= 250 && potentialRisk < 400)
+            {
+                return VCIClass.C2;
+            }
+            return VCIClass.C3;
         }
 
     }
