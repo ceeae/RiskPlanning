@@ -1,41 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using CalcoloRischioResiduo.RiskAssessment.Common;
-using CalcoloRischioResiduo.RiskAssessment.Exceptions;
+using ResidualRisk.RiskAssessment.Common;
+using ResidualRisk.RiskAssessment.Exceptions;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Requirements
+namespace ResidualRisk.RiskAssessment.Requirements
 {
     public class Requirement
     {
-        public const int WEIGHTS_NUM = 3 + 35;  // indexed by 0..
+        public const int WEIGHTS_NUM = 3 + 35;  // RID + 35 compliance Weights indexed by 0..
+
+        #region Properties Risk Factors (calculated - BIA, BIAID, COMPL - format 00.00)
 
         public long Id { get; }
 
-        public FractionWeight PAS { get; }
+        public WeightFraction PAS { get; }
 
         public CorrectionFactor Alpha { get; }
 
         public bool Adequate { get; }
 
-        public Weights ReqWeights { get;  }     // RID + 35 compliance ReqWeights
+        public Weights Weights { get; }    
 
-  
-        #region Potential Risk Factors (calculated - BIA, BIAID, COMPL - format 00.00)
+        public double PotentialRiskBIA { get; private set; } = 0;
 
-        private double _prbia = 0;
-        private double _prbiaid = 0;
-        private double _prcompl = 0;
+        public double PotentialRiskBIAID { get; private set; } = 0;
 
-        public double PRbia => _prbia;
+        public double PotentialRiskCOMPL { get; private set; } = 0;
 
-        public double PRbiaID => _prbiaid;
+        #endregion 
 
-        public double PRcompl => _prcompl;
-
-        #endregion calculated factors
-
-        public Requirement(long id, FractionWeight pas, CorrectionFactor alpha, bool adequate)
+        public Requirement(long id, WeightFraction pas, CorrectionFactor alpha, bool adequate)
         {
             if (id <= 0)
             {
@@ -47,54 +41,48 @@ namespace CalcoloRischioResiduo.RiskAssessment.Requirements
             Alpha = alpha;
             Adequate = adequate;
 
-            ReqWeights = new Weights(Enumerable.Repeat((Weight)new DefaultWeight(), WEIGHTS_NUM).ToList()); 
+            Weights = new Weights(Enumerable.Repeat((Weight)new DefaultWeight(), WEIGHTS_NUM).ToList()); 
         }
 
-        public Requirement(long id, FractionWeight pas, CorrectionFactor alpha, bool adequate, int[] values) 
+        public Requirement(long id, WeightFraction pas, CorrectionFactor alpha, bool adequate, int[] weights)
             : this(id, pas, alpha, adequate)
         {
-            InitializeWeightsWithIntArray(values);
+            InitializeWeightsWithIntArray(weights);
         }
 
-        public void InitializeWeightsWithIntArray(int startIndex, int[] values)
+        //public Requirement(long id, WeightFraction pas, CorrectionFactor alpha, bool adequate, int[] weights) 
+        //    : this(id, pas, alpha, adequate)
+        //{
+        //    InitializeWeightsWithIntArray(weights);
+        //}
+
+        private void InitializeWeightsWithIntArray(int startIndex, int[] weights)
         {
             int i;
             for (i = startIndex;
-                i <= startIndex + values.Length - 1;
+                i <= startIndex + weights.Length - 1;
                 i++)
             {
-                ReqWeights[i] = new Weight(values[i - startIndex]);
+                Weights[i] = new Weight(weights[i - startIndex]);
             }
         }
 
-        public void InitializeWeightsWithIntArray(int[] values)
+        private void InitializeWeightsWithIntArray(int[] weights)
         {
-            InitializeWeightsWithIntArray(0, values);
+            InitializeWeightsWithIntArray(0, weights);
         }
 
-        public void CalculatePotentialRiskFactors(List<int> totals)
+        public void CalculatePotentialRisk(List<int> totals)
         {
             double correctedPAS = PAS.Value + Alpha.Value;
 
-            List<double> f = DivideWeightsBy(totals);                       // f = ReqWeights / CalculateWeightsTotals
+            List<double> fractions = Weights / totals;
 
-            _prbia =    f.Take(3).Sum()         * correctedPAS;
-            _prbiaid =  f.Skip(1).Take(2).Sum() * correctedPAS;
-            _prcompl =  f.Skip(3).Sum()         * correctedPAS;
+            PotentialRiskBIA =    fractions.Take(3).Sum()         * correctedPAS;
+
+            PotentialRiskBIAID =  fractions.Skip(1).Take(2).Sum() * correctedPAS;
+
+            PotentialRiskCOMPL =  fractions.Skip(3).Sum()         * correctedPAS;
         }
-
-
-        private List<double> DivideWeightsBy(List<int> totals)
-        {
-            int i;
-            List<double> fraction = Enumerable.Repeat((double) 0, WEIGHTS_NUM).ToList();
-
-            for (i = 0; i < WEIGHTS_NUM - 1; i++)
-            {
-                fraction[i] = (double) ReqWeights[i].Value/totals[i];
-            }
-            return fraction;
-        }
-
     }
 }

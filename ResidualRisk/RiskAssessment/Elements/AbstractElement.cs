@@ -1,8 +1,8 @@
-﻿using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
-using CalcoloRischioResiduo.RiskAssessment.Exceptions;
+﻿using ResidualRisk.FunctionalPerimeters;
+using ResidualRisk.RiskAssessment.Analysis;
+using ResidualRisk.RiskAssessment.Exceptions;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Elements
+namespace ResidualRisk.RiskAssessment.Elements
 {
     public abstract class AbstractElement : IElement
     {
@@ -11,32 +11,32 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         protected PerimeterType Perimeter { get; }
 
-        protected readonly RPvci vci;
+        protected readonly RiskPlanningVCI vci;
 
-        protected readonly RPpds pds;
+        protected readonly RiskPlanningPDS pds;
 
         protected readonly PerimetersAnalysis perimeters;
 
         #region constructors
         
-        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters)  // Not classified
+        protected AbstractElement(PerimeterType perimeterType, PerimetersAnalysis perimeters)  // Not classified
         {
-            Perimeter = elperimeter;
-            if (elperimeters == null)
+            Perimeter = perimeterType;
+            if (perimeters == null)
             {
                 throw new InvalidNullArgumentException();
             }
-            perimeters = elperimeters;
+            this.perimeters = perimeters;
         }
 
-        protected AbstractElement(ElementTypes elclassification, PerimeterType elperimeter, PerimetersAnalysis elperimeters) // For classified elements
-            : this (elperimeter, elperimeters)
+        protected AbstractElement(ElementTypes elclassification, PerimeterType perimeterType, PerimetersAnalysis perimeters) // For classified elements
+            : this (perimeterType, perimeters)
         {
             classification = elclassification;
         }
 
-        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RPvci elvci)
-            : this(ElementTypes.Classified, elperimeter, elperimeters)
+        protected AbstractElement(PerimeterType perimeterType, PerimetersAnalysis perimeters, RiskPlanningVCI elvci)
+            : this(ElementTypes.Classified, perimeterType, perimeters)
         {
             if (elvci == null)
             {
@@ -45,8 +45,8 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
             vci = elvci;
         }
 
-        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RPvci elvci, RPpds elpds)
-            : this(elperimeter, elperimeters, elvci)
+        protected AbstractElement(PerimeterType perimeterType, PerimetersAnalysis perimeters, RiskPlanningVCI elvci, RiskPlanningPDS elpds)
+            : this(perimeterType, perimeters, elvci)
         {
             if (elpds == null)
             {
@@ -57,11 +57,12 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         #endregion
 
-        public bool HasPerimeterAnalysis()
+        public bool IsAssociatedToAnalyzedPerimeter()
         {
             if (perimeters == null) return false;
 
             Perimeter perimeter = TakeAssociatedPerimeter();
+
             return perimeter?.IsAnalyzed() ?? false;
         }
 
@@ -72,12 +73,12 @@ namespace CalcoloRischioResiduo.RiskAssessment.Elements
 
         public virtual double GetResidualRisk()
         {
-            if (HasPerimeterAnalysis())
+            if (IsAssociatedToAnalyzedPerimeter())
             {
                 return TakeAssociatedPerimeter().GetResidualRiskEstimate(classification);
             }
 
-            return RPvci.VCIMAX;
+            return RiskPlanningVCI.VCI_MAX;
         }
     }
 }

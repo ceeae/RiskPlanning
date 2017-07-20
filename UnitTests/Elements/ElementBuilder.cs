@@ -1,11 +1,7 @@
-﻿using CalcoloRischioResiduo;
-using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
-using CalcoloRischioResiduo.RiskAssessment.Elements;
-using CalcoloRischioResiduo.RiskAssessment.Requirements;
-using Xunit;
-using FluentAssertions;
+﻿using ResidualRisk.FunctionalPerimeters;
+using ResidualRisk.RiskAssessment.Analysis;
+using ResidualRisk.RiskAssessment.Elements;
+using ResidualRisk.RiskAssessment.Requirements;
 
 namespace UnitTests.Elements
 {
@@ -16,8 +12,8 @@ namespace UnitTests.Elements
         {
             IElement element = null;
             PerimetersAnalysis perimeters = CreatePerimetersAnalysis();
-            RPvci vci = new RPvci(450, 300); // vci=750
-            RPpds pds = CreateRPpds();
+            RiskPlanningVCI vci = new RiskPlanningVCI(450, 300); // vci=750
+            RiskPlanningPDS pds = CreateRPpds();
 
             switch (scenario)
             {
@@ -69,39 +65,39 @@ namespace UnitTests.Elements
             return perimeters;
         }
 
-        public static RPpds CreateRPpds()
+        public static RiskPlanningPDS CreateRPpds()
         {
-            RequirementsSet set = new RequirementsSet();
+            RequirementsSet requirements = new RequirementsSet();
 
-            set.AddRequirement(101, 4.8, 0.2, true, new int[38]
+            requirements.AddRequirement(101, 4.8, 0.2, true, new int[38]
             {
                 3, 1, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
                 5, 5, 5,
 
             });
 
-            set.AddRequirement(102, 3.2, 0.0, false, new int[38]
+            requirements.AddRequirement(102, 3.2, 0.0, false, new int[38]
             {
                 3, 1, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
                 5, 5, 5,
             });
 
-            set.AddRequirement(103, 1.0, 0.0, false, new int[3]
+            requirements.AddRequirement(103, 1.0, 0.0, false, new int[3]
             {
                 5, 4, 1
             });
 
-            set.AddRequirement(104, 1.0, 0.0, false, new int[3]
+            requirements.AddRequirement(104, 1.0, 0.0, false, new int[3]
             {
                 3, 4, 1
             });
 
-            set.AddRequirement(105, 1.0, 0.0, true, new int[3]
+            requirements.AddRequirement(105, 1.0, 0.0, true, new int[3]
             {
                 3, 3, 1
             });
 
-            return new RPpds(set);
+            return new RiskPlanningPDS(requirements);
         }
 
     }

@@ -1,7 +1,7 @@
 ﻿
-using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
-using CalcoloRischioResiduo.RiskAssessment.Elements;
+using ResidualRisk.FunctionalPerimeters;
+using ResidualRisk.RiskAssessment.Analysis;
+using ResidualRisk.RiskAssessment.Elements;
 
 namespace UnitTests.Elements.CompleteElements
 {
@@ -11,9 +11,12 @@ namespace UnitTests.Elements.CompleteElements
         public CompleteElement CreateCase()
         {
             PerimeterType perimeter = SelectPerimeter();
+
             PerimetersAnalysis perimeters = CreatePerimetersAnalysis();
-            RPvci vci = CreateRPVci();                                               // vci=750
-            RPpds pds = CreateRPpds();
+
+            RiskPlanningVCI vci = CreateRPVci();                                               // vci=750
+
+            RiskPlanningPDS pds = CreateRPpds();
 
             return new CompleteElement(perimeter, perimeters, vci, pds);
         }
@@ -22,9 +25,9 @@ namespace UnitTests.Elements.CompleteElements
 
         protected abstract PerimetersAnalysis CreatePerimetersAnalysis();
 
-        protected abstract RPvci CreateRPVci();
+        protected abstract RiskPlanningVCI CreateRPVci();
 
-        protected abstract RPpds CreateRPpds();
+        protected abstract RiskPlanningPDS CreateRPpds();
 
     }
 }

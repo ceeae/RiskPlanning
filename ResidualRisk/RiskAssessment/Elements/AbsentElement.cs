@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
+﻿using ResidualRisk.FunctionalPerimeters;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Elements
+namespace ResidualRisk.RiskAssessment.Elements
 {
     public class AbsentElement : AbstractElement
     {
-        public AbsentElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters) 
-            : base(ElementTypes.Classified, elperimeter, elperimeters)
+        public AbsentElement(PerimeterType perimeterType, PerimetersAnalysis perimeters) 
+            : base(ElementTypes.Classified, perimeterType, perimeters)
         {
 
         }

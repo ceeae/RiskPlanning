@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalcoloRischioResiduo.RiskAssessment.Exceptions;
+using ResidualRisk.RiskAssessment.Exceptions;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Common
+namespace ResidualRisk.RiskAssessment.Common
 {
     public class Weights : List<Weight>
     {
@@ -20,7 +16,7 @@ namespace CalcoloRischioResiduo.RiskAssessment.Common
         {
             if (a.Count != b.Count)
             {
-                throw new ListsWithDifferentSizesCannotBeAddedException();
+                throw new ListsWithDifferentSizesCannotBeManagedException();
             }
             int i;
             List<int> result = Enumerable.Repeat(0, a.Count).ToList();
@@ -31,6 +27,23 @@ namespace CalcoloRischioResiduo.RiskAssessment.Common
             }
             return result;
         }
+
+        public static List<double> operator /(Weights a, List<int> b)
+        {
+            if (a.Count != b.Count)
+            {
+                throw new ListsWithDifferentSizesCannotBeManagedException();
+            }
+            int i;
+            List<double> result = Enumerable.Repeat((double) 0, a.Count).ToList();
+
+            for (i = 0; i < a.Count; i++)
+            {
+                result[i] = (double) a[i].Value / b[i];
+            }
+            return result;
+        }
+
     }
 
 }

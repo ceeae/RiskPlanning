@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RiskAssessment\Elements\ElementTypes.cs" />
-    <Compile Include="RiskAssessment\Common\Tuple.cs" />
     <Compile Include="RiskAssessment\Common\Weights.cs" />
     <Compile Include="RiskAssessment\Elements\AbsentElement.cs" />
     <Compile Include="RiskAssessment\Elements\CompleteElement.cs" />
@@ -54,21 +53,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RiskAssessment\Elements\IncompleteElement.cs" />
     <Compile Include="RiskAssessment\Elements\NotClassifiedElement.cs" />
-    <Compile Include="RiskAssessment\Analysis\RPpds.cs" />
-    <Compile Include="RiskAssessment\Analysis\RPvci.cs" />
+    <Compile Include="RiskAssessment\Analysis\RiskPlanningPDS.cs" />
+    <Compile Include="RiskAssessment\Analysis\RiskPlanningVCI.cs" />
     <Compile Include="RiskAssessment\Exceptions\DuplicatedKeyException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidCorrectionFactorValueException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidCorrectionValueException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidNullArgumentException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidProbabilityValueException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidWeightValueException.cs" />
-    <Compile Include="RiskAssessment\Exceptions\ListsWithDifferentSizesCannotBeAddedException.cs" />
+    <Compile Include="RiskAssessment\Exceptions\ListsWithDifferentSizesCannotBeManagedException.cs" />
     <Compile Include="RiskAssessment\Exceptions\MissingRequirementsException.cs" />
     <Compile Include="RiskAssessment\Exceptions\InvalidKeyException.cs" />
     <Compile Include="RiskAssessment\Exceptions\OutOfRangeIndexException.cs" />
     <Compile Include="RiskAssessment\Exceptions\WrongWeightValueException.cs" />
     <Compile Include="RiskAssessment\Common\CorrectionFactor.cs" />
-    <Compile Include="RiskAssessment\Common\FractionWeight.cs" />
+    <Compile Include="RiskAssessment\Common\WeightFraction.cs" />
     <Compile Include="RiskAssessment\Requirements\Requirement.cs" />
     <Compile Include="RiskAssessment\Common\Weight.cs" />
     <Compile Include="RiskAssessment\Requirements\RequirementsSet.cs" />

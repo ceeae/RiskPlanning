@@ -1,12 +1,11 @@
-﻿using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
+﻿using ResidualRisk.FunctionalPerimeters;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Elements
+namespace ResidualRisk.RiskAssessment.Elements
 {
     public class NotClassifiedElement : AbstractElement
     {
-        public NotClassifiedElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters) 
-            : base(elperimeter, elperimeters)
+        public NotClassifiedElement(PerimeterType perimeterType, PerimetersAnalysis perimeters) 
+            : base(perimeterType, perimeters)
         {
 
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 
-
-namespace CalcoloRischioResiduo.RiskAssessment.Exceptions
+namespace ResidualRisk.RiskAssessment.Exceptions
 {
     public class DuplicatedKeyException : Exception
     {

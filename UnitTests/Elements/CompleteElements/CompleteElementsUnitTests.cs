@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using CalcoloRischioResiduo.RiskAssessment.Elements;
 using Xunit;
 using FluentAssertions;
+using ResidualRisk.RiskAssessment.Elements;
 
 namespace UnitTests.Elements.CompleteElements
 {
@@ -16,40 +15,42 @@ namespace UnitTests.Elements.CompleteElements
         [InlineData(TestCase.MissingPerimeterAnalysis, 342)]
         [InlineData(TestCase.CoveredPerimeterAnalysis, 342)]
         [InlineData(TestCase.LowManagedRisk, 541)]
-        public void GetResidualRisk_GivenCase_ExpectedResult(TestCase testCase, int residualrisk)
+        public void GetResidualRisk_GivenCase_ExpectedResult(TestCase testCase, int expectedResidualRisk)
         {
             CompleteElement element = CompleteElementBuilder.CreateCase(testCase);
 
             double result = element.GetResidualRisk();
 
-            R0(result).Should().Be(residualrisk);
+            R0(result).Should().Be(expectedResidualRisk);
         }
 
         [Theory]
         [InlineData(TestCase.LowManagedRisk, 455, 86)]
-        public void GetResidualRiskBIAAndCOMPL_GivenCase_ExpectedResult(TestCase testCase, int rrbia, int rrcompl)
+        public void GetResidualRiskBIAAndCOMPL_GivenCase_ExpectedResult(
+            TestCase testCase, int expectedResidualRiskBIA, int expectedResidualRiskCOMPL)
         {
             CompleteElement element = CompleteElementBuilder.CreateCase(testCase);
 
-            double rrbiaresult = element.GetResidualRiskBIA();
-            double rrcomplresult = element.GetResidualRiskCOMPL();
+            double residualRiskBIA = element.GetResidualRiskBIA();
+            double residualRiskCOMPL = element.GetResidualRiskCOMPL();
 
-            R0(rrbiaresult).Should().Be(rrbia);
-            R0(rrcomplresult).Should().Be(rrcompl);
+            R0(residualRiskBIA).Should().Be(expectedResidualRiskBIA);
+            R0(residualRiskCOMPL).Should().Be(expectedResidualRiskCOMPL);
 
         }
 
         [Theory]
         [InlineData(TestCase.LowManagedRisk, 175, 24)]
-        public void GetManagedRiskBIAAndCOMPL_GivenCase_ExpectedResult(TestCase testCase, int rrbia, int rrcompl)
+        public void GetManagedRiskBIAAndCOMPL_GivenCase_ExpectedResult(
+            TestCase testCase, int expectedManagedRiskBIA, int exptectedManagedRiskCOMPL)
         {
             CompleteElement element = CompleteElementBuilder.CreateCase(testCase);
 
-            double rrbiaresult = element.GetManagedRiskBIA();
-            double rrcomplresult = element.GetManagedRiskCOMPL();
+            double managedRiskBIA = element.GetManagedRiskBIA();
+            double managedRiskCOMPL = element.GetManagedRiskCOMPL();
 
-            R0(rrbiaresult).Should().Be(rrbia);
-            R0(rrcomplresult).Should().Be(rrcompl);
+            R0(managedRiskBIA).Should().Be(expectedManagedRiskBIA);
+            R0(managedRiskCOMPL).Should().Be(exptectedManagedRiskCOMPL);
 
         }
 
@@ -59,11 +60,11 @@ namespace UnitTests.Elements.CompleteElements
         {
             CompleteElement element = CompleteElementBuilder.CreateCase(testCase);
             
-            element.SetVEF(vef);
+            element.SetVEF(vef);  // Setting VEF automatically force risk calculation of PDS
             
-            Dictionary<long, double[]> factorsDistrib = element.GetPotentialRiskDistributionFactors();
+            Dictionary<long, double[]> distribution = element.GetPotentialRiskDistributionFactors();
 
-            VEFDistrib(factorsDistrib).Should().Equals(new Dictionary<long, double>
+            ExtractVEF(distribution).Should().Equal(new Dictionary<long, double>
             {
                 { 101, 20270.27 },
                 { 102, 18918.92 },
@@ -73,18 +74,19 @@ namespace UnitTests.Elements.CompleteElements
             });
         }
 
+        private static Dictionary<long, double> ExtractVEF(Dictionary<long, double[]> distrib)
+        {
+            return distrib.ToDictionary(factors => factors.Key, factors => R2(factors.Value[3]));
+        }
+
         private static double R0(double result)
         {
             return Math.Round(result, 0);
         }
+
         private static double R2(double result)
         {
-            return Math.Round(result, 0);
-        }
-
-        private Dictionary<long, double> VEFDistrib(Dictionary<long, double[]> distrib)
-        {
-            return distrib.ToDictionary(factors => factors.Key, factors => R2(factors.Value[3]));
+            return Math.Round(result, 2);
         }
 
     }

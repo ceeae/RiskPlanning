@@ -1,5 +1,5 @@
 ﻿using System;
-using CalcoloRischioResiduo.RiskAssessment.Elements;
+using ResidualRisk.RiskAssessment.Elements;
 using Xunit;
 using FluentAssertions;
 
@@ -24,51 +24,7 @@ namespace UnitTests.Elements
             R0(result).Should().Be(expectedresidualriskvalue);
         }
 
-        [Theory]
-        [InlineData(TestCase.CompleteElementWithCompletePerimeterAnalysis, 230)]
-        public void ManagedRiskBIA_CompleteElementGivenScenario(TestCase testCase, double expectedmanagedriskvalue)
-        {
-            CompleteElement element = (CompleteElement) ElementBuilder.CreateCase(testCase);
-
-            double result = element.GetManagedRiskBIA();
-
-            R0(result).Should().Be(expectedmanagedriskvalue);
-        }
-
-        [Theory]
-        [InlineData(TestCase.CompleteElementWithCompletePerimeterAnalysis, 177)]
-        public void ManagedRiskCOMPL_CompleteElementGivenScenario(TestCase testCase, double expectedmanagedriskvalue)
-        {
-            CompleteElement element = (CompleteElement)ElementBuilder.CreateCase(testCase);
-
-            double result = element.GetManagedRiskCOMPL();
-
-            R0(result).Should().Be(expectedmanagedriskvalue);
-        }
-
-        [Theory]
-        [InlineData(TestCase.CompleteElementWithCompletePerimeterAnalysis, 220)]
-        public void ResidualRiskBIA_CompleteElementGivenScenario(TestCase testCase, double expectedmanagedriskvalue)
-        {
-            CompleteElement element = (CompleteElement)ElementBuilder.CreateCase(testCase);
-
-            double result = element.GetResidualRiskBIA();
-
-            R0(result).Should().Be(expectedmanagedriskvalue);
-        }
-
-        [Theory]
-        [InlineData(TestCase.CompleteElementWithCompletePerimeterAnalysis, 123)]
-        public void ResidualRiskCOMPL_CompleteElementGivenScenario(TestCase testCase, double expectedmanagedriskvalue)
-        {
-            CompleteElement element = (CompleteElement)ElementBuilder.CreateCase(testCase);
-
-            double result = element.GetResidualRiskCOMPL();
-
-            R0(result).Should().Be(expectedmanagedriskvalue);
-        }
-
-        public static double R0(double result)
+        private static double R0(double result)
         {
             return Math.Round(result, 0);
         }

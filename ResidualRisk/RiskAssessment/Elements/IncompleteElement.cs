@@ -1,12 +1,12 @@
-﻿using CalcoloRischioResiduo.FunctionalPerimeters;
-using CalcoloRischioResiduo.RiskAssessment.Analysis;
+﻿using ResidualRisk.FunctionalPerimeters;
+using ResidualRisk.RiskAssessment.Analysis;
 
-namespace CalcoloRischioResiduo.RiskAssessment.Elements
+namespace ResidualRisk.RiskAssessment.Elements
 {
     public class IncompleteElement: AbstractElement { 
 
-        public IncompleteElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RPvci elvci) // Classified by default
-            : base(elperimeter, elperimeters, elvci)
+        public IncompleteElement(PerimeterType perimeterType, PerimetersAnalysis perimeters, RiskPlanningVCI elvci) // Classified by default
+            : base(perimeterType, perimeters, elvci)
         {
 
         }
