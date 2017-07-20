@@ -1,7 +1,4 @@
-﻿using System.CodeDom;
-using System.Collections.Specialized;
-
-namespace WhatIfAnalysis.ReductionAnalysis
+﻿namespace WhatIfAnalysis.ReductionAnalysis
 {
     public class ReductionAction
     {
