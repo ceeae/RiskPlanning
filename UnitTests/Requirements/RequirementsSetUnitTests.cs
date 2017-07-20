@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ResidualRisk.RiskAssessment.Common;
 using ResidualRisk.RiskAssessment.Requirements;
 using Xunit;
 using FluentAssertions;

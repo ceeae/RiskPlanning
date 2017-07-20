@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using WhatIfAnalysis.Elements;
 
@@ -14,15 +13,11 @@ namespace WhatIfAnalysis.CoverageAnalysis
 
         private bool _includeNotClassified = false;
 
-        private int _targetBudget = 0;
-
-        private int _targetResidualRisk = 0;
-
         #endregion
 
         #region properties
 
-        public List<CoverageActivity> Activities;               // What <Projections> If Implement <Activities>
+        public List<CoverageAction> Actions;               // "What" <Projections> "If I Do" <Actions>
 
         public Dictionary<long, double[]> Projections;
 
@@ -48,31 +43,31 @@ namespace WhatIfAnalysis.CoverageAnalysis
 
         public void ExecuteAnalysis(int pdsCost, int pdsIngcost, int notClassifiedVolumeEstimate)
         {
-            GenerateCoverageActivities(pdsCost, pdsIngcost);
+            GenerateActions(pdsCost, pdsIngcost);
 
-            OrderActivitiesByRanking();
+            OrderActionsByImportance();
 
-            ProduceRiskReductionScenario(notClassifiedVolumeEstimate);
+            CreateRiskReductionProjections(notClassifiedVolumeEstimate);
         }
 
-        private void GenerateCoverageActivities(int pdsCost, int pdsIngcost)
+        private void GenerateActions(int pdsCost, int pdsIngcost)
         {
-            Activities = new List<CoverageActivity>();
+            Actions = new List<CoverageAction>();
 
-            _elements.ForEach(element => GenerateCoverageActivity(element, pdsCost, pdsIngcost));
+            _elements.ForEach(element => GenerateAction(element, pdsCost, pdsIngcost));
 
             if (_includeNotClassified)
             {
-                GenerateCoverageActivitiesForNotClassifiedElements(0, 0); // Not implemented!
+                GenerateActionsForNotClassifiedElements(0, 0); // Not implemented!
             }
         }
 
-        private void GenerateCoverageActivitiesForNotClassifiedElements(int totalcost, int ingtotalcost)
+        private void GenerateActionsForNotClassifiedElements(int totalcost, int ingtotalcost)
         {
-            // Feature not implemented! ... generate VCI + PDS Activities for NotClassified elements
+            // Feature not implemented! ... generate VCI + PDS Actions for NotClassified elements
         }
 
-        private void GenerateCoverageActivity(Element element, int pdscost, int ingpdscost)
+        private void GenerateAction(Element element, int pdscost, int ingpdscost)
         {
 
             switch (element.GetElementType())
@@ -83,8 +78,8 @@ namespace WhatIfAnalysis.CoverageAnalysis
                 {
                     var managedRiskReduction = (double) element.PotentialRisk * _elements.ManagedRiskReductionFactor;
 
-                    Activities.Add(
-                            new CoverageActivity(element, ActivityType.PDS, pdscost, ingpdscost, managedRiskReduction)
+                    Actions.Add(
+                            new CoverageAction(element, ActionType.PDS, pdscost, ingpdscost, managedRiskReduction)
                         );
                 }
                 break;
@@ -93,12 +88,12 @@ namespace WhatIfAnalysis.CoverageAnalysis
 
         }
 
-        private void OrderActivitiesByRanking()
+        private void OrderActionsByImportance()
         {
-            Activities = Activities.OrderByDescending(activity => activity.Ranking).ToList();
+            Actions = Actions.OrderByDescending(action => action.Importance).ToList();
         }
 
-        private void ProduceRiskReductionScenario(int notClassified)
+        private void CreateRiskReductionProjections(int notClassified)
         {
 
             double totalPotentialRisk = (double) notClassified * _elements.AveragePotentialRiskOfC3Class + _elements.TotalPotentialRisk;
@@ -109,41 +104,37 @@ namespace WhatIfAnalysis.CoverageAnalysis
 
             Projections = new Dictionary<long, double[]>();
             
-            Activities.ForEach(CalculateRiskProjectionsBy );
+            Actions.ForEach(CreateRiskProjection );
         }
 
-        private void CalculateRiskProjectionsBy(CoverageActivity activity)
+        private void CreateRiskProjection(CoverageAction action)
         {
             
-            DecreaseTotalRiskAndCostByActivity(activity);
+            DecreaseTotalRiskAndCostByAction(action);
 
-            // Calculate diff relative to target (easier to select result)
-            //double riskDiff = TotalResidualRisk - _targetResidualRisk;
-            //riskDiff = riskDiff > 0 ? riskDiff : TotalResidualRisk;
-
-            //double bdgDiff = _targetBudget - TotalCost;
-            //bdgDiff = bdgDiff > 0 ? bdgDiff : _targetBudget;
-
-            //Projections.Add(id, new double[] {TotalResidualRisk, TotalCost, TotalIngCost, riskDiff, bdgDiff });
             Projections.Add(
-                activity.GetElementId(), 
-                new double[] { TotalResidualRisk, TotalCost, TotalIngCost, 0, 0 });
+
+                action.GetActionId(), 
+                
+                new double[] { TotalResidualRisk, TotalCost, TotalIngCost}
+                
+                );
         }
 
-        private void DecreaseTotalRiskAndCostByActivity(CoverageActivity activity)
+        private void DecreaseTotalRiskAndCostByAction(CoverageAction action)
         {
-            TotalResidualRisk = TotalResidualRisk - (double) activity.ManagedRiskReduction;
+            TotalResidualRisk = TotalResidualRisk - (double) action.ManagedRiskReduction;
 
-            TotalCost += (double) activity.Cost;
+            TotalCost += (double) action.Cost;
 
-            TotalIngCost += (double) activity.IngCost;
+            TotalIngCost += (double) action.IngCost;
         }
 
         public KeyValuePair<long, double[]> GetClosestResidualRiskProjection(int targetRisk)
         {
             long nearestId = -1;
 
-            double nearestTargetRisk = TotalResidualRisk;
+            double nearestTargetRisk = _elements.TotalPotentialRisk;
 
             foreach (var projection in Projections)
             {

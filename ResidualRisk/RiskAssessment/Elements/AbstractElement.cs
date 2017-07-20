@@ -19,24 +19,24 @@ namespace ResidualRisk.RiskAssessment.Elements
 
         #region constructors
         
-        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters)  // Not classified
+        protected AbstractElement(PerimeterType perimeterType, PerimetersAnalysis perimeters)  // Not classified
         {
-            Perimeter = elperimeter;
-            if (elperimeters == null)
+            Perimeter = perimeterType;
+            if (perimeters == null)
             {
                 throw new InvalidNullArgumentException();
             }
-            perimeters = elperimeters;
+            this.perimeters = perimeters;
         }
 
-        protected AbstractElement(ElementTypes elclassification, PerimeterType elperimeter, PerimetersAnalysis elperimeters) // For classified elements
-            : this (elperimeter, elperimeters)
+        protected AbstractElement(ElementTypes elclassification, PerimeterType perimeterType, PerimetersAnalysis perimeters) // For classified elements
+            : this (perimeterType, perimeters)
         {
             classification = elclassification;
         }
 
-        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RiskPlanningVCI elvci)
-            : this(ElementTypes.Classified, elperimeter, elperimeters)
+        protected AbstractElement(PerimeterType perimeterType, PerimetersAnalysis perimeters, RiskPlanningVCI elvci)
+            : this(ElementTypes.Classified, perimeterType, perimeters)
         {
             if (elvci == null)
             {
@@ -45,8 +45,8 @@ namespace ResidualRisk.RiskAssessment.Elements
             vci = elvci;
         }
 
-        protected AbstractElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RiskPlanningVCI elvci, RiskPlanningPDS elpds)
-            : this(elperimeter, elperimeters, elvci)
+        protected AbstractElement(PerimeterType perimeterType, PerimetersAnalysis perimeters, RiskPlanningVCI elvci, RiskPlanningPDS elpds)
+            : this(perimeterType, perimeters, elvci)
         {
             if (elpds == null)
             {

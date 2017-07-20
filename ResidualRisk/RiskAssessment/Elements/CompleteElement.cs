@@ -1,9 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ResidualRisk.FunctionalPerimeters;
 using ResidualRisk.RiskAssessment.Analysis;
 
@@ -13,8 +8,8 @@ namespace ResidualRisk.RiskAssessment.Elements
     public class CompleteElement : AbstractElement
     {
 
-        public CompleteElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RiskPlanningVCI vci, RiskPlanningPDS pds) // Classified by default
-            : base(elperimeter, elperimeters, vci, pds)
+        public CompleteElement(PerimeterType perimeterType, PerimetersAnalysis perimeters, RiskPlanningVCI vci, RiskPlanningPDS pds) // Classified by default
+            : base(perimeterType, perimeters, vci, pds)
         {
 
         }

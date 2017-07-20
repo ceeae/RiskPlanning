@@ -83,6 +83,7 @@
     <Compile Include="Elements\ElementUnitTests.cs" />
     <Compile Include="FakeUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReductionAnalysis\WhatIfEngineUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

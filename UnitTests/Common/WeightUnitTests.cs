@@ -1,6 +1,5 @@
 ﻿using ResidualRisk.RiskAssessment.Common;
 using ResidualRisk.RiskAssessment.Exceptions;
-using ResidualRisk.RiskAssessment.Requirements;
 using Xunit;
 using FluentAssertions;
 

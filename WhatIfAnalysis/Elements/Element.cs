@@ -13,8 +13,11 @@
         public Element(long id, int potentialRisk, int managedRisk)
         {
             Id = id;
+
             PotentialRisk = potentialRisk;
+
             ManagedRisk = managedRisk;
+
             VciClass = GetVCIClass(potentialRisk);
         }
 
@@ -43,7 +46,6 @@
             if (potentialRisk < 250)
             {
                 return VCIClass.C1;
-
             }
             else if (potentialRisk >= 250 && potentialRisk < 400)
             {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using Xunit;
 using FluentAssertions;
 using WhatIfAnalysis.CoverageAnalysis;
@@ -13,7 +12,7 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
     public class WhatIfEngineUnitTests
     {
         private readonly WhatIfEngine _whatIfEngine;
-        private readonly List<CoverageActivity> _activities;
+        private readonly List<CoverageAction> _activities;
 
         public WhatIfEngineUnitTests()
         {
@@ -37,7 +36,7 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
             // PDS cost, IngPDS cost, NotClassified volume
             _whatIfEngine.ExecuteAnalysis(12, 2, 3);
 
-            _activities = _whatIfEngine.Activities;
+            _activities = _whatIfEngine.Actions;
 
         }
 
@@ -45,14 +44,14 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
         public void ApplyWhatIfAnalysis_GivenElementsAndStandardCosts_ExpectedCoverageActivities()
         {
 
-            // Expected Activities
+            // Expected Actions
             _activities.Count.Should().Be(5);
 
             _activities.Count(activity => activity.IsPDS()).Should().Be(5);
 
-            R0(_activities[0].Ranking).Should().Be(23);
+            R0(_activities[0].Importance).Should().Be(23);
 
-            R0(_activities[1].Ranking).Should().Be(17);
+            R0(_activities[1].Importance).Should().Be(17);
 
         }
 
@@ -97,9 +96,6 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
 
         }
 
-        private double R0(double value)
-        {
-            return Math.Round(value, 0);
-        }
+        private double R0(double value) { return Math.Round(value, 0); }
     }
 }

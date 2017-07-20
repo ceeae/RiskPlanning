@@ -5,8 +5,8 @@ namespace ResidualRisk.RiskAssessment.Elements
 {
     public class IncompleteElement: AbstractElement { 
 
-        public IncompleteElement(PerimeterType elperimeter, PerimetersAnalysis elperimeters, RiskPlanningVCI elvci) // Classified by default
-            : base(elperimeter, elperimeters, elvci)
+        public IncompleteElement(PerimeterType perimeterType, PerimetersAnalysis perimeters, RiskPlanningVCI elvci) // Classified by default
+            : base(perimeterType, perimeters, elvci)
         {
 
         }

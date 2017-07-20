@@ -1,9 +1,4 @@
-﻿using ResidualRisk.RiskAssessment.Analysis;
-using ResidualRisk.RiskAssessment.Requirements;
-using ResidualRisk.RiskAssessment.Exceptions;
-
-using Xunit;
-using FluentAssertions;
+﻿using Xunit;
 
 namespace UnitTests.Analysis
 {

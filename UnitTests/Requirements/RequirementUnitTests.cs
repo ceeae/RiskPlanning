@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using ResidualRisk.RiskAssessment.Common;
 using ResidualRisk.RiskAssessment.Exceptions;
 using ResidualRisk.RiskAssessment.Requirements;

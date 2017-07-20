@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
-using System.Security.Cryptography;
 using Xunit;
 using FluentAssertions;
 using WhatIfAnalysis.Elements;
@@ -61,12 +59,7 @@ namespace WhatIfAnalysis.UnitTests.Elements
 
         }
 
-
-        private static double R2(double value)
-        {
-            return Math.Round(value, 2);
-        }
-
+        private static double R2(double value) { return Math.Round(value, 2); }
     }
 
 }

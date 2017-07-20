@@ -1,11 +1,7 @@
-﻿using ResidualRisk;
-using ResidualRisk.FunctionalPerimeters;
-using ResidualRisk.RiskAssessment;
+﻿using ResidualRisk.FunctionalPerimeters;
 using ResidualRisk.RiskAssessment.Analysis;
 using ResidualRisk.RiskAssessment.Elements;
 using ResidualRisk.RiskAssessment.Requirements;
-using Xunit;
-using FluentAssertions;
 
 namespace UnitTests.Elements
 {

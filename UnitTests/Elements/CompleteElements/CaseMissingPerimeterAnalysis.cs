@@ -1,6 +1,5 @@
 ﻿using ResidualRisk.FunctionalPerimeters;
 using ResidualRisk.RiskAssessment.Analysis;
-using ResidualRisk.RiskAssessment.Elements;
 using ResidualRisk.RiskAssessment.Requirements;
 
 namespace UnitTests.Elements.CompleteElements

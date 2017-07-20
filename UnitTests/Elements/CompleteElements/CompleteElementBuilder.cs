@@ -1,8 +1,4 @@
-﻿using System.Resources;
-using ResidualRisk.FunctionalPerimeters;
-using ResidualRisk.RiskAssessment.Analysis;
-using ResidualRisk.RiskAssessment.Elements;
-using ResidualRisk.RiskAssessment.Requirements;
+﻿using ResidualRisk.RiskAssessment.Elements;
 
 namespace UnitTests.Elements.CompleteElements
 {
