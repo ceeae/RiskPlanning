@@ -42,12 +42,14 @@
   <ItemGroup>
     <Compile Include="CoverageAnalysis\ActionType.cs" />
     <Compile Include="CoverageAnalysis\CoverageAction.cs" />
+    <Compile Include="CoverageAnalysis\Projection.cs" />
     <Compile Include="CoverageAnalysis\WhatIfEngine.cs" />
     <Compile Include="Elements\Element.cs" />
     <Compile Include="Elements\ElementsSet.cs" />
     <Compile Include="Elements\ElementType.cs" />
     <Compile Include="Elements\VCIClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReductionAnalysis\Projection.cs" />
     <Compile Include="ReductionAnalysis\ReductionAction.cs" />
     <Compile Include="ReductionAnalysis\WhatIfEngine.cs" />
   </ItemGroup>

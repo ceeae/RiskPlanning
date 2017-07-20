@@ -19,7 +19,7 @@ namespace WhatIfAnalysis.ReductionAnalysis
 
         public List<ReductionAction> Actions;
 
-        public Dictionary<long, double[]> Projections;
+        public Dictionary<long, Projection> Projections;
 
         public WhatIfEngine(ElementsSet elements)
         {
@@ -54,7 +54,7 @@ namespace WhatIfAnalysis.ReductionAnalysis
 
             TotalCost = 0;
 
-            Projections = new Dictionary<long, double[]>();
+            Projections = new Dictionary<long, Projection>();
 
             Actions.ForEach(CreateRiskProjection);
         }
@@ -68,7 +68,7 @@ namespace WhatIfAnalysis.ReductionAnalysis
 
                 action.ActionId,
 
-                new double[] { TotalResidualRisk, TotalCost, TotalIngCost }
+                new Projection(TotalResidualRisk, TotalCost, TotalIngCost)
 
                 );
         }
@@ -82,47 +82,58 @@ namespace WhatIfAnalysis.ReductionAnalysis
             TotalIngCost += (double)action.IngCost;
         }
 
-        public KeyValuePair<long, double[]> GetClosestResidualRiskProjection(int targetRisk)
+        public KeyValuePair<long, Projection> GetClosestResidualRiskProjection(int targetRisk)
         {
             long nearestId = -1;
+
+            Projection nearestProjection = null;
 
             double nearestTargetRisk = _elements.TotalPotentialRisk;
 
             foreach (var projection in Projections)
             {
-                double deltaRisk = projection.Value[0] - targetRisk;
+                double deltaRisk = projection.Value.ResidualRisk - targetRisk;
 
                 if (deltaRisk >= 0 && deltaRisk < nearestTargetRisk)
                 {
                     nearestId = (long)projection.Key;
+
+                    nearestProjection = projection.Value;
+
                     nearestTargetRisk = deltaRisk;
                 }
             }
 
-            if (nearestId == -1) return new KeyValuePair<long, double[]>();
+            if (nearestId == -1) return new KeyValuePair<long, Projection>();
 
-            return new KeyValuePair<long, double[]>(nearestId, Projections[nearestId]);
+            return new KeyValuePair<long, Projection>(nearestId, nearestProjection);
         }
 
-        public KeyValuePair<long, double[]> GetClosestBudgetProjection(int targetBudget)
+        public KeyValuePair<long, Projection> GetClosestBudgetProjection(int targetBudget)
         {
             long nearestId = -1;
+
+            Projection nearestProjection = null;
+
             double nearestTargetBudget = targetBudget;
 
             foreach (var projection in Projections)
             {
-                double deltaBudget = targetBudget - projection.Value[1];
+                double deltaBudget = targetBudget - projection.Value.TotalCost;
 
                 if (deltaBudget >= 0 && deltaBudget < nearestTargetBudget)
                 {
                     nearestId = (long)projection.Key;
+
+                    nearestProjection = projection.Value;
+
                     nearestTargetBudget = deltaBudget;
                 }
             }
 
-            if (nearestId == -1) return new KeyValuePair<long, double[]>();
+            if (nearestId == -1) return new KeyValuePair<long, Projection>();
 
-            return new KeyValuePair<long, double[]>(nearestId, Projections[nearestId]);
+            return new KeyValuePair<long, Projection>(nearestId, nearestProjection);
         }
     }
 }

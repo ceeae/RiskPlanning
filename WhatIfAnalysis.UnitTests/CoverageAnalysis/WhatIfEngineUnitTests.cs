@@ -52,7 +52,6 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
             R0(_activities[0].Importance).Should().Be(23);
 
             R0(_activities[1].Importance).Should().Be(17);
-
         }
 
         [Fact]
@@ -71,14 +70,14 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
         public void GetTargetRisk_GivenElementsAndStandardCosts_ExcpectedTargetFigure()
         {
 
-            KeyValuePair<long, double[]> target = _whatIfEngine.GetClosestResidualRiskProjection(5300); 
+            KeyValuePair<long, Projection> target = _whatIfEngine.GetClosestResidualRiskProjection(5300); 
 
             // Target Residual Risk Found
             target.Key.Should().Be(2);
 
-            R0(target.Value[0]).Should().Be(5361);  // Actual Residual Risk
-            R0(target.Value[1]).Should().Be(36);    // Actual Costs
-            R0(target.Value[2]).Should().Be(6);     // Actual IngCosts
+            R0(target.Value.ResidualRisk).Should().Be(5361);  // Actual Residual Risk
+            R0(target.Value.TotalCost).Should().Be(36);    // Actual Costs
+            R0(target.Value.TotalIngCost).Should().Be(6);     // Actual IngCosts
 
         }
 
@@ -86,13 +85,13 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
         public void GetTargetBudget_GivenElementsAndStandardCosts_ExcpectedTargetFigure()
         {
 
-            KeyValuePair<long, double[]> target = _whatIfEngine.GetClosestBudgetProjection(50); 
+            KeyValuePair<long, Projection> target = _whatIfEngine.GetClosestBudgetProjection(50); 
 
             // Target Budget Found
             target.Key.Should().Be(5);
-            R0(target.Value[0]).Should().Be(5233);  // Actual Residual Risk
-            R0(target.Value[1]).Should().Be(48);    // Actual Costs
-            R0(target.Value[2]).Should().Be(8);     // Actual IngCosts
+            R0(target.Value.ResidualRisk).Should().Be(5233);  // Actual Residual Risk
+            R0(target.Value.TotalCost).Should().Be(48);    // Actual Costs
+            R0(target.Value.TotalIngCost).Should().Be(8);     // Actual IngCosts
 
         }
 

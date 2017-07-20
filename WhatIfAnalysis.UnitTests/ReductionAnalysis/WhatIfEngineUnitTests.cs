@@ -92,14 +92,14 @@ namespace WhatIfAnalysis.UnitTests.ReductionAnalysis
         public void GetTargetRisk_GivenElementsAndStandardCosts_ExcpectedTargetFigure()
         {
 
-            KeyValuePair<long, double[]> target = _whatIfEngine.GetClosestResidualRiskProjection(230);
+            KeyValuePair<long, Projection> target = _whatIfEngine.GetClosestResidualRiskProjection(230);
 
             // Target Residual Risk Found
             target.Key.Should().Be(1013);
 
-            R0(target.Value[0]).Should().Be(280);           // Actual Residual Risk
-            R0(target.Value[1]).Should().Be(521);           // Actual Costs
-            //R0(target.Value[2]).Should().Be(0);           // Actual IngCosts
+            R0(target.Value.ResidualRisk).Should().Be(280);           // Actual Residual Risk
+            R0(target.Value.TotalCost).Should().Be(521);           // Actual Costs
+            //R0(target.Value.TotalIngCost).Should().Be(0);           // Actual IngCosts
 
         }
 
@@ -107,14 +107,14 @@ namespace WhatIfAnalysis.UnitTests.ReductionAnalysis
         public void GetTargetBudget_GivenElementsAndStandardCosts_ExcpectedTargetFigure()
         {
 
-            KeyValuePair<long, double[]> target = _whatIfEngine.GetClosestBudgetProjection(420);
+            KeyValuePair<long, Projection> target = _whatIfEngine.GetClosestBudgetProjection(420);
 
             // Target Budget Found
             target.Key.Should().Be(1031);
 
-            R0(target.Value[0]).Should().Be(423);       // Actual Residual Risk
-            R0(target.Value[1]).Should().Be(401);       // Actual Costs
-            //R0(target.Value[2]).Should().Be(0);         // Actual IngCosts
+            R0(target.Value.ResidualRisk).Should().Be(423);       // Actual Residual Risk
+            R0(target.Value.TotalCost).Should().Be(401);       // Actual Costs
+            //R0(target.Value.TotalIngCost).Should().Be(0);         // Actual IngCosts
 
         }
 
