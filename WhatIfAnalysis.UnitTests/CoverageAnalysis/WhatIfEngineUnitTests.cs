@@ -12,7 +12,7 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
     public class WhatIfEngineUnitTests
     {
         private readonly WhatIfEngine _whatIfEngine;
-        private readonly List<CoverageAction> _activities;
+        private readonly List<CoverageAction> _actions;
 
         public WhatIfEngineUnitTests()
         {
@@ -36,7 +36,7 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
             // PDS cost, IngPDS cost, NotClassified volume
             _whatIfEngine.ExecuteAnalysis(12, 2, 3);
 
-            _activities = _whatIfEngine.Actions;
+            _actions = _whatIfEngine.Actions;
 
         }
 
@@ -45,13 +45,13 @@ namespace WhatIfAnalysis.UnitTests.CoverageAnalysis
         {
 
             // Expected Actions
-            _activities.Count.Should().Be(5);
+            _actions.Count.Should().Be(5);
 
-            _activities.Count(activity => activity.IsPDS()).Should().Be(5);
+            _actions.Count(activity => activity.IsPDS()).Should().Be(5);
 
-            R0(_activities[0].Importance).Should().Be(23);
+            R0(_actions[0].Importance).Should().Be(23);
 
-            R0(_activities[1].Importance).Should().Be(17);
+            R0(_actions[1].Importance).Should().Be(17);
         }
 
         [Fact]
